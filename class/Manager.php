@@ -10,7 +10,17 @@ class Manager {
     private $host;
     private $user;
     private $pass;
-
+    
+    /**
+     * __construct - Constructor of the class, assign inputs to attributes
+     *
+     * @param  mixed $dbType
+     * @param  mixed $host
+     * @param  mixed $dbName
+     * @param  mixed $user
+     * @param  mixed $pass
+     * @return void
+     */
     public function __construct($dbType, $host, $dbName, $user, $pass){
         $this->$dbType = $dbType;
         $this->$host = $host;
