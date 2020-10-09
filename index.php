@@ -7,12 +7,15 @@ try {
     if(isset($_GET['action'])){
         switch ($_GET['action']){
             case 'login':
-                require 'view/login.php';
+                require 'controller/login.php';
             case 'register':
-                require 'view/register.php';
+                require 'controller/register.php';
         }
+    } else {
+        // Home page
+        require 'controller/home.php';
     }
 } catch(Exception $e) {
     $errorMessage = $e->getMessage();
-    require 'view/error.php';
+    header('Location: error.php?errorMessage=' . $errorMessage);
 }
