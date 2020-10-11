@@ -2,6 +2,9 @@
 /**
  * PHP router
  */
+// Autoloader initialization
+require_once 'function/autoload.php';
+spl_autoload_register('autoloader');
 
 try {
     if(isset($_GET['action'])){
@@ -10,6 +13,8 @@ try {
                 require 'controller/login.php';
             case 'register':
                 require 'controller/register.php';
+            case 'games':
+                require 'controller/games.php';
         }
     } else {
         // Home page
