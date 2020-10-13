@@ -3,7 +3,7 @@
     <head>
         <title>Jeu critique - Connexion</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css/style_creer_un_compte.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
     
