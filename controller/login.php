@@ -1,4 +1,0 @@
-<?php
-/**
- * Manage user login
- */
