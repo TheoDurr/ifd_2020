@@ -6,15 +6,16 @@
 require_once 'function/autoload.php';
 spl_autoload_register('autoloader');
 
+// Autoloader initialization
+require_once 'function/autoload.php';
+spl_autoload_register('autoloader');
+
+// DB Connection Initialization
+$db = new PDO('mysql:host=92.140.139.116;dbname=ifd', 'admin', 'ifd2020');
+
 try {
     if(isset($_GET['action'])){
         switch ($_GET['action']){
-            case 'login':
-                require 'controller/login.php';
-            case 'register':
-                require 'controller/register.php';
-            case 'games':
-                require 'controller/games.php';
         }
     } else {
         // Home page
