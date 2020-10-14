@@ -1,4 +1,3 @@
 <?php
-/**
- * Manage user registration
- */
+
+require dirname(__FILE__) . '../../view/register.php';

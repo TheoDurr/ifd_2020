@@ -1,15 +1,22 @@
 <?php
-/**
- * PHP router
- */
 
 try {
     if(isset($_GET['action'])){
         switch ($_GET['action']){
             case 'login':
                 require 'controller/login.php';
+            break;
             case 'register':
                 require 'controller/register.php';
+            break;
+            case 'games':
+                require 'controller/games.php';
+            break;
+            case 'account':
+                require 'controller/account.php';
+            break;
+            default:
+                echo "error name action";
         }
     } else {
         // Home page

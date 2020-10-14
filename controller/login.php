@@ -1,4 +1,3 @@
 <?php
-/**
- * Manage user login
- */
+
+require dirname(__FILE__) . '../../view/login.php';

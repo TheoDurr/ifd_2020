@@ -1,5 +1,6 @@
-<section id="corps-de-page">
+<?php ob_start(); ?>
 
+<section id="corps-de-page">
         <section id="presentation">
             <p>Présentation du site :</p>
             <p>Bienvenue sur Jeu Critique, le forum n°1 de critiques de jeux de plateux dans la monde !</p>
@@ -18,3 +19,7 @@
             </section>
         </aside>
 </section>
+
+<?php $data['content'] = ob_get_clean(); 
+    require 'template/basic.php';
+?>

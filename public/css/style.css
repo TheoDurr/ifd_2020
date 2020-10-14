@@ -1,0 +1,125 @@
+/* Feuille css du site Jeu critique - réseau social de ciritques de jeux de plateau */
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+
+nav ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: #6B7BF4;
+    height: 50px;
+    width: 100%;
+}
+
+#header-gauche{
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+
+#title-principale{
+    color: white;
+    text-size-adjust: 3em;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#header-droit{
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+nav ul img{
+    margin: 2%;
+    height: 80%;
+}
+
+nav .btn{
+    color: black;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 30%;
+}
+
+.btn:hover{
+    transition: 0.2s;
+    background-color: white;
+}
+
+/* Footer */
+
+#pied_de_page{
+    height: 60px;
+    background-color: #6B7BF4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+footer section{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+footer center p{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Corps de page */
+
+#corps_de_page{
+    margin: 0;
+    padding 0;
+    display: flex;
+    height: 800px;
+}
+
+aside{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0%;
+    width: 30%;
+    height: 100%;
+}
+
+/* style spécifiques */
+
+#presentation{
+    margin: 0;
+    padding: 0;
+    border: 3px solid #6B7BF4;
+    width: 70%;
+    height:100%;
+}
+
+#dernieres_critiques{
+    padding: 0;
+    border: 3px solid #6B7BF4;
+    height: 50%;
+
+}
+
+#derniers_jeux{
+    padding: 0;
+    border: 3px solid #6B7BF4;
+    height: 50%;
+}
+
