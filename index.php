@@ -15,6 +15,8 @@ try {
             case 'account':
                 require 'controller/account.php';
             break;
+            case 'game_page':
+                    require 'controller/game_page.php';
             default:
                 echo "error name action";
         }

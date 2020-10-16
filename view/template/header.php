@@ -7,19 +7,19 @@
     </head>
     <body>
     
-<nav id="menu-nav">
+<nav id="menu_nav">
     <ul>
-        <section id="header-gauche">
+        <section id="header_left">
             <img src="public/img/logo.jpg">
             <a href="index.php" class="btn" id="btn-accueil">Accueil</a>
             <a href="index.php?action=games" class="btn" id="btn-jeux">Jeux</a>
         </section>
-        <a href="#" id="title-principale">Jeu critique - réseau social de ciritques de jeux de plateau</a>
-        <section id="header-droit">
+        <a href="index.php" id="main_title">Jeu critique - réseau social de ciritques de jeux de plateau</a>
+        <section id="header_right">
             <?php if(isset($_SESSION)){ ?>
-                <a href="index.php?action=account" class="btn" id="btn-connexion">Mon compte</a>
+                <a href="index.php?action=account" class="btn">Mon compte</a>
             <?php }else{ ?>
-                <a href="index.php?action=login" class="btn" id="btn-connexion">Connexion</a>
+                <a href="index.php?action=login" class="btn">Connexion</a>
             <?php } ?>
         </section>
     </ul>

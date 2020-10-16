@@ -1,8 +1,10 @@
 <?php ob_start(); ?>
 
-<section id="corps">
-    <section id="contenu">
-        <p id="titre_connexion">Connexion</p>
+<link rel="stylesheet" type="text/css" href="public/css/style_register_login.css">
+
+<section class="contents_page">
+    <section id="form_login" class="box">
+        <p id="connexion_title" class="title_box">Connexion</p>
             <form action="post">
                 <p>Email :</p>
                 <input type="text" name="email">

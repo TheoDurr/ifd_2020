@@ -1,0 +1,85 @@
+/* Fichier css de la page games du site Jeu critique */
+
+.contents_page{
+    flex-direction: column;
+}
+
+#search_area{
+    margin-top: 1%;
+    margin: 0.5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 4%;
+    width: 94%;
+}
+
+#results{
+    margin: 1%;
+    padding-bottom: 50px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+}
+
+#results_title{
+    font-size: 2em;
+    color: brown;
+    border: 5px solid brown;
+    border-radius: 10%;
+    padding: 0.5%;
+    margin: 0.5%;
+}
+
+.result_game{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5%;
+    margin: 0.5%;
+    border: 5px solid brown;
+    border-radius: 10%;
+    text-decoration: none;
+    height: 160px;
+}
+
+.result_game img{
+    height: 80px;
+    width: 80px;
+    padding-right: 0.9%;
+    padding-left: 0.9%;
+}
+
+#game_title{
+    font-size: 1.5em;
+    margin: 3px;
+    padding: 0;
+    text-decoration: underline;
+}
+
+#game_info{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.result_game p{
+    color: black;
+    padding: 4px;
+}
+
+#games_info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.games_info_content{
+    width: 20%;
+}
+
+.category_name{
+    font-size: 1.1em;
+    text-decoration: none;
+}

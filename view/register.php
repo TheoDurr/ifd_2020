@@ -1,8 +1,10 @@
 <?php ob_start(); ?>
+
+<link rel="stylesheet" type="text/css" href="public/css/style_register_login.css">
    
-<section id="corps">
-    <section id="contenu">
-    <p id="titre_connexion">Se créer un compte</p>
+<section class="contents_page">
+    <section class="box" id="form_register">
+    <p id="register_title" class="title_box">Se créer un compte</p>
         <form action="post">
             <p>Nom :</p>
             <input type="text" name="nom">
@@ -17,7 +19,7 @@
             <p>Veuillez confimer votre mot de passe :</p>
             <input type="password" name="password"> <br><br>
             <input type="submit" name="valider"> <br> <br>
-            <a href="connexion.php">Se connecter</a>
+            <a href="index.php?action=login">Se connecter</a>
         </form>
     </section>
 </section>

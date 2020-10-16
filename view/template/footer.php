@@ -1,5 +1,5 @@
-<footer id="pied_de_page">
-    <section id="lien">
+<footer id="footer">
+    <section id="links">
         <a href="mention_legales.html">Mentions légales</a>
         <a href="contacts.html">Contact</a>
         <a href="https://www.utbm.fr/">Utbm</a>
