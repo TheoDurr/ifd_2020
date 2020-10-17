@@ -1,9 +1,11 @@
 <?php
-// Atom is the base class for all other classes such as user, game, category, etc...
-class Atom {
+/**
+ * Atom is the base class for all other classes such as user, game, category, etc...
+ */
+abstract class Atom {
 
     /**
-     * Hydratation function
+     * Hydration function
      *
      * @param array $data
      * @return void

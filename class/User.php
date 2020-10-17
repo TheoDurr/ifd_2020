@@ -1,12 +1,6 @@
 <?php
 class User extends Atom{
-    private $_id;
-    private $_firstName;
-    private $_lastName;
-    private $_birthDate;
-    private $_email;
-    private $_password;
-    private $_creationDate;
+    private $_id, $_firstName, $_lastName, $_birthDate, $_email, $_password, $_creationDate;
 
     public function __construct(array $data){
         $this->hydrate($data);
