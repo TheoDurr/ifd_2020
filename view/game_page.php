@@ -3,22 +3,83 @@
 <link rel="stylesheet" type="text/css" href="public/css/style_game_page.css">
 
 <section class="contents_page">
-    <section class="box" id="game">
-        <img src="" alt="">
-        <p id="name">Monopoly</p>
-        <p>Editor :</p>
-        <p>Catégorie :</p>
-        <p>Prix :</p>
-        <p>Nb joueur max :</p>
-        <p>Nb joueur min :</p>
-        <p>Complexité :</p>
-        <p>Concentration :</p>
-        <p>Ambiance</p>
-        <p>Descritpion :</p>
+    <section id="picture_title">
+        <img src="public/img/monopoly.jpg">
+        <p>Monopoly</p>
     </section>
-    <section id="avis">
-        
+
+    <section class="box1" id="info">
+        <section class="info_content">
+            <p class="name_info">Editor :</p>
+            <p>Hasbro</p>
+        </section>
+        <section class="info_content">
+            <p class="name_info">Catégorie :</p>
+            <p>Capitalisme</p>
+        </section>
+        <section class="info_content">
+            <p class="name_info">Prix :</p>
+            <p>25 €</p>
+        </section>
+        <section class="info_content">
+            <p class="name_info">Nombre joueurs :</p>
+            <p>2 à 6</p>
+        </section>
+        <section Complexité="info_content">
+            <p class="name_info">Complexité :</p>
+            <p>4</p>
+        </section>
+        <section class="info_content">
+            <p class="name_info">Concentration :</p>
+            <p>6</p>
+        </section>
+        <section class="info_content">
+            <p class="name_info">Ambiance :</p>
+            <p>5</p>
+        </section>
     </section>
+
+    <section class="box1">
+        <p class="title_box">Descritpion :</p>
+        <p>Le Monopoly est un jeu de société américain édité par Hasbro. Le but du jeu consiste à ruiner ses concurrents par des opérations immobilières. Il symbolise les aspects apparents et spectaculaires du capitalisme, les fortunes se faisant et se défaisant au fil des coups de dés. Ce jeu de société est mondialement connu, et il en existe de multiples versions.</p>
+    </section>
+
+    <section id="box_avis" class="box1">
+        <section class="top_box_avis"> 
+            <p class="title_box">Avis :</p>
+            <section class="sort_section">
+                <p>Trier par :</p>
+                <form action="post">
+                    <select name="sort_by" id="sort_by">
+                        <option value="reaction">Intérêt</option>
+                        <option value="date_desc">Date (plus récent)</option>
+                        <option value="date_asc">Date (plus vieux)</option>
+                    </select>
+                </form>
+                <p>1 avis (sur 173 avis)</p>
+            </section>
+        </section>
+
+        <!--Intégration php des avis-->
+
+        <section class="avis">
+            <section class="top_avis">
+                <p>Cyrille STROESSER (à 00:01 le 18/10/2020)</p>
+                <p>Note : 8/10</p>
+            </section>
+            <p>Je trouve ce jeu psartek bien mais il serait quand même beaucoup mieux si l'argent qu'on avait dedans était vrai, genre t'achètes un jeu 25 balles et dedans t'as des millions d'euros, ce serait du génie wallah, tout le monde l'acheterai du coup !!! mais bon les directeurs marketing sont encore trop cons pour avoir pensé à ça du coup je sais même plus quoi dire mais bon faut que ce commentaire soit long pour pouvoir tester l'affichage des retour à la ligne et tt bref je pense que c'est assez long là</p>
+            <a href="">8 commentaires</a>
+        </section>
+        <section class="avis">
+            <section class="top_avis">
+                <p>Cyrille STROESSER (à 00:01 le 18/10/2020)</p>
+                <p>Note : 8/10</p>
+            </section>
+            <p>Je trouve ce jeu psartek bien mais il serait quand même beaucoup mieux si l'argent qu'on avait dedans était vrai, genre t'achètes un jeu 25 balles et dedans t'as des millions d'euros, ce serait du génie wallah, tout le monde l'acheterai du coup !!! mais bon les directeurs marketing sont encore trop cons pour avoir pensé à ça du coup je sais même plus quoi dire mais bon faut que ce commentaire soit long pour pouvoir tester l'affichage des retour à la ligne et tt bref je pense que c'est assez long là</p>
+            <a href="">8 commentaires</a>
+        </section>
+    </section>
+
 </section>
 
 <?php $data['content'] = ob_get_clean(); 

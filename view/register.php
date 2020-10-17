@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="public/css/style_register_login.css">
    
 <section class="contents_page">
-    <section class="box" id="form_register">
+    <section class="box1" id="form_register">
     <p id="register_title" class="title_box">Se créer un compte</p>
         <form action="post">
             <p>Nom :</p>

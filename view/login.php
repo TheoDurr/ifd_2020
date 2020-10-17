@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="public/css/style_register_login.css">
 
 <section class="contents_page">
-    <section id="form_login" class="box">
+    <section id="form_login" class="box1">
         <p id="connexion_title" class="title_box">Connexion</p>
             <form action="post">
                 <p>Email :</p>

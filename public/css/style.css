@@ -90,12 +90,15 @@ footer center p{
 
 }
 
-.box{
-    padding: 0.9%;
-    border: 20px solid #6B7BF4;
-    border-radius: 10%;
+.box1{
+    margin: 5px;
+    padding: 10px;
+    border: 10px solid #6B7BF4;
+    border-radius: 15px;
+    overflow: auto;
 }
 
 .title_box{
     font-size: 1.5em;
+    font-weight: bold;
 }

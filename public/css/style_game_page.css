@@ -1,4 +1,72 @@
 .contents_page{
-    height: 800px;
+    flex-direction: column;
+}
+
+#picture_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#picture_title img{
+    height: 200px;
+    width: 200px;
+    margin: 20px;
+}
+
+#picture_title p{
+    font-size: 4em;
+    margin: 20px;
+    color: brown;
+}
+
+#info{
+    display: flex;
+    justify-content: space-around;
+    width: 97%;
+    height: 100px;
+}
+
+.name_info{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Ppt de la box contenant tous les avis */
+
+.top_box_avis{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sort_section{
+    display: flex;
+    align-items: center;
+}
+
+.sort_section p{
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+/* Ppt d'un avis */
+
+.avis{
+    border-top: 3px solid grey;
+}
+
+.top_avis{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top_avis p{
+    font-weight: bold;
+}
+
+.avis a{
+    padding-bottom: 10px;
 }
 
