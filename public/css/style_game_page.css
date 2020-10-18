@@ -34,7 +34,7 @@
 
 /* Ppt de la box contenant tous les avis */
 
-.top_box_avis{
+.top_box_review{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,21 +52,53 @@
 
 /* Ppt d'un avis */
 
-.avis{
+.review{
     border-top: 3px solid grey;
 }
 
-.top_avis{
+.top_review{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.top_avis p{
+.top_review p{
     font-weight: bold;
 }
 
-.avis a{
+.review a{
     padding-bottom: 10px;
 }
 
+.bottom_review{
+    display: flex;
+}
+
+.bottom_review a{
+    margin-left: 10px;
+}
+
+.bottom_review input{
+    margin-left: 10px;
+}
+ 
+/* Ppt des commentaires des avis */
+
+.comments_box{
+    margin-left: 5%;
+    max-height: 600px;
+    overflow: auto;
+}
+
+.comment{
+    border-left: 3px solid grey;
+    margin: 0.5%;
+}
+
+.comment p{
+    margin: 0.7%;
+}
+
+.comment_top{
+    font-weight: bold;
+}

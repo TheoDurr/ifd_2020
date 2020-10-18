@@ -44,8 +44,8 @@
         <p>Le Monopoly est un jeu de société américain édité par Hasbro. Le but du jeu consiste à ruiner ses concurrents par des opérations immobilières. Il symbolise les aspects apparents et spectaculaires du capitalisme, les fortunes se faisant et se défaisant au fil des coups de dés. Ce jeu de société est mondialement connu, et il en existe de multiples versions.</p>
     </section>
 
-    <section id="box_avis" class="box1">
-        <section class="top_box_avis"> 
+    <section class="box1">
+        <section class="top_box_review"> 
             <p class="title_box">Avis :</p>
             <section class="sort_section">
                 <p>Trier par :</p>
@@ -60,24 +60,58 @@
             </section>
         </section>
 
-        <!--Intégration php des avis-->
+        <!--Intégration php des avis if(isset($_GET[id_avis]) && isset($_GET[show]))-->
 
-        <section class="avis">
-            <section class="top_avis">
+        <section class="review">
+            <section class="top_review" id="review1">
+                <p>Cyrille STROESSER (à 00:01 le 18/10/2020)</p>
+                <p>Note : 8/10</p>
+            </section>
+            <p>Je trouve ce jeu psarvtek bien mais il serait quand même beaucoup mieux si l'argent qu'on avait dedans était vrai, genre t'achètes un jeu 25 balles et dedans t'as des millions d'euros, ce serait du génie wallah, tout le monde l'acheterai du coup !!! mais bon les directeurs marketing sont encore trop cons pour avoir pensé à ça du coup je sais même plus quoi dire mais bon faut que ce commentaire soit long pour pouvoir tester l'affichage des retour à la ligne et tt bref je pense que c'est assez long là</p>
+            <section class="bottom_review">
+                <a href="index.php?action=game_page&id=1&id_avis=1&show=true#review1">3 commentaires</a>
+                <form action="post">
+                    <input type="submit" name="like" value="Pertinent">
+                    <input type="submit" name="dislike" value="Pas pertinent">
+                </form>
+            </section>
+            
+            <?php if(isset($_GET['id_avis'])){ if($_GET['id_avis']==1 && $_GET['show']==true){ ?>
+            <section class="comments_box">
+                <section class="comment">
+                    <p class="comment_top">Théo DURR (à 23:17 le 18/10/2020) :</p>
+                    <p>Je suis ton plus grand fan Cyrille !!!!!</p>
+                </section>
+                <section class="comment">
+                    <p class="comment_top">Esteban LELIBOUX (à 23:19 le 18/10/2020) :</p>
+                    <p>Wouah mais ce site est tellement bien fait ! Comment fas-tu pour être si bon en html/css siril ?!?! </p>
+                </section>
+                <section class="comment">
+                    <p class="comment_top">Cyrille STROESSER (à 23:21 le 18/10/2020) :</p>
+                    <p>FIRST</p>
+                </section>
+            </section>
+
+            <?php };}; ?>
+            
+        <section class="review">
+            <section class="top_review">
                 <p>Cyrille STROESSER (à 00:01 le 18/10/2020)</p>
                 <p>Note : 8/10</p>
             </section>
             <p>Je trouve ce jeu psartek bien mais il serait quand même beaucoup mieux si l'argent qu'on avait dedans était vrai, genre t'achètes un jeu 25 balles et dedans t'as des millions d'euros, ce serait du génie wallah, tout le monde l'acheterai du coup !!! mais bon les directeurs marketing sont encore trop cons pour avoir pensé à ça du coup je sais même plus quoi dire mais bon faut que ce commentaire soit long pour pouvoir tester l'affichage des retour à la ligne et tt bref je pense que c'est assez long là</p>
-            <a href="">8 commentaires</a>
-        </section>
-        <section class="avis">
-            <section class="top_avis">
-                <p>Cyrille STROESSER (à 00:01 le 18/10/2020)</p>
-                <p>Note : 8/10</p>
+            <section class="bottom_review">
+                <a href="">0 commentaire</a>
+                <form action="post">
+                    <input type="submit" name="like" value="Pertinent">
+                    <input type="submit" name="dislike" value="Pas pertinent">
+                </form>
             </section>
-            <p>Je trouve ce jeu psartek bien mais il serait quand même beaucoup mieux si l'argent qu'on avait dedans était vrai, genre t'achètes un jeu 25 balles et dedans t'as des millions d'euros, ce serait du génie wallah, tout le monde l'acheterai du coup !!! mais bon les directeurs marketing sont encore trop cons pour avoir pensé à ça du coup je sais même plus quoi dire mais bon faut que ce commentaire soit long pour pouvoir tester l'affichage des retour à la ligne et tt bref je pense que c'est assez long là</p>
-            <a href="">8 commentaires</a>
         </section>
+
+        
+        </section>
+
     </section>
 
 </section>
