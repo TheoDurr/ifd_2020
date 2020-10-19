@@ -1,12 +1,11 @@
 /* Fichier css de la page home du site Jeu critique */
 
 .contents_page{
-    height: 800px;
+    height: 1200px;
 }
 
 #presentation{
     width: 70%;
-    height: 93.5%;
 }
 
 #last_reviews{

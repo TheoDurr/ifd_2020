@@ -10,43 +10,43 @@
 
     <section class="box1" id="info">
         <section class="info_content">
-            <p class="name_info">Editor :</p>
+            <p class="small_title">Editor :</p>
             <p>Hasbro</p>
         </section>
         <section class="info_content">
-            <p class="name_info">Catégorie :</p>
+            <p class="small_title">Catégorie :</p>
             <p>Capitalisme</p>
         </section>
         <section class="info_content">
-            <p class="name_info">Prix :</p>
+            <p class="small_title">Prix :</p>
             <p>25 €</p>
         </section>
         <section class="info_content">
-            <p class="name_info">Nombre joueurs :</p>
+            <p class="small_title">Nombre joueurs :</p>
             <p>2 à 6</p>
         </section>
         <section Complexité="info_content">
-            <p class="name_info">Complexité :</p>
+            <p class="small_title">Complexité :</p>
             <p>4</p>
         </section>
         <section class="info_content">
-            <p class="name_info">Concentration :</p>
+            <p class="small_title">Concentration :</p>
             <p>6</p>
         </section>
         <section class="info_content">
-            <p class="name_info">Ambiance :</p>
+            <p class="small_title">Ambiance :</p>
             <p>5</p>
         </section>
     </section>
 
     <section class="box1">
-        <p class="title_box">Descritpion :</p>
+        <p class="big_title">Descritpion :</p>
         <p>Le Monopoly est un jeu de société américain édité par Hasbro. Le but du jeu consiste à ruiner ses concurrents par des opérations immobilières. Il symbolise les aspects apparents et spectaculaires du capitalisme, les fortunes se faisant et se défaisant au fil des coups de dés. Ce jeu de société est mondialement connu, et il en existe de multiples versions.</p>
     </section>
 
     <section class="box1">
         <section class="top_box_review"> 
-            <p class="title_box">Avis :</p>
+            <p class="big_title">Avis :</p>
             <section class="sort_section">
                 <p>Trier par :</p>
                 <form action="post">
@@ -76,7 +76,7 @@
                 </form>
             </section>
             
-            <?php if(isset($_GET['id_avis'])){ if($_GET['id_avis']==1 && $_GET['show']==true){ ?>
+            <?php if(isset($_GET['id_avis'])){ if($_GET['id_avis']==1 && $_GET['show']=='true'){ ?>
             <section class="comments_box">
                 <section class="comment">
                     <p class="comment_top">Théo DURR (à 23:17 le 18/10/2020) :</p>
@@ -93,6 +93,7 @@
             </section>
 
             <?php };}; ?>
+        </section>
             
         <section class="review">
             <section class="top_review">
@@ -108,10 +109,6 @@
                 </form>
             </section>
         </section>
-
-        
-        </section>
-
     </section>
 
 </section>

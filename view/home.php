@@ -21,7 +21,7 @@
             <p>Derniers jeux ajoutés</p>
         </section>
     </aside>
-</section>
+</section>  
 
 <?php $data['content'] = ob_get_clean(); 
     require 'template/basic.php';

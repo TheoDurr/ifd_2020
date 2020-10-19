@@ -4,7 +4,7 @@
    
 <section class="contents_page">
     <section class="box1" id="form_register">
-    <p id="register_title" class="title_box">Se créer un compte</p>
+    <p id="register_title" class="big_title">Se créer un compte</p>
         <form action="post">
             <p>Nom :</p>
             <input type="text" name="nom">

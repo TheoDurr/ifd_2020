@@ -5,19 +5,19 @@
 <section class="contents_page">
 
     <form action="post" id="search_area" class="box1">
-        <p>Rechercher : </p>
+        <p class="small_title">Rechercher : </p>
         <input type="text" name="search" placeholder="Nom, Editeur,...">
-        <p>Catégorie :</p>
+        <p class="small_title">Catégorie :</p>
         <select name="category" id="categroy">
             <option value="0">-Select-</option>
             <option value="adventure">Aventure</option>
             <option value="reflexion">Réflexion</option>
         </select>
-        <p>Prix :</p>
+        <p class="small_title">Prix :</p>
         <input type="number" name="price" min="1" max="200" step="1">
-        <p>Nb joueur min :</p>
+        <p class="small_title">Nb joueur min :</p>
         <input type="number" name="players_min" min="1" max="20" step="1">
-        <p>Nb joueur max :</p>
+        <p class="small_title">Nb joueur max :</p>
         <input type="number" name="players_max" min="1" max="20" step="1">
         <input type="submit" value="Rechercher">
     </form>

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 try {
     if(isset($_GET['action'])){
         switch ($_GET['action']){

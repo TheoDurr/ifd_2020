@@ -1,5 +1,6 @@
 .contents_page{
     flex-direction: column;
+    min-height: 1200px;
 }
 
 #picture_title{
@@ -23,82 +24,5 @@
 #info{
     display: flex;
     justify-content: space-around;
-    width: 97%;
     height: 100px;
-}
-
-.name_info{
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-/* Ppt de la box contenant tous les avis */
-
-.top_box_review{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.sort_section{
-    display: flex;
-    align-items: center;
-}
-
-.sort_section p{
-    margin-right: 5px;
-    margin-left: 5px;
-}
-
-/* Ppt d'un avis */
-
-.review{
-    border-top: 3px solid grey;
-}
-
-.top_review{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.top_review p{
-    font-weight: bold;
-}
-
-.review a{
-    padding-bottom: 10px;
-}
-
-.bottom_review{
-    display: flex;
-}
-
-.bottom_review a{
-    margin-left: 10px;
-}
-
-.bottom_review input{
-    margin-left: 10px;
-}
- 
-/* Ppt des commentaires des avis */
-
-.comments_box{
-    margin-left: 5%;
-    max-height: 600px;
-    overflow: auto;
-}
-
-.comment{
-    border-left: 3px solid grey;
-    margin: 0.5%;
-}
-
-.comment p{
-    margin: 0.7%;
-}
-
-.comment_top{
-    font-weight: bold;
 }
