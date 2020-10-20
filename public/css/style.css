@@ -1,0 +1,180 @@
+/* Feuille css du site Jeu critique - réseau social de ciritques de jeux de plateau */
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+
+nav ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: #6B7BF4;
+    height: 50px;
+    width: 100%;
+}
+
+#header_left{
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+
+#main_title{
+    color: white;
+    text-size-adjust: 3em;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#header_right{
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+nav ul img{
+    margin: 2%;
+    height: 80%;
+}
+
+nav .btn{
+    color: black;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 30%;
+}
+
+.btn:hover{
+    transition: 0.2s;
+    background-color: white;
+}
+
+/* Footer */
+
+#footer{
+    height: 60px;
+    background-color: #6B7BF4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+}
+#links{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+footer center p{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Corps de page */
+
+.contents_page{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 100%;
+
+}
+
+.box1{
+    margin: 5px;
+    padding: 10px;
+    border: 10px solid #6B7BF4;
+    border-radius: 15px;
+    overflow: auto;
+}
+
+.big_title{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.small_title{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Ppt de la box contenant tous les avis */
+
+.top_box_review{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sort_section{
+    display: flex;
+    align-items: center;
+}
+
+.sort_section p{
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+/* Ppt d'un avis */
+
+.review{
+    border-top: 3px solid grey;
+}
+
+.top_review{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top_review p{
+    font-weight: bold;
+}
+
+.review a{
+    padding-bottom: 10px;
+}
+
+.bottom_review{
+    display: flex;
+}
+
+.bottom_review a{
+    margin-left: 10px;
+}
+
+.bottom_review input{
+    margin-left: 10px;
+}
+ 
+/* Ppt des commentaires des avis */
+
+.comments_box{
+    margin-left: 5%;
+    max-height: 600px;
+    overflow: auto;
+}
+
+.comment{
+    border-left: 3px solid grey;
+    margin: 0.5%;
+}
+
+.comment p{
+    margin: 0.7%;
+}
+
+.comment_top{
+    font-weight: bold;
+}
