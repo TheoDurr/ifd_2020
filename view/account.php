@@ -9,11 +9,11 @@
         <form action="post" id="modify_info">
             <section>
                 <p class="small_title">Prénom :</p>
-                <input type="text" max="20">
+                <input type="text" max="255">
             </section>
             <Section>
                 <p class="small_title">Nom :</p>
-                <input type="text" max="20">
+                <input type="text" max="255">
             </Section>
             <section>
                 <p class="small_title">Date de naissance :</p>
