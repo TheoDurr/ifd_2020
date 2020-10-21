@@ -1,4 +1,7 @@
 <?php
+/**
+ * Class used to represent an user
+ */
 class User extends Atom{
     private $_id, $_firstName, $_lastName, $_birthDate, $_email, $_password, $_creationDate, $_admin;
 

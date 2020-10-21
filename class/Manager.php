@@ -2,7 +2,6 @@
 /**
  * Manage database connection across all managers
  */
-
 abstract class Manager {
 
     protected $_db;
