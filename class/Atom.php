@@ -1,9 +1,11 @@
 <?php
-// Atom is the base class for all other classes such as user, game, category, etc...
-class Atom {
+/**
+ * Atom is the base class for all other classes such as user, game, category, etc...
+ */
+abstract class Atom {
 
     /**
-     * Hydratation function
+     * Hydration function
      *
      * @param array $data
      * @return void
@@ -12,7 +14,7 @@ class Atom {
         foreach($data as $key => $value){
             $method = 'set' . ucfirst($key);
 
-            if(method_exists($this, $method)){
+            if(method_exists($this, $method) && isset($value)){
                 $this->$method($value);
             }
         }
