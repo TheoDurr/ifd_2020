@@ -79,6 +79,13 @@ class UserManager extends Manager {
     }
 
     public function update(User $user){
+        $q = $this->_db->prepare('UPDATE user SET firstName = :firstName, lastName = :lastName, birthDate = :birthDate, email = :email, password = :password, admin = :admin, WHERE id = :id');
 
+        $q->bindValue(':firstName', strtolower($user->firstName()), PDO::PARAM_STR);
+        $q->bindValue(':lastName', strtolower($user->lastName()), PDO::PARAM_STR);
+        $q->bindValue(':birthDate', $user->birthDate(),PDO::PARAM_STR);
+        $q->bindValue(':email', $user->email(), PDO::PARAM_STR);
+        $q->bindValue(':password', $user->password(), PDO::PARAM_STR);
+        $q->bindValue(':admin', $user->admin(), PDO::PARAM_BOOL);
     }
 }

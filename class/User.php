@@ -1,40 +1,21 @@
 <?php
 class User extends Atom{
-    private $_id, $_firstName, $_lastName, $_birthDate, $_email, $_password, $_creationDate;
+    private $_id, $_firstName, $_lastName, $_birthDate, $_email, $_password, $_creationDate, $_admin;
 
     public function __construct(array $data){
         $this->hydrate($data);
     }
 
     // Getters
-    public function id(): int{
-        return $this->_id;
-    }
-
-    public function firstName(): string{
-        return ucfirst($this->_firstName);
-    }
-
-    public function lastName(): string{
-        return strtoupper($this->_lastName);
-    }
-
-    public function birthDate(){
-        return $this->_birthDate;
-    }
+    public function id(): int{return $this->_id;}
+    public function firstName(): string{return ucfirst($this->_firstName);}
+    public function lastName(): string{return strtoupper($this->_lastName);}
+    public function birthDate(){return $this->_birthDate;}    
+    public function email(): string{return $this->_email;}    
+    public function password(): string{return $this->_password;}
+    public function creationDate(){return $this ->_creationDate;}
+    public function admin(): bool {return $this->_admin;}
     
-    public function email(): string{
-        return $this->_email;
-    }
-    
-    public function password(): string{
-        return $this->_password;
-    }
-
-    public function creationDate(){
-        return $this ->_creationDate;
-    }
-
     // Setters
     public function setId($id){
         if(is_string($id)){
@@ -81,5 +62,9 @@ class User extends Atom{
 
     public function setCreationDate(string $creationDate){
         $this->_creationDate = $creationDate;
+    }
+
+    public function setAdmin(bool $value){
+        $this->_admin = $value;
     }
 }
