@@ -1,0 +1,26 @@
+/* Fichier css de la page home du site Jeu critique */
+
+.contents_page{
+    height: 1200px;
+}
+
+#presentation{
+    width: 70%;
+}
+
+#last_reviews{
+    height: 50%;
+}
+
+#last_games{
+    height: 50%;
+}
+
+aside{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0%;
+    width: 30%;
+    height: 100%;
+}

@@ -1,0 +1,28 @@
+.contents_page{
+    flex-direction: column;
+    min-height: 1200px;
+}
+
+#picture_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#picture_title img{
+    height: 200px;
+    width: 200px;
+    margin: 20px;
+}
+
+#picture_title p{
+    font-size: 4em;
+    margin: 20px;
+    color: brown;
+}
+
+#info{
+    display: flex;
+    justify-content: space-around;
+    height: 100px;
+}

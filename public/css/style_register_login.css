@@ -1,0 +1,8 @@
+/* Fichier css de la page register et de la page login du site Jeu critique */
+
+.contents_page{
+
+    height: 800px;
+    justify-content: center;
+    align-items: center;
+}
