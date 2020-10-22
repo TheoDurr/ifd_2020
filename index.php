@@ -1,4 +1,5 @@
 <?php
+session_start();
 try {
     if(isset($_GET['action'])){
         switch ($_GET['action']){
@@ -16,6 +17,9 @@ try {
             break;
             case 'game_page':
                     require 'controller/game_page.php';
+            break;
+            case 'add_game':
+                require 'controller/add_game.php';
             default:
                 echo "error name action";
         }
