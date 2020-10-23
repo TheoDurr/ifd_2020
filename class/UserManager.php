@@ -100,4 +100,36 @@ class UserManager extends Manager {
 
         return $result;
     }
+
+    /**
+     * Search an user
+     *
+     * @param array $data search criteria
+     * @return mixed
+     */
+    public function search(array $data){
+        $i = 0;
+        $s = "SELECT * FROM user WHERE ";
+        $c = (count($data));
+        foreach($data as $key => $value){
+            $s = $s . $key . " = :" . $key;
+            if($i != $c - 1){
+                $s = $s . ", ";
+            }
+            $i++;
+        }
+        $s = $s . " ORDER BY firstName, lastName";
+        $q = $this->_db->prepare($s);
+        $q->execute($data);
+
+        while($data = $q->fetch(PDO::FETCH_ASSOC)){
+            $result[] = new User($data);
+        }
+
+        if(isset($result)){
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }

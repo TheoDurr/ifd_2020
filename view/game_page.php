@@ -70,7 +70,7 @@
             <p>Je trouve ce jeu psarvtek bien mais il serait quand même beaucoup mieux si l'argent qu'on avait dedans était vrai, genre t'achètes un jeu 25 balles et dedans t'as des millions d'euros, ce serait du génie wallah, tout le monde l'acheterai du coup !!! mais bon les directeurs marketing sont encore trop cons pour avoir pensé à ça du coup je sais même plus quoi dire mais bon faut que ce commentaire soit long pour pouvoir tester l'affichage des retour à la ligne et tt bref je pense que c'est assez long là</p>
             <section class="bottom_review">
                 <a href="index.php?action=game_page&id=1&id_review=1&show=true#review1">3 commentaires</a>
-                <form action="post">
+                <form method="post">
                     <input type="submit" name="like" value="Pertinent">
                     <input type="submit" name="dislike" value="Pas pertinent">
                 </form>
@@ -114,6 +114,22 @@
                     <a href="index.php?action=login" class="add_comment">Pour ajouter un commentaire, connectez-vous</a>
                 <?php }; ?>
                 <?php if(isset($_GET['show']) && isset($_GET['modify']) ){ ?>
+                    <form method="post" >
+                        <textarea cols="150" rows="8" placeholder="Ecrivez votre commenatire ici"></textarea>
+                        <input type="submit" value="Ajouter">
+                    </form>
+                <?php }; ?>
+            </section>
+
+                <!-- Add comments -->
+
+                <?php if(isset($_SESSION)){?>
+                    <?php if(!isset($_GET['modify'])){ ?>
+                    <a href="index.php?action=game_page&id=1&id_review=1&show=true&modify=true#review1" class="add_comment">Ajouter un commentaire</a>
+                <?php }; }else{ ?>
+                    <a href="index.php?action=login" class="add_comment">Pour ajouter un commentaire, connectez-vous</a>
+                <?php }; ?>
+                <?php if(isset($_GET['show']) && isset($_GET['modify']) ){ ?>
                     <form action="post" >
                         <textarea cols="150" rows="8" placeholder="Ecrivez votre commenatire ici"></textarea>
                         <input type="submit" value="Ajouter">
@@ -133,7 +149,7 @@
             <p>Je trouve ce jeu psarvtek bien mais il serait quand même beaucoup mieux si l'argent qu'on avait dedans était vrai, genre t'achètes un jeu 25 balles et dedans t'as des millions d'euros, ce serait du génie wallah, tout le monde l'acheterai du coup !!! mais bon les directeurs marketing sont encore trop cons pour avoir pensé à ça du coup je sais même plus quoi dire mais bon faut que ce commentaire soit long pour pouvoir tester l'affichage des retour à la ligne et tt bref je pense que c'est assez long là</p>
             <section class="bottom_review">
                 <a href="index.php?action=game_page&id=2&id_review=2&show=true#review2">0 commentaire</a>
-                <form action="post">
+                <form method="post">
                     <input type="submit" name="like" value="Pertinent">
                     <input type="submit" name="dislike" value="Pas pertinent">
                 </form>
@@ -153,7 +169,7 @@
                     <a href="index.php?action=login" class="add_comment">Pour ajouter un commentaire, connectez-vous</a>
                 <?php }; ?>
                 <?php if(isset($_GET['modify'])){ if($_GET['id_review']){ ?>
-                    <form action="post" >
+                    <form method="post" >
                         <textarea cols="150" rows="8" placeholder="Ecrivez votre commenatire ici"></textarea>
                         <input type="submit" value="Ajouter">
                     </form>

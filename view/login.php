@@ -5,11 +5,11 @@
 <section class="contents_page">
     <section id="form_login" class="box1">
         <p id="connexion_title" class="title_box">Connexion</p>
-            <form action="post">
+            <form method="post">
                 <p>Email :</p>
-                <input type="text" name="email">
+                <input type="text" name="email" required>
                 <p>Mot de passe :</p>
-                <input type="password" name="password"> <br><br>
+                <input type="password" name="password" required> <br><br>
                 <input type="submit" name="valider"> <br> <br>
                 <a href="index.php?action=register">Nouveau ? Se créer un compte</a>
             </form>

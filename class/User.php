@@ -20,17 +20,8 @@ class User extends Atom{
     public function admin(): bool {return $this->_admin;}
     
     // Setters
-    public function setId($id){
-        if(is_string($id)){
-            $id = (int) $id;
-        }
-        
-        // Checking successful conversion
-        if($id > 0){
-            $this->_id = $id;
-        } else {
-            throw new Exception("Invalid User ID");
-        }
+    public function setId(int $id){
+        $this->_id = $id;
     }
 
     public function setFirstName(string $firstName){
@@ -69,5 +60,13 @@ class User extends Atom{
 
     public function setAdmin(bool $value){
         $this->_admin = $value;
+    }
+
+    public function comparePassword(string $pass){
+        if(password_verify($pass, $this->password())){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
