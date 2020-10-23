@@ -33,8 +33,8 @@
         <p class="small_title">Conentration :</p>
         <input type="range" min="1" max="5" name="concentration">
         <p class="small_title">Ambiance :</p>
-        <input type="range" min="1" max="5" name="ambiance">
-
+        <input type="range" min="1" max="5" name="ambiance"> <br><br>
+        <input type="submit" value="Ajouter">
     </form>
 
     </section>
