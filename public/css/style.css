@@ -1,4 +1,4 @@
-/* Feuille css du site Jeu critique - réseau social de ciritques de jeux de plateau */
+/* Sheet css form the website : Jeu critique - réseau social de ciritques de jeux de plateau */
 
 body{
     margin: 0;
@@ -52,13 +52,38 @@ nav .btn{
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 30%;
+    width: 160px;
+    background-color: #6B7BF4;
 }
 
 .btn:hover{
     transition: 0.2s;
     background-color: white;
 }
+
+.dropdown{
+    height: 50px;
+    position: relative;
+}
+
+#logout, #add_game{
+    opacity: 0;
+    pointer-events: none;
+}
+
+#logout:hover, #add_game:hover{
+    opacity: 1;
+    pointer-events: all;
+    transition: 0.4s;
+}
+
+.dropdown a:hover + #logout,.dropdown a:hover + #add_game{ 
+    opacity: 1;
+    pointer-events: all;
+    transition: 0.4s;
+}
+
+
 
 /* Footer */
 
@@ -80,7 +105,7 @@ footer center p{
     margin-bottom: 0;
 }
 
-/* Corps de page */
+/* Body */
 
 .contents_page{
     margin: 0;
@@ -108,7 +133,7 @@ footer center p{
     font-weight: bold;
 }
 
-/* Ppt de la box contenant tous les avis */
+/* Box containing all reviews */
 
 .top_box_review{
     display: flex;
@@ -126,10 +151,11 @@ footer center p{
     margin-left: 5px;
 }
 
-/* Ppt d'un avis */
+/* Review */
 
 .review{
     border-top: 3px solid grey;
+    height: auto;
 }
 
 .top_review{
@@ -140,10 +166,6 @@ footer center p{
 
 .top_review p{
     font-weight: bold;
-}
-
-.review a{
-    padding-bottom: 10px;
 }
 
 .bottom_review{
@@ -158,12 +180,22 @@ footer center p{
     margin-left: 10px;
 }
  
-/* Ppt des commentaires des avis */
+/* review's comment */
 
 .comments_box{
     margin-left: 5%;
-    max-height: 600px;
-    overflow: auto;
+    margin-bottom: 1%;
+}
+
+.comments_box form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-top: 1%;
+}
+
+.comments_box form input{
+    width: 8%;
 }
 
 .comment{
@@ -177,4 +209,12 @@ footer center p{
 
 .comment_top{
     font-weight: bold;
+}
+
+.add_comment{
+    color: black;
+    text-decoration: none;
+    border: black solid 1px;
+    background-color: #E5E8E5;
+    padding: 2px 5px 2px 5px;
 }

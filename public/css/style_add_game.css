@@ -1,0 +1,12 @@
+.contents_page{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#add_game_box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
