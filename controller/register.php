@@ -18,8 +18,11 @@ if(!empty($_POST)){
         if($uManager->search(array('email' => $_POST['email']))){
             $errors['exists'] = "Un compte avec cet email existe déjà";
         } else {
+            $_POST['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $u = new User($_POST);
             $uManager->add($u);
+            $u = $uManager->search([$_POST['email']]);
+
             header('Location: index.php');
         }
     }    

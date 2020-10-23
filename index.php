@@ -14,12 +14,15 @@ spl_autoload_register('autoloader');
 // DB Connection Initialization
 $db = new PDO('mysql:host=92.140.139.116;dbname=ifd', 'admin', 'ifd2020');
 
+$errors = array();
 try {
     if(isset($_GET['action'])){
         switch ($_GET['action']){
             case 'login':
                 require 'controller/login.php';
             break;
+            case 'logout':
+                require 'controller/logout.php';
             case 'register':
                 require 'controller/register.php';
             break;
@@ -34,6 +37,7 @@ try {
             break;
             case 'add_game':
                 require 'controller/add_game.php';
+            break;
             default:
                 echo "error name action";
         }

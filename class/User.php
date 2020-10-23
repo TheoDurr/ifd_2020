@@ -50,7 +50,7 @@ class User extends Atom{
 
     public function setPassword(string $password){
         if(strlen($password) <= 255){
-            $this->_password = password_hash($password, PASSWORD_BCRYPT);
+            $this->_password = $password;
         }
     }
 
@@ -60,5 +60,13 @@ class User extends Atom{
 
     public function setAdmin(bool $value){
         $this->_admin = $value;
+    }
+
+    public function comparePassword(string $pass){
+        if(password_verify($pass, $this->password())){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

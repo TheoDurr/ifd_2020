@@ -20,10 +20,10 @@
         
         <a href="index.php" id="main_title">Jeu critique - réseau social de ciritques de jeux de plateau</a>
         <section id="header_right">
-            <?php if(isset($_SESSION)){ ?>
+            <?php if(isset($_SESSION['user'])){ ?>
             <section class="dropdown">
                 <a href="index.php?action=account" class="btn" id="my_account">Mon compte</a>
-                <a href="#" class="btn" id="logout">Déconnexion</a>
+                <a href="index.php?action=logout" class="btn" id="logout">Déconnexion</a>
             </section>
             
 
