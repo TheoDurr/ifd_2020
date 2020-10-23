@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**
  * PHP router
  */
@@ -30,6 +31,9 @@ try {
             break;
             case 'game_page':
                     require 'controller/game_page.php';
+            break;
+            case 'add_game':
+                require 'controller/add_game.php';
             default:
                 echo "error name action";
         }

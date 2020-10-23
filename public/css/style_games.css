@@ -14,6 +14,11 @@
     height: 4%;
 }
 
+#indication{
+    margin: 0.3%;
+    margin-left: 1%;
+}
+
 #results{
     padding-bottom: 50px;
     height: 100%;
