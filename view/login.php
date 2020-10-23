@@ -5,7 +5,7 @@
 <section class="contents_page">
     <section id="form_login" class="box1">
         <p id="connexion_title" class="title_box">Connexion</p>
-            <form action="post">
+            <form method="post">
                 <p>Email :</p>
                 <input type="text" name="email">
                 <p>Mot de passe :</p>

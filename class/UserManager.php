@@ -100,4 +100,14 @@ class UserManager extends Manager {
 
         return $result;
     }
+
+    public function search(array $data){
+        $q = "SELECT * FROM user WHERE ";
+        foreach($data as $key => $value){
+            $q = $q . $key . " = :" . $key;
+        }
+
+        echo($q);
+        die;
+    }
 }
