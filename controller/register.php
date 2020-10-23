@@ -1,4 +1,9 @@
 <?php
+if(isset($_SESSION['user'])){
+    // User already logged
+    header("Location: index.php?action=account");
+}
+
 // If there is data
 if(!empty($_POST)){
     if($_POST['password'] != $_POST['passwordConfirm']) {
