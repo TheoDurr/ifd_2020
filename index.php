@@ -1,5 +1,4 @@
 <?php
-session_start();
 /**
  * PHP router
  */
@@ -10,6 +9,8 @@ spl_autoload_register('autoloader');
 // Autoloader initialization
 require_once 'function/autoload.php';
 spl_autoload_register('autoloader');
+
+session_start();
 
 // DB Connection Initialization
 $db = new PDO('mysql:host=92.140.139.116;dbname=ifd', 'admin', 'ifd2020');
