@@ -7,7 +7,7 @@ if(!empty($_POST)){
         $errors['email'] = "Compte introuvable";
     }else{
         if(password_verify($_POST['password'], $result[0]->password())){
-            $_SESSION['user'] = $result;
+            $_SESSION['user'] = $result[0];
             header("Location: index.php");
         }else{
             $errors['password'] = "Le mot de passe est incorrect";
