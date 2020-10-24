@@ -6,10 +6,6 @@
 require_once 'function/autoload.php';
 spl_autoload_register('autoloader');
 
-// Autoloader initialization
-require_once 'function/autoload.php';
-spl_autoload_register('autoloader');
-
 session_start();
 
 // DB Connection Initialization
