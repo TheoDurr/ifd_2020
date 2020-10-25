@@ -1,4 +1,7 @@
 <?php
+/**
+ * Class used to represent a review
+ */
 class Review extends Atom {
     private $_id, $_gameId, $_score, $_content, $_userId, $_creationDate;
 

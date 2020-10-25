@@ -5,13 +5,14 @@
 // Autoloader initialization
 require_once 'function/autoload.php';
 spl_autoload_register('autoloader');
-
 session_start();
 
+if(!isset($_SESSION['errors'])){
+    $_SESSION['errors'] = array();
+}
 // DB Connection Initialization
 $db = new PDO('mysql:host=92.140.139.116;dbname=ifd', 'admin', 'ifd2020');
 
-$errors = array();
 try {
     if(isset($_GET['action'])){
         switch ($_GET['action']){
