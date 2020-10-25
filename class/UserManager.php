@@ -31,6 +31,8 @@ class UserManager extends Manager {
         $q->bindValue(':password', $user->password(), PDO::PARAM_STR);
 
         $result = $q->execute();
+
+        return $result;
     }
 
     /**
