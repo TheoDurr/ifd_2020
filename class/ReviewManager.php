@@ -85,12 +85,10 @@ class ReviewManager extends Manager{
      * @return void
      */
     public function update(Review $r){
-        $q = $this->_db->prepare('UPDATE review SET gameId = :gameId, score = :score, content = :content, userId = :userId WHERE id = :id');
+        $q = $this->_db->prepare('UPDATE review SET score = :score, content = :content WHERE id = :id');
 
-        $q->bindValue(':gameId', $r->gameId(), PDO::PARAM_INT);
         $q->bindValue(':score', $r->score(), PDO::PARAM_INT);
         $q->bindValue(':content', $r->content(), PDO::PARAM_STR);
-        $q->bindValue(':userId', $r->userId(), PDO::PARAM_INT);
         $q->bindValue(':id', $r->id(), PDO::PARAM_INT);
 
         $result = $q->execute();
