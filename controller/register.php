@@ -26,7 +26,9 @@ if(!empty($_POST)){
             $_POST['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $u = new User($_POST);
             $uManager->add($u);
-            $u = $uManager->get(new User(array('email' => $_POST['email'])));
+            $u = $uManager->get(new User(array('email' => $u->email())));
+
+            $_SESSION['user'] = $u[0];
 
             header('Location: index.php');
         }
