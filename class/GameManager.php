@@ -1,6 +1,4 @@
 <?php
-require_once 'manager.php';
-
 /**
  * Class used to manage games
  */
@@ -56,38 +54,44 @@ class GameManager extends Manager{
     }
 
     /**
-     * Look for a specific game in the database by its Id
+     * Look for a specific game in the database or return all games
      *
      * @param int $id
      * @return mixed
      */
-    public function get(int $id){
-        $q = $this->_db->prepare('SELECT * FROM game WHERE id = :id');
-        $q->execute(array('id' => $id));
-        
-        $data = $q->fetch(PDO::FETCH_ASSOC);
-        if($data){
-            return new Game($data); // Id is unique, so return the first (and the only) occurrence
+    public function get(Game $g){
+        if($g){
+            $array = $g->toArray(false);
+
+            $s = "SELECT * FROM editor WHERE ";
+
+            $i = 0;
+            foreach($array as $key => $value){
+                $s = $s . $key . " = :" . $key;
+                if($i != count($array) - 1){
+                    $s = $s . ", ";
+                }
+                $i++;
+            }
+
+            $q = $this->_db->prepare($s);
+            $q->execute($array);
+            $data = $q->fetch(PDO::FETCH_ASSOC);
+            if($data){
+                return new Comment($data); 
+            } else {
+                return false;
+            }
         } else {
-            return false;           // No occurrence
+            $result = array();
+            $q = $this->_db->query('SELECT * FROM editor');
+
+            while($data = $q->fetch(PDO::FETCH_ASSOC)){
+                $result[] = new Comment($data);
+            }
+    
+            return $result;
         }
-    }
-
-    /**
-     * Get the list of games
-     *
-     * @return array all entries of the database
-     */
-    public function getList(): array{
-        $result = array();
-
-        $q = $this->_db->query('SELECT * FROM game ORDER BY name');
-
-        while($data = $q->fetch(PDO::FETCH_ASSOC)){
-            $result[] = new Game($data);
-        }
-
-        return $result;
     }
 
     public function update(Game $game){

@@ -35,18 +35,20 @@ class CommentManager extends Manager{
      * Deletes a comment
      *
      * @param Comment $c
-     * @return void
+     * @return mixed
      */
-    public function delete(Comment $c): void{
+    public function delete(Comment $c){
         $q = $this->_db->prepare('DELETE FROM review WHERE id = :id');
         $result = $q->execute(array('id' => $c->id()));
+
+        return $result;
     }
 
     /**
-     * Look for a specific comment in the database by its Id
+     * Look for a specific comment in the database or return all comments
      *
-     * @param int $id
-     * @return mixed or False if there is no occurrence
+     * @param Comment $comment
+     * @return mixed
      */
     public function get(Comment $comment = NULL){
         if($comment){
@@ -68,9 +70,9 @@ class CommentManager extends Manager{
             $q->execute($array);
             $data = $q->fetch(PDO::FETCH_ASSOC);
             if($data){
-                return new Comment($data); // Id is unique, so return the first (and the only) occurrence
+                return new Comment($data);
             } else {
-                return false;           // No occurrence
+                return false;
             }
         } else {
             $result = array();
@@ -88,7 +90,7 @@ class CommentManager extends Manager{
      * Update the comment with new data
      *
      * @param Comment $c
-     * @return void
+     * @return mixed
      */
     public function update(Comment $c){
         $q = $this->_db->prepare('UPDATE comment SET content = :content WHERE id = :id');
