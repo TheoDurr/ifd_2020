@@ -14,7 +14,7 @@ class Comment extends Atom{
     public function content(){return $this->_content;}
     public function userId(){return $this->_userId;}
     public function reviewId(){return $this->_reviewId;}
-    public function creationDate(){return $this->_creationDate;}
+    public function creationDate(){return date('d-m-Y:H.i.s',strtotime($this ->_creationDate));}
 
     // Setter
     public function setId(int $id){

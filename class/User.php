@@ -16,7 +16,7 @@ class User extends Atom{
     public function birthDate(){return $this->_birthDate;}    
     public function email(): string{return $this->_email;}    
     public function password(): string{return $this->_password;}
-    public function creationDate(){return $this ->_creationDate;}
+    public function creationDate(){return date('d-m-Y:H.i.s',strtotime($this ->_creationDate));}
     public function admin(): bool {return $this->_admin;}
     
     // Setters
