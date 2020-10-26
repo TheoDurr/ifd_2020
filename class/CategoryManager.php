@@ -51,7 +51,7 @@ class CategoryManager extends Manager{
         if($c){
             $array = $c->toArray(false);
 
-            $s = "SELECT * FROM editor WHERE ";
+            $s = "SELECT * FROM category WHERE ";
 
             $i = 0;
             foreach($array as $key => $value){
@@ -72,7 +72,7 @@ class CategoryManager extends Manager{
             }
         } else {
             $result = array();
-            $q = $this->_db->query('SELECT * FROM editor');
+            $q = $this->_db->query('SELECT * FROM category');
 
             while($data = $q->fetch(PDO::FETCH_ASSOC)){
                 $result[] = new Category($data);

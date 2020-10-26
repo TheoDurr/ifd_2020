@@ -3,7 +3,7 @@
  * Class used to represent a game
  */
 class Game extends Atom {
-    private $_id, $_name, $_editorId, $_description, $_img, $_categoryId, $_price,
+    private $_id, $_name, $_editorId, $_editor, $_description, $_img, $_categoryId, $_category, $_price,
     $_playersMin, $_playersMax, $_userId, $_complexity, $_concentration, $_ambiance;
 
     public function __construct(array $data){
@@ -13,10 +13,12 @@ class Game extends Atom {
     // Getters
     public function id(): int{return $this->_id;}
     public function name(): string{return $this->_name;}
-    public function editorId(): int{return $this->_editorId;}
+    private function editorId(): int{return $this->_editorId;}
+    public function editor(): Editor{return $this->_editor;}
     public function description(): string{return $this->_description;}
     public function img(){return $this->_img;}
-    public function categoryId(): int{return $this->_categoryId;}
+    private function categoryId(): int{return $this->_categoryId;}
+    public function category(): Category{return $this->_category;}
     public function price(): float{return $this->_price;}
     public function playersMin(): int{return $this->_playersMin;}
     public function playersMax(): int{return $this->_playersMax;}
@@ -39,7 +41,11 @@ class Game extends Atom {
     }
 
     public function setEditorId(int $id){
-        $this->_editorId = $id;
+        $this->setEditor(new Editor(array('id' => $id)));
+    }
+
+    public function setEditor(Editor $e){
+        $this->_editor = $e;
     }
 
     public function setDescription(string $content){
@@ -51,7 +57,11 @@ class Game extends Atom {
     }
 
     public function setCategoryId(int $id){
-        $this->_categoryId = $id;
+        $this->setCategory(new Category(array('id' => $id)));
+    }
+
+    public function setCategory(Category $c){
+        $this->_category = $c;
     }
 
     public function setPrice(float $price){

@@ -23,10 +23,10 @@ class GameManager extends Manager{
         VALUES (:name, :editorId, :description, :img, :categoryId, :price, :playersMin, :playersMax, :userId, :complexity, :concentration, :ambiance)');
 
         $q->bindValue(':name', ucwords($game->name()), PDO::PARAM_STR);
-        $q->bindValue(':editorId', $game->editorId(), PDO::PARAM_INT);
+        $q->bindValue(':editorId', $game->editor()->id(), PDO::PARAM_INT);
         $q->bindValue(':description', $game->description(), PDO::PARAM_STR);
         $q->bindValue(':img', $game->img(), PDO::PARAM_STR);
-        $q->bindValue(':categoryId', $game->categoryId(), PDO::PARAM_INT);
+        $q->bindValue(':categoryId', $game->category()->id(), PDO::PARAM_INT);
         $q->bindValue(':price', (string) $game->price(), PDO::PARAM_STR);
         $q->bindValue(':playersMin', $game->playersMin(), PDO::PARAM_INT);
         $q->bindValue(':playersMax', $game->playersMax(), PDO::PARAM_INT);
@@ -59,11 +59,11 @@ class GameManager extends Manager{
      * @param int $id
      * @return mixed
      */
-    public function get(Game $g){
+    public function get(Game $g = NULL){
         if($g){
             $array = $g->toArray(false);
 
-            $s = "SELECT * FROM editor WHERE ";
+            $s = "SELECT * FROM game WHERE ";
 
             $i = 0;
             foreach($array as $key => $value){
@@ -78,16 +78,22 @@ class GameManager extends Manager{
             $q->execute($array);
             $data = $q->fetch(PDO::FETCH_ASSOC);
             if($data){
-                return new Comment($data); 
+                $data['editor'] = $this->getEditor(new Editor(array('id' => $data['editorId'])));
+                $data['category'] = $this->getCategory(new Category(array('id' => $data['categoryId'])));
+                $data['avgScore'] = $this->getAvgScore(new Game(array('id' => $data['id'])));
+                return new Game($data); 
             } else {
                 return false;
             }
         } else {
             $result = array();
-            $q = $this->_db->query('SELECT * FROM editor');
+            $q = $this->_db->query('SELECT * FROM game');
 
             while($data = $q->fetch(PDO::FETCH_ASSOC)){
-                $result[] = new Comment($data);
+                $data['editor'] = $this->getEditor(new Editor(array('id' => $data['editorId'])));
+                $data['category'] = $this->getCategory(new Category(array('id' => $data['categoryId'])));
+                $data['avgScore'] = $this->getAvgScore(new Game(array('id' => $data['id'])));
+                $result[] = new Game($data);
             }
     
             return $result;
@@ -113,10 +119,10 @@ class GameManager extends Manager{
         ');
 
         $q->bindValue(':name', ucwords($game->name()), PDO::PARAM_STR);
-        $q->bindValue(':editorId', $game->editorId(), PDO::PARAM_INT);
+        $q->bindValue(':editorId', $game->editor()->id(), PDO::PARAM_INT);
         $q->bindValue(':description', $game->description(), PDO::PARAM_STR);
         $q->bindValue(':img', $game->img(), PDO::PARAM_STR);
-        $q->bindValue(':categoryId', $game->categoryId(), PDO::PARAM_INT);
+        $q->bindValue(':categoryId', $game->category()->id(), PDO::PARAM_INT);
         $q->bindValue(':price', (string) $game->price(), PDO::PARAM_STR);
         $q->bindValue(':playersMin', $game->playersMin(), PDO::PARAM_INT);
         $q->bindValue(':playersMax', $game->playersMax(), PDO::PARAM_INT);
@@ -128,6 +134,27 @@ class GameManager extends Manager{
         $q->bindValue(':id', $game->id(), PDO::PARAM_INT);
 
         $result = $q->execute();
+
+        return $result;
+    }
+
+    private function getEditor(Editor $e){
+        $eManager = new EditorManager($this->_db);
+        $result = $eManager->get($e);
+
+        return $result;
+    }
+
+    private function getCategory(Category $c){
+        $cManager = new CategoryManager($this->_db);
+        $result = $cManager->get($c);
+
+        return $result;
+    }
+
+    private function getAvgScore(Game $g){
+        $rManager = new ReviewManager($this->_db);
+        $result = $rManager->get(new Review(array('gameId' => $g->id())));
 
         return $result;
     }
