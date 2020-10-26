@@ -50,9 +50,9 @@ class CommentManager extends Manager{
      * @param Comment $comment
      * @return mixed
      */
-    public function get(Comment $comment = NULL){
-        if($comment){
-            $array = $comment->toArray(false);
+    public function get(Comment $c = NULL){
+        if($c){
+            $array = $c->toArray(false);
 
             $s = "SELECT * FROM comment WHERE ";
 
@@ -64,24 +64,19 @@ class CommentManager extends Manager{
                 }
                 $i++;
             }
-            var_dump($s);
 
             $q = $this->_db->prepare($s);
             $q->execute($array);
-            $data = $q->fetch(PDO::FETCH_ASSOC);
-            if($data){
-                return new Comment($data);
-            } else {
-                return false;
-            }
         } else {
             $result = array();
-            $q = $this->_db->query('SELECT * FROM comment ORDER BY creationDate');
-
-            while($data = $q->fetch(PDO::FETCH_ASSOC)){
-                $result[] = new Comment($data);
-            }
-    
+            $q = $this->_db->query('SELECT * FROM comment');
+        }
+        while($data = $q->fetch(PDO::FETCH_ASSOC)){
+            $result[] = new Comment($data);
+        }
+        if(empty($result)){
+            return false;
+        } else {
             return $result;
         }
     }

@@ -64,20 +64,16 @@ class CategoryManager extends Manager{
 
             $q = $this->_db->prepare($s);
             $q->execute($array);
-            $data = $q->fetch(PDO::FETCH_ASSOC);
-            if($data){
-                return new Category($data); 
-            } else {
-                return false;
-            }
         } else {
             $result = array();
             $q = $this->_db->query('SELECT * FROM category');
-
-            while($data = $q->fetch(PDO::FETCH_ASSOC)){
-                $result[] = new Category($data);
-            }
-    
+        }
+        while($data = $q->fetch(PDO::FETCH_ASSOC)){
+            $result[] = new Category($data);
+        }
+        if(empty($result)){
+            return false;
+        } else {
             return $result;
         }
     }

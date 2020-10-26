@@ -64,20 +64,16 @@ class EditorManager extends Manager{
 
             $q = $this->_db->prepare($s);
             $q->execute($array);
-            $data = $q->fetch(PDO::FETCH_ASSOC);
-            if($data){
-                return new Editor($data); 
-            } else {
-                return false;
-            }
         } else {
             $result = array();
             $q = $this->_db->query('SELECT * FROM editor');
-
-            while($data = $q->fetch(PDO::FETCH_ASSOC)){
-                $result[] = new Editor($data);
-            }
-    
+        }
+        while($data = $q->fetch(PDO::FETCH_ASSOC)){
+            $result[] = new Editor($data);
+        }
+        if(empty($result)){
+            return false;
+        } else {
             return $result;
         }
     }

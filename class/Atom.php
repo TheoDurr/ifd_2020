@@ -26,6 +26,7 @@ abstract class Atom {
      * @return array
      */
     public function toArray(bool $returnNullValues = true): array{
+        $array = [];
         foreach ((array) $this as $key => $value) {
             $result = explode('_', $key);
             if ($value == null) {

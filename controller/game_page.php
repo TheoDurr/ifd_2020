@@ -6,7 +6,7 @@ if(isset($_GET['id']) && (int) $_GET['id']){
         'id' => (int) $_GET['id']
     )));
     if($result){
-        $data['game'] = $result; 
+        $data['game'] = $result[0]; 
     } else {
         $_SESSION['errors']['game'] = "Jeu introuvable";
         header('Location: index.php?action=games');
