@@ -36,11 +36,13 @@ class ReviewManager extends Manager{
      * Deletes a review
      *
      * @param Review $r
-     * @return void
+     * @return mixed
      */
-    public function delete(Review $r): void{
+    public function delete(Review $r){
         $q = $this->_db->prepare('DELETE FROM review WHERE id = :id');
         $result = $q->execute(array('id' => $r->id()));
+
+        return $result;
     }
 
     /**
@@ -49,40 +51,46 @@ class ReviewManager extends Manager{
      * @param int $id
      * @return Review or False if there is no occurrence
      */
-    public function get(int $id){
-        $q = $this->_db->prepare('SELECT * FROM review WHERE id = :id');
-        $result = $q->execute(array('id' => $id));
+    public function get(Review $r){
+        if($r){
+            $array = $r->toArray(false);
 
-        $data = $q->fetch(PDO::FETCH_ASSOC);
-        if($data){
-            return new Review($data); // Id is unique, so return the first (and the only) occurrence
+            $s = "SELECT * FROM editor WHERE ";
+
+            $i = 0;
+            foreach($array as $key => $value){
+                $s = $s . $key . " = :" . $key;
+                if($i != count($array) - 1){
+                    $s = $s . ", ";
+                }
+                $i++;
+            }
+
+            $q = $this->_db->prepare($s);
+            $q->execute($array);
+            $data = $q->fetch(PDO::FETCH_ASSOC);
+            if($data){
+                return new Comment($data); 
+            } else {
+                return false;
+            }
         } else {
-            return false;             // No occurrence
+            $result = array();
+            $q = $this->_db->query('SELECT * FROM editor');
+
+            while($data = $q->fetch(PDO::FETCH_ASSOC)){
+                $result[] = new Comment($data);
+            }
+    
+            return $result;
         }
-    }
-
-    /**
-     * Get the list of reviews
-     *
-     * @return array user objects
-     */
-    public function getList(): array {
-        $result = array();
-        
-        $q = $this->_db->query('SELECT * FROM review ORDER BY creationDate');
-
-        while($data = $q->fetch(PDO::FETCH_ASSOC)){
-            $result[] = new Review($data);
-        }
-
-        return $result;
     }
 
     /**
      * Update the review with new data
      *
      * @param Review $r
-     * @return void
+     * @return mixed
      */
     public function update(Review $r){
         $q = $this->_db->prepare('UPDATE review SET score = :score, content = :content WHERE id = :id');

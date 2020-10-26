@@ -1,47 +1,48 @@
 <?php ob_start(); ?>
+<?php $g = $data['game']; ?>
 
 <link rel="stylesheet" type="text/css" href="public/css/style_game_page.css">
 
 <section class="contents_page">
     <section id="picture_title">
-        <img src="public/img/monopoly.jpg">
-        <p>Monopoly</p>
+        <img src="data:image/jpeg;base64, <?= base64_encode($result->img())?>"/>
+        <p><?= $g->name() ?></p>
     </section>
 
     <section class="box1" id="info">
         <section class="info_content">
-            <p class="small_title">Editor :</p>
-            <p>Hasbro</p>
+            <p class="small_title">Editeur :</p>
+            <p><?= $g->editor()->name() ?></p>
         </section>
         <section class="info_content">
             <p class="small_title">Catégorie :</p>
-            <p>Capitalisme</p>
+            <p><?= $g->category()->name() ?></p>
         </section>
         <section class="info_content">
             <p class="small_title">Prix :</p>
-            <p>25 €</p>
+            <p><?= $g->price() ?> €</p>
         </section>
         <section class="info_content">
             <p class="small_title">Nombre joueurs :</p>
-            <p>2 à 6</p>
+            <p><?= $g->playersMin() ?> à <?= $g->playersMax() ?></p>
         </section>
         <section Complexité="info_content">
             <p class="small_title">Complexité :</p>
-            <p>4</p>
+            <p><?= $g->complexity() ?></p>
         </section>
         <section class="info_content">
             <p class="small_title">Concentration :</p>
-            <p>6</p>
+            <p><?= $g->concentration() ?></p>
         </section>
         <section class="info_content">
             <p class="small_title">Ambiance :</p>
-            <p>5</p>
+            <p><?= $g->ambiance() ?></p>
         </section>
     </section>
 
     <section class="box1">
         <p class="big_title">Descritpion :</p>
-        <p>Le Monopoly est un jeu de société américain édité par Hasbro. Le but du jeu consiste à ruiner ses concurrents par des opérations immobilières. Il symbolise les aspects apparents et spectaculaires du capitalisme, les fortunes se faisant et se défaisant au fil des coups de dés. Ce jeu de société est mondialement connu, et il en existe de multiples versions.</p>
+        <p><?= $g->description() ?></p>
     </section>
             
     <?php include 'view/reviews.php'; ?>

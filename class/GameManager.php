@@ -1,6 +1,4 @@
 <?php
-require_once 'manager.php';
-
 /**
  * Class used to manage games
  */
@@ -25,10 +23,10 @@ class GameManager extends Manager{
         VALUES (:name, :editorId, :description, :img, :categoryId, :price, :playersMin, :playersMax, :userId, :complexity, :concentration, :ambiance)');
 
         $q->bindValue(':name', ucwords($game->name()), PDO::PARAM_STR);
-        $q->bindValue(':editorId', $game->editorId(), PDO::PARAM_INT);
+        $q->bindValue(':editorId', $game->editor()->id(), PDO::PARAM_INT);
         $q->bindValue(':description', $game->description(), PDO::PARAM_STR);
         $q->bindValue(':img', $game->img(), PDO::PARAM_STR);
-        $q->bindValue(':categoryId', $game->categoryId(), PDO::PARAM_INT);
+        $q->bindValue(':categoryId', $game->category()->id(), PDO::PARAM_INT);
         $q->bindValue(':price', (string) $game->price(), PDO::PARAM_STR);
         $q->bindValue(':playersMin', $game->playersMin(), PDO::PARAM_INT);
         $q->bindValue(':playersMax', $game->playersMax(), PDO::PARAM_INT);
@@ -56,38 +54,50 @@ class GameManager extends Manager{
     }
 
     /**
-     * Look for a specific game in the database by its Id
+     * Look for a specific game in the database or return all games
      *
      * @param int $id
      * @return mixed
      */
-    public function get(int $id){
-        $q = $this->_db->prepare('SELECT * FROM game WHERE id = :id');
-        $q->execute(array('id' => $id));
-        
-        $data = $q->fetch(PDO::FETCH_ASSOC);
-        if($data){
-            return new Game($data); // Id is unique, so return the first (and the only) occurrence
+    public function get(Game $g = NULL){
+        if($g){
+            $array = $g->toArray(false);
+
+            $s = "SELECT * FROM game WHERE ";
+
+            $i = 0;
+            foreach($array as $key => $value){
+                $s = $s . $key . " = :" . $key;
+                if($i != count($array) - 1){
+                    $s = $s . ", ";
+                }
+                $i++;
+            }
+
+            $q = $this->_db->prepare($s);
+            $q->execute($array);
+            $data = $q->fetch(PDO::FETCH_ASSOC);
+            if($data){
+                $data['editor'] = $this->getEditor(new Editor(array('id' => $data['editorId'])));
+                $data['category'] = $this->getCategory(new Category(array('id' => $data['categoryId'])));
+                $data['avgScore'] = $this->getAvgScore(new Game(array('id' => $data['id'])));
+                return new Game($data); 
+            } else {
+                return false;
+            }
         } else {
-            return false;           // No occurrence
+            $result = array();
+            $q = $this->_db->query('SELECT * FROM game');
+
+            while($data = $q->fetch(PDO::FETCH_ASSOC)){
+                $data['editor'] = $this->getEditor(new Editor(array('id' => $data['editorId'])));
+                $data['category'] = $this->getCategory(new Category(array('id' => $data['categoryId'])));
+                $data['avgScore'] = $this->getAvgScore(new Game(array('id' => $data['id'])));
+                $result[] = new Game($data);
+            }
+    
+            return $result;
         }
-    }
-
-    /**
-     * Get the list of games
-     *
-     * @return array all entries of the database
-     */
-    public function getList(): array{
-        $result = array();
-
-        $q = $this->_db->query('SELECT * FROM game ORDER BY name');
-
-        while($data = $q->fetch(PDO::FETCH_ASSOC)){
-            $result[] = new Game($data);
-        }
-
-        return $result;
     }
 
     public function update(Game $game){
@@ -109,10 +119,10 @@ class GameManager extends Manager{
         ');
 
         $q->bindValue(':name', ucwords($game->name()), PDO::PARAM_STR);
-        $q->bindValue(':editorId', $game->editorId(), PDO::PARAM_INT);
+        $q->bindValue(':editorId', $game->editor()->id(), PDO::PARAM_INT);
         $q->bindValue(':description', $game->description(), PDO::PARAM_STR);
         $q->bindValue(':img', $game->img(), PDO::PARAM_STR);
-        $q->bindValue(':categoryId', $game->categoryId(), PDO::PARAM_INT);
+        $q->bindValue(':categoryId', $game->category()->id(), PDO::PARAM_INT);
         $q->bindValue(':price', (string) $game->price(), PDO::PARAM_STR);
         $q->bindValue(':playersMin', $game->playersMin(), PDO::PARAM_INT);
         $q->bindValue(':playersMax', $game->playersMax(), PDO::PARAM_INT);
@@ -124,6 +134,27 @@ class GameManager extends Manager{
         $q->bindValue(':id', $game->id(), PDO::PARAM_INT);
 
         $result = $q->execute();
+
+        return $result;
+    }
+
+    private function getEditor(Editor $e){
+        $eManager = new EditorManager($this->_db);
+        $result = $eManager->get($e);
+
+        return $result;
+    }
+
+    private function getCategory(Category $c){
+        $cManager = new CategoryManager($this->_db);
+        $result = $cManager->get($c);
+
+        return $result;
+    }
+
+    private function getAvgScore(Game $g){
+        $rManager = new ReviewManager($this->_db);
+        $result = $rManager->get(new Review(array('gameId' => $g->id())));
 
         return $result;
     }
