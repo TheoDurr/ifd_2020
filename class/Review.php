@@ -15,7 +15,7 @@ class Review extends Atom {
     public function score(): int{return $this->_score;}
     public function content(): string{return $this->_content;}
     public function userId(): int{return $this->_userId;}
-    public function creationDate(): string{return $this->_creationDate;}
+    public function creationDate(): string{return date('d-m-Y:H.i.s',strtotime($this ->_creationDate));}
 
     // Setters
     public function setId(int $id){
