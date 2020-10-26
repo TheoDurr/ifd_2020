@@ -48,7 +48,7 @@
                     </section>
                     <section class="games_info_content">
                         <p class="category_name">Note Moyenne :</p>
-                        <p>TO BE DEFINED</p>
+                        <p><?= $game->avgScore() ?>/5</p>
                     </section> 
                     <section>
                         <p class="category_name">Description :</p>

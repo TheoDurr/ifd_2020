@@ -26,7 +26,7 @@ class Game extends Atom {
     public function complexity(): int{return $this->_complexity;}
     public function concentration(): int{return $this->_concentration;}
     public function ambiance(): int{return $this->_ambiance;}
-    public function avgScore(): float{return $this->_avgScore;}
+    public function avgScore(): float{return round($this->_avgScore);}
 
     // Setters
     public function setId(int $id){

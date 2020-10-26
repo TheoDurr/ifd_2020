@@ -51,11 +51,11 @@ class ReviewManager extends Manager{
      * @param int $id
      * @return Review or False if there is no occurrence
      */
-    public function get(Review $r){
+    public function get(Review $r = NULL){
         if($r){
             $array = $r->toArray(false);
 
-            $s = "SELECT * FROM editor WHERE ";
+            $s = "SELECT * FROM review WHERE ";
 
             $i = 0;
             foreach($array as $key => $value){
@@ -68,20 +68,16 @@ class ReviewManager extends Manager{
 
             $q = $this->_db->prepare($s);
             $q->execute($array);
-            $data = $q->fetch(PDO::FETCH_ASSOC);
-            if($data){
-                return new Comment($data); 
-            } else {
-                return false;
-            }
         } else {
             $result = array();
-            $q = $this->_db->query('SELECT * FROM editor');
-
-            while($data = $q->fetch(PDO::FETCH_ASSOC)){
-                $result[] = new Comment($data);
-            }
-    
+            $q = $this->_db->query('SELECT * FROM review');
+        }
+        while($data = $q->fetch(PDO::FETCH_ASSOC)){
+            $result[] = new Review($data);
+        }
+        if(empty($result)){
+            return false;
+        } else {
             return $result;
         }
     }
