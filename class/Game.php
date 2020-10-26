@@ -4,7 +4,7 @@
  */
 class Game extends Atom {
     private $_id, $_name, $_editorId, $_editor, $_description, $_img, $_categoryId, $_category, $_price,
-    $_playersMin, $_playersMax, $_userId, $_complexity, $_concentration, $_ambiance;
+    $_playersMin, $_playersMax, $_userId, $_complexity, $_concentration, $_ambiance, $_avgScore;
 
     public function __construct(array $data){
         $this->hydrate($data);
@@ -26,6 +26,7 @@ class Game extends Atom {
     public function complexity(): int{return $this->_complexity;}
     public function concentration(): int{return $this->_concentration;}
     public function ambiance(): int{return $this->_ambiance;}
+    public function avgScore(): float{return $this->_avgScore;}
 
     // Setters
     public function setId(int $id){
@@ -90,5 +91,9 @@ class Game extends Atom {
 
     public function setAmbiance(int $number){
         $this->_ambiance = $number;
+    }
+
+    public function setAvgScore(float $score){
+        $this->_avgScore = $score;
     }
 }

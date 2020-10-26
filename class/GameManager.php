@@ -156,6 +156,17 @@ class GameManager extends Manager{
         $rManager = new ReviewManager($this->_db);
         $result = $rManager->get(new Review(array('gameId' => $g->id())));
 
-        return $result;
+        if($result){
+            $i = 0;
+            $score = 0;
+            foreach($result as $review){
+                $score += $review->score();
+                $i++;
+            }
+
+            return $score/$i;
+        } else {
+            return 0;
+        }
     }
 }
