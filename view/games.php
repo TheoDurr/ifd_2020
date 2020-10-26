@@ -28,49 +28,36 @@
     </form>
 
     <section id="results" class="box1">
-        <p id="results_title">Résultats :</p>
+        <?php
+            if(isset($data['result'])){?>
+                <p id="results_title">Résultats :</p>
+            <?php } else {?>
+                <p id="results_title">Jeux</p>
+            <?php }
+        ?>
 
-        <a href="index.php?action=game_page&id=1" class="result_game">
-            <img src="public/img/monopoly.jpg">
+        <?php foreach($data['games'] as $game){ ?>
+        <a href="index.php?action=game_page&id=<?= $game->id() ?>" class="result_game">
+            <img src="data:image/jpeg;base64, <?= base64_encode($game->img())?>"/>
             <section>
-                <p id="game_title">Monopoly</p>
+                <p id="game_title"><?= $game->name() ?></p>
                 <section id="games_info">
                     <section class="games_info_content">
                         <p class="category_name">Catégorie :</p>
-                        <p>Capitalisme</p>
+                        <p><?= $game->category()->name() ?></p>
                     </section>
                     <section class="games_info_content">
                         <p class="category_name">Note Moyenne :</p>
-                        <p>8/10</p>
+                        <p>TO BE DEFINED</p>
                     </section> 
                     <section>
                         <p class="category_name">Description :</p>
-                        <p>Le Monopoly est un jeu de société américain édité par Hasbro. Le but du jeu consiste à ruiner ses concurrents par des opérations immobilières. Il symbolise les aspects apparents et spectaculaires du capitalisme, les fortunes se faisant et se défaisant au fil des coups de dés. Ce jeu de société est mondialement connu, et il en existe de multiples versions.</p>
+                        <p><?= $game->description() ?></p>
                     </section>
                 </section>   
             </section>
         </a>
-
-        <a href="index.php?action=game_page&id=1" class="result_game">
-            <img src="public/img/monopoly.jpg">
-            <section>
-                <p id="game_title">Monopoly</p>
-                <section id="games_info">
-                    <section class="games_info_content">
-                        <p class="category_name">Catégorie :</p>
-                        <p>Capitalisme</p>
-                    </section>
-                    <section class="games_info_content">
-                        <p class="category_name">Note Moyenne :</p>
-                        <p>8/10</p>
-                    </section> 
-                    <section>
-                        <p class="category_name">Description :</p>
-                        <p>Le Monopoly est un jeu de société américain édité par Hasbro. Le but du jeu consiste à ruiner ses concurrents par des opérations immobilières. Il symbolise les aspects apparents et spectaculaires du capitalisme, les fortunes se faisant et se défaisant au fil des coups de dés. Ce jeu de société est mondialement connu, et il en existe de multiples versions.</p>
-                    </section>
-                </section>   
-            </section>
-        </a>
+        <?php } ?>
 
     </section>
 
