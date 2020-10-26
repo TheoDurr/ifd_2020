@@ -72,6 +72,7 @@ class CommentManager extends Manager{
             $q = $this->_db->query('SELECT * FROM comment');
         }
         while($data = $q->fetch(PDO::FETCH_ASSOC)){
+            $data['user'] = $this->getUser(new Comment(array("userId" => $data['userId'])));
             $result[] = new Comment($data);
         }
         if(empty($result)){
@@ -96,5 +97,12 @@ class CommentManager extends Manager{
         $result = $q->execute();
 
         return $result;
+    }
+
+    public function getUser(Comment $c){
+        $uManager = new UserManager($this->_db);
+        $result = $uManager->get(new User(array('id' => $c->userId())));
+        
+        return $result[0];
     }
 }

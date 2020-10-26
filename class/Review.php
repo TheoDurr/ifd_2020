@@ -3,7 +3,7 @@
  * Class used to represent a review
  */
 class Review extends Atom {
-    private $_id, $_gameId, $_score, $_content, $_userId, $_creationDate;
+    private $_id, $_gameId, $_score, $_content, $_userId, $_user, $_creationDate;
 
     public function __construct(array $data){
         $this->hydrate($data);
@@ -15,6 +15,7 @@ class Review extends Atom {
     public function score(): int{return $this->_score;}
     public function content(): string{return $this->_content;}
     public function userId(): int{return $this->_userId;}
+    public function user(): user{return $this->_user;}
     public function creationDate(): string{return $this->_creationDate;}
 
     // Setters
@@ -40,6 +41,10 @@ class Review extends Atom {
 
     public function setUserId(int $id){
         $this->_userId = $id;
+    }
+
+    public function setUser(User $user){
+        $this->_user = $user;
     }
 
     public function setCreationDate(string $date){
