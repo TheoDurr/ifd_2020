@@ -20,13 +20,13 @@ if(!empty($_POST)){
     
     if(empty($_SESSION['errors'])){
         $uManager = new UserManager($db);
-        if($uManager->search(array('email' => $_POST['email']))){
+        if($uManager->get(new User(array('email' => $_POST['email'])))){
             $_SESSION['errors']['exists'] = "Un compte avec cet email existe déjà";
         } else {
             $_POST['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $u = new User($_POST);
             $uManager->add($u);
-            $u = $uManager->search([$_POST['email']]);
+            $u = $uManager->get(new User(array('email' => $_POST['email'])));
 
             header('Location: index.php');
         }

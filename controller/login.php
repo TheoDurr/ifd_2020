@@ -2,7 +2,7 @@
 
 if(!empty($_POST)){
     $uManager = new UserManager($db);
-    $result = $uManager->search(array('email' => $_POST['email']));
+    $result = $uManager->get(new User(array('email' => $_POST['email'])));
     if(!$result){
         $_SESSION['errors']['email'] = "Compte introuvable";
     }else{
