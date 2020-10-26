@@ -5,7 +5,7 @@
 
 <section class="contents_page">
     <section id="picture_title">
-        <img src="data:image/jpeg;base64, <?= base64_encode($result->img())?>"/>
+        <img src="data:image/jpeg;base64, <?= base64_encode($g->img())?>"/>
         <p><?= $g->name() ?></p>
     </section>
 

@@ -76,26 +76,19 @@ class GameManager extends Manager{
 
             $q = $this->_db->prepare($s);
             $q->execute($array);
-            $data = $q->fetch(PDO::FETCH_ASSOC);
-            if($data){
-                $data['editor'] = $this->getEditor(new Editor(array('id' => $data['editorId'])));
-                $data['category'] = $this->getCategory(new Category(array('id' => $data['categoryId'])));
-                $data['avgScore'] = $this->getAvgScore(new Game(array('id' => $data['id'])));
-                return new Game($data); 
-            } else {
-                return false;
-            }
         } else {
             $result = array();
             $q = $this->_db->query('SELECT * FROM game');
-
-            while($data = $q->fetch(PDO::FETCH_ASSOC)){
-                $data['editor'] = $this->getEditor(new Editor(array('id' => $data['editorId'])));
-                $data['category'] = $this->getCategory(new Category(array('id' => $data['categoryId'])));
-                $data['avgScore'] = $this->getAvgScore(new Game(array('id' => $data['id'])));
-                $result[] = new Game($data);
-            }
-    
+        }
+        while($data = $q->fetch(PDO::FETCH_ASSOC)){
+            $data['editor'] = $this->getEditor(new Editor(array('id' => $data['editorId'])));
+            $data['category'] = $this->getCategory(new Category(array('id' => $data['categoryId'])));
+            $data['avgScore'] = $this->getAvgScore(new Game(array('id' => $data['id'])));
+            $result[] = new Game($data);
+        }
+        if(empty($result)){
+            return false;
+        } else {
             return $result;
         }
     }
@@ -142,14 +135,14 @@ class GameManager extends Manager{
         $eManager = new EditorManager($this->_db);
         $result = $eManager->get($e);
 
-        return $result;
+        return $result[0];
     }
 
     private function getCategory(Category $c){
         $cManager = new CategoryManager($this->_db);
         $result = $cManager->get($c);
 
-        return $result;
+        return $result[0];
     }
 
     private function getAvgScore(Game $g){

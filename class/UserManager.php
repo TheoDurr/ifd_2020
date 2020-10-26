@@ -69,20 +69,16 @@ class UserManager extends Manager {
 
             $q = $this->_db->prepare($s);
             $q->execute($array);
-            $data = $q->fetch(PDO::FETCH_ASSOC);
-            if($data){
-                return new User($data); 
-            } else {
-                return false;
-            }
         } else {
             $result = array();
-            $q = $this->_db->query('SELECT * FROM editor');
-
-            while($data = $q->fetch(PDO::FETCH_ASSOC)){
-                $result[] = new User($data);
-            }
-    
+            $q = $this->_db->query('SELECT * FROM user');
+        }
+        while($data = $q->fetch(PDO::FETCH_ASSOC)){
+            $result[] = new User($data);
+        }
+        if(empty($result)){
+            return false;
+        } else {
             return $result;
         }
     }
