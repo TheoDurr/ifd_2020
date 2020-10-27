@@ -70,6 +70,7 @@ class ReviewManager extends Manager{
             $q->execute($array);
             while($data = $q->fetch(PDO::FETCH_ASSOC)){
                 $data['user'] = $this->getUser(new Review(array('userId' => $data['userId'])));
+                $data['game'] = $this->getGame(new Review(array('gameId' => $data['gameId'])));
                 $result[] = new Review($data);
             }
 
@@ -84,6 +85,7 @@ class ReviewManager extends Manager{
 
             while($data = $q->fetch(PDO::FETCH_ASSOC)){
                 $data['user'] = $this->getUser(new Review(array('userId' => $data['userId'])));
+                $data['game'] = $this->getGame(new Review(array('gameId' => $data['gameId'])));
                 $result[] = new Review($data);
             }
     
@@ -112,6 +114,13 @@ class ReviewManager extends Manager{
     public function getUser(Review $r){
         $uManager = new UserManager($this->_db);
         $result = $uManager->get(new User(array('id' => $r->userId())));
+
+        return $result[0];
+    }
+
+    public function getGame(Review $r){
+        $gManager = new GameManager($this->_db);
+        $result = $gManager->get(new Game(array('id' => $r->gameId())));
 
         return $result[0];
     }

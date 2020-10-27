@@ -30,7 +30,7 @@ class Comment extends Atom{
         $this->_userId = $id;
     }
 
-    public function setUser(user $user){
+    public function setUser(User $user){
         $this->_user = $user;
     }
 

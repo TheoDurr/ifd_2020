@@ -38,6 +38,7 @@ if($_GET['action']=='game_page' && isset($_GET['id'])){
 if($_GET['action']=='account' && isset($_SESSION['user'])){
     $rManager = new ReviewManager($db);
     $r = $rManager->get(new Review(array("userId" => $_SESSION['user']->id())));
+
 }
 
 require dirname(__FILE__) . '../../view/reviews.php';

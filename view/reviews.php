@@ -42,7 +42,10 @@
     <?php foreach($r as $value){ ?>
         <section class="review" id="review<?php echo $value->id(); ?>">
             <section class="top_review" id="review1">
-                <p><?php echo ($value->user())->firstName() . " " . ($value->user())->lastName() . " (" . $value->creationDate() . ")" ?></p>
+                <p><?php /*echo ($value->user())->firstName() . " " . ($value->user())->lastName() . " (" . $value->creationDate() . ")" ?></p>
+                <?php  if($_GET['action']=='account'){ ?>
+                <p> <?php echo $r->game()->name(); ?> </p>
+                <?php }; */?>
                 <p>Note : <?php echo $value->score(); ?>/10</p>
             </section>
             <p><?php echo $value->content(); ?></p>
