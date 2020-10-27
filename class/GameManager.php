@@ -127,4 +127,80 @@ class GameManager extends Manager{
 
         return $result;
     }
+
+    public function search(array $data){
+        $i = 0;
+        $s = "SELECT * FROM game WHERE ";
+        $c = (count($data));
+        foreach($data as $key => $value){
+            $s = $s . $key . " = :" . $key;
+            if($i != $c - 1){
+                $s = $s . ", ";
+            }
+            $i++;
+        }
+        //$s = $s . " ORDER BY firstName, lastName";
+        $q = $this->_db->prepare($s);
+        $q->execute($data);
+
+        while($data = $q->fetch(PDO::FETCH_ASSOC)){
+            $result[] = new Game($data);
+        }
+
+        if(isset($result)){
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+
+
+    public function UploadPicture(string &$mesErrors)
+    {
+        $target_repo = "C:/xampp/htdocs/ifd_2020/public/img/";
+        $target_file = $target_repo . basename($_FILES['image']["name"]);
+        $uploadOk = 1;
+        $typeImage = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        $size=getimagesize($_FILES["image"]["tmp_name"]);
+
+        // Check if file already exists
+        if (file_exists($target_file)) {
+            $mesErrors= "Cette image existe dèjà";
+            $uploadOk = 0;
+        }
+
+        // Check file size
+        else if ($_FILES['image']["size"] > 500000) {
+            $mesErrors= "Cette image est trop volumineuse.";
+            $uploadOk = 0;
+        }
+
+        else if($size[0]!=$size[1])
+        {
+            $uploadOk = 0;
+            $mesErrors= "Cette image n'est pas carrée";
+        }
+
+        // Check format file
+        else if($typeImage != "jpg" && $typeImage != "png" && $typeImage != "jpeg"
+        && $typeImage != "gif" ) {
+            $mesErrors= "Seul le type jpg/png/jpeg/gif sont acceptés";
+            $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0
+        if ($uploadOk == 0) {
+            $mesErrors=$mesErrors . " / Le téléchargement a échoué";
+            // if everything is ok, we try to upload the file
+        } 
+        else {
+            if (move_uploaded_file($_FILES['image']["tmp_name"], $target_file)) {
+                $mesErrors=" Le fichier ". htmlspecialchars( basename( $_FILES['image']["name"])). " a bien été téléchargé.";
+            } 
+            else {
+                $mesErrors= "Le téléchargement a échoué";
+            }
+        }
+    }
 }
