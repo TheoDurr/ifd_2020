@@ -29,13 +29,15 @@
                 <p>Note : <?php echo $value->score(); ?>/10</p>
             </section>
             <p><?php echo $value->content(); ?></p>
+            <?php if($_GET['action']=='game_page'){ ?>
             <section class="bottom_review">
-                <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&id_review=<?php echo $value->id(); ?>&show=true#review<?php echo $value->id(); ?>">3 commentaires</a>
+                <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&id_review=<?php echo $value->id(); ?>&show=true#review<?php echo $value->id(); ?>">Commentaires</a>
                 <form method="post">
                     <input type="submit" name="like" value="Pertinent">
                     <input type="submit" name="dislike" value="Pas pertinent">
                 </form>
             </section>
+            <?php }; ?>
 
             <!-- Display reviews's comments -->
             

@@ -44,7 +44,7 @@
     <?php }; ?>
     </section>
 
-    <?php include 'view/reviews.php'; ?>
+    <?php require 'controller/reviews.php'; ?>
     
 </section>
 
