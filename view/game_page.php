@@ -45,7 +45,7 @@
         <p><?= $g->description() ?></p>
     </section>
             
-    <?php include 'view/reviews.php'; ?>
+    <?php require 'controller/reviews.php'; ?>
 
 </section>
 

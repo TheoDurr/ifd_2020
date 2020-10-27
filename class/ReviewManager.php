@@ -68,16 +68,25 @@ class ReviewManager extends Manager{
 
             $q = $this->_db->prepare($s);
             $q->execute($array);
-        } else {
+            while($data = $q->fetch(PDO::FETCH_ASSOC)){
+                $data['user'] = $this->getUser(new Review(array('userId' => $data['userId'])));
+                $result[] = new Review($data);
+            }
+
+            if(empty($result)){
+                return false;
+            } else {
+                return $result;
+            }
+            } else {
             $result = array();
             $q = $this->_db->query('SELECT * FROM review');
-        }
-        while($data = $q->fetch(PDO::FETCH_ASSOC)){
-            $result[] = new Review($data);
-        }
-        if(empty($result)){
-            return false;
-        } else {
+
+            while($data = $q->fetch(PDO::FETCH_ASSOC)){
+                $data['user'] = $this->getUser(new Review(array('userId' => $data['userId'])));
+                $result[] = new Review($data);
+            }
+    
             return $result;
         }
     }
@@ -99,4 +108,13 @@ class ReviewManager extends Manager{
         
         return $result;
     }
+
+    public function getUser(Review $r){
+        $uManager = new UserManager($this->_db);
+        $result = $uManager->get(new User(array('id' => $r->userId())));
+
+        return $result[0];
+    }
 }
+
+    
