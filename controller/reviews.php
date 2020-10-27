@@ -1,5 +1,29 @@
 <?php
 
+//Add a review
+
+if(isset($_POST['contentReview']) && isset($_SESSION['user'])){
+    $r = new Review(array(
+        'gameId' => $_GET['id'],
+        'score' => $_POST['score'],
+        'content' => $_POST['contentReview'],
+        'userId' => $_SESSION['user']->id()
+    ));
+    $rManager = new ReviewManager($db);
+    $rManager->add($r);
+}
+
+// Add a Comment 
+if(isset($_POST['contentComment']) && isset($_SESSION['user'])){
+    $c = new Comment(array(
+        'userId' => $_SESSION['user']->id(),
+        'content' => $_POST['contentComment'],
+        'reviewId' => $_GET['id_review']
+    ));
+    $cManager = new CommentManager($db);
+    $cManager->add($c);
+}
+
 // Game's review
 if($_GET['action']=='game_page' && isset($_GET['id'])){
     $rManager = new ReviewManager($db);
@@ -14,10 +38,6 @@ if($_GET['action']=='game_page' && isset($_GET['id'])){
 if($_GET['action']=='account' && isset($_SESSION['user'])){
     $rManager = new ReviewManager($db);
     $r = $rManager->get(new Review(array("userId" => $_SESSION['user']->id())));
-    if(isset($_GET['id_review']) && isset($_GET['show'])){
-        $cManager = new CommentManager($db);
-        $c = $cManager->get(new Comment(array('reviewId' => $_GET['id_review'])));
-    }
 }
 
 require dirname(__FILE__) . '../../view/reviews.php';
