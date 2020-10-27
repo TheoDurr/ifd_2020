@@ -42,28 +42,28 @@
             <?php if(isset($_GET['id_review'])){ if($_GET['id_review']==$value->id() && $_GET['show']=='true'){ ?>
             <section class="comments_box">
 
-                <?php if(!empty($c)){ foreach($c as $value){ ?> 
+                <?php if(!empty($c)){ foreach($c as $comment){ ?> 
 
                     <section class="comment">
-                        <p class="comment_top"><?php echo $value->user()->firstName() . " " . $value->user()->lastName() . " (" .  $value->creationDate() . ") :" ?></p>
-                        <p> <?php echo $value->content();?> </p>
+                        <p class="comment_top"><?php echo $comment->user()->firstName() . " " . $comment->user()->lastName() . " (" .  $comment->creationDate() . ") :" ?></p>
+                        <p> <?php echo $comment->content();?> </p>
                     </section>
                 <?php }; };?>
 
                 <!-- Add comments -->
 
-                <?php if(isset($_SESSION)){?>
-                    <?php if(!isset($_GET['modify'])){ ?>
-                    <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&id_review=<?php echo $value->id(); ?>&show=true&modify=true#review<?php echo $value->id(); ?>" class="add_comment">Ajouter un commentaire</a>
+                <?php if(isset($_SESSION['user'])){ 
+                    if(!isset($_GET['add'])){ ?>
+                    <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&id_review=<?php echo $value->id(); ?>&show=true&add=true#review<?php echo $value->id(); ?>" class="add_comment">Ajouter un commentaire</a>
                 <?php }; }else{ ?>
                     <a href="index.php?action=login" class="add_comment">Pour ajouter un commentaire, connectez-vous</a>
                 <?php }; ?>
-                <?php if(isset($_GET['show']) && isset($_GET['modify']) ){ ?>
+                <?php if(isset($_GET['show'])){ if(isset($_GET['add']) && $_GET['id_review']==$value->id()){ ?>
                     <form method="post">
                         <textarea cols="150" rows="8" placeholder="Ecrivez votre commenatire ici"></textarea>
                         <input type="submit" value="Ajouter">
                     </form>
-                <?php }; ?>
+                <?php };}; ?>
 
             </section>
             <?php };}; ?>

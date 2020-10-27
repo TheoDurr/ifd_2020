@@ -1,5 +1,6 @@
 <?php
 
+// Game's review
 if($_GET['action']=='game_page' && isset($_GET['id'])){
     $rManager = new ReviewManager($db);
     $r = $rManager->get(new Review(array("gameId" => $_GET['id'])));
@@ -9,8 +10,9 @@ if($_GET['action']=='game_page' && isset($_GET['id'])){
     }
 }
 
+// User's review
 if($_GET['action']=='account' && isset($_SESSION['user'])){
-    // user's review
+  
 }
 
 require dirname(__FILE__) . '../../view/reviews.php';
