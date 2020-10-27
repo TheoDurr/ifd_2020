@@ -7,26 +7,28 @@ if(isset($_SESSION['user'])){
 // If there is data
 if(!empty($_POST)){
     if($_POST['password'] != $_POST['passwordConfirm']) {
-        $errors['password'] = "Les mots de passe ne concordent pas.";
+        $_SESSION['errors']['password'] = "Les mots de passe ne concordent pas.";
     }
     if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['firstName'])){
         // one or more of the 'special characters' found in $_POST['firstName']
-        $errors['firstName'] = "Le prénom contient des caractères invalides";
+        $_SESSION['errors']['firstName'] = "Le prénom contient des caractères invalides";
     }
     if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['lastName'])){
         // one or more of the 'special characters' found in $_POST['firstName']
-        $errors['lastName'] = "Le nom contient des caractères invalides";
+        $_SESSION['errors']['lastName'] = "Le nom contient des caractères invalides";
     }
     
-    if(empty($errors)){
+    if(empty($_SESSION['errors'])){
         $uManager = new UserManager($db);
-        if($uManager->search(array('email' => $_POST['email']))){
-            $errors['exists'] = "Un compte avec cet email existe déjà";
+        if($uManager->get(new User(array('email' => $_POST['email'])))){
+            $_SESSION['errors']['exists'] = "Un compte avec cet email existe déjà";
         } else {
             $_POST['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $u = new User($_POST);
             $uManager->add($u);
-            $u = $uManager->search([$_POST['email']]);
+            $u = $uManager->get(new User(array('email' => $u->email())));
+
+            $_SESSION['user'] = $u[0];
 
             header('Location: index.php');
         }

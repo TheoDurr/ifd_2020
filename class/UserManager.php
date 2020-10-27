@@ -1,6 +1,4 @@
 <?php
-require_once 'manager.php';
-
 /**
  * Class used to manage users
  */
@@ -18,7 +16,7 @@ class UserManager extends Manager {
      * Add an user to the database
      *
      * @param User $user user to add
-     * @return void
+     * @return mixed
      */
     public function add(User $user){
         $q = $this->_db->prepare('INSERT INTO user (firstName, lastName, birthDate, email, password)
@@ -31,52 +29,58 @@ class UserManager extends Manager {
         $q->bindValue(':password', $user->password(), PDO::PARAM_STR);
 
         $result = $q->execute();
+
+        return $result;
     }
 
     /**
      * Delete an user
      *
      * @param User $user user to delete
-     * @return void
+     * @return mixed
      */
     public function delete(User $user){
         $q =$this->_db->prepare('DELETE FROM user WHERE id = :id');
         $result = $q->execute(array('id' => $user->id()));
+
+        return $result;
     }
 
     /**
-     * Look for a specific user in the database by its Id
+     * Look for a specific user in the database or return all users
      *
      * @param int $id
-     * @return User or False if there is no occurrence
+     * @return mixed
      */
-    public function get(int $id){
-        $q = $this->_db->prepare('SELECT * FROM user WHERE id = :id');
-        $q->execute(array('id' => $id));
-        
-        $data = $q->fetch(PDO::FETCH_ASSOC);
-        if($data){
-            return new User($data); // Id is unique, so return the first (and the only) occurrence
+    public function get(User $u = NULL){
+        if($u){
+            $array = $u->toArray(false);
+
+            $s = "SELECT * FROM user WHERE ";
+
+            $i = 0;
+            foreach($array as $key => $value){
+                $s = $s . $key . " = :" . $key;
+                if($i != count($array) - 1){
+                    $s = $s . ", ";
+                }
+                $i++;
+            }
+
+            $q = $this->_db->prepare($s);
+            $q->execute($array);
         } else {
-            return false;           // No occurrence
+            $result = array();
+            $q = $this->_db->query('SELECT * FROM user');
         }
-    }
-
-    /**
-     * Get the list of users
-     *
-     * @return array user objects
-     */
-    public function getList(): array {
-        $result = array();
-        
-        $q = $this->_db->query('SELECT * FROM user ORDER BY firstName, lastName');
-
         while($data = $q->fetch(PDO::FETCH_ASSOC)){
             $result[] = new User($data);
         }
-
-        return $result;
+        if(empty($result)){
+            return false;
+        } else {
+            return $result;
+        }
     }
 
     /**
@@ -99,37 +103,5 @@ class UserManager extends Manager {
         $result = $q->execute();
 
         return $result;
-    }
-
-    /**
-     * Search an user
-     *
-     * @param array $data search criteria
-     * @return mixed
-     */
-    public function search(array $data){
-        $i = 0;
-        $s = "SELECT * FROM user WHERE ";
-        $c = (count($data));
-        foreach($data as $key => $value){
-            $s = $s . $key . " = :" . $key;
-            if($i != $c - 1){
-                $s = $s . ", ";
-            }
-            $i++;
-        }
-        $s = $s . " ORDER BY firstName, lastName";
-        $q = $this->_db->prepare($s);
-        $q->execute($data);
-
-        while($data = $q->fetch(PDO::FETCH_ASSOC)){
-            $result[] = new User($data);
-        }
-
-        if(isset($result)){
-            return $result;
-        } else {
-            return false;
-        }
     }
 }

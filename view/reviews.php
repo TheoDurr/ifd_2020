@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="public/css/style_reviews.css">
 
 <section class="box1">
-    <section class="top_box_review"> 
+    <section class="top_box_review">
         <?php if($_GET['action']=='account'){ ?>
             <p class="big_title">Mes derniers avis postés :</p>
         <?php }else{ ?>
@@ -16,111 +16,74 @@
                     <option value="date_asc">Date (plus vieux)</option>
                 </select>
             </form>
-            <p>1 avis (sur 173 avis)</p>
+            <p> <?php echo sizeof($r); ?> avis</p>
+            <?php if(isset($_SESSION['user'])){ if($_GET['action']=='game_page' && !isset($_GET['addReview'])){ ?>
+            <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&addReview=true#addReview" class="btn1">Ajouter un avis</a>
+            <?php };}else{ ?>
+            <a href="index.php?action=login" class="btn1">Connectez-vous pour ajouter un avis</a>
+            <?php }; ?>
         </section>
     </section>
 
-    <!--Integration reviews with if(isset($_GET[id_review]) && isset($_GET[show]))-->
+    <!-- Add review -->
 
-    <section class="review">
-        <section class="top_review" id="review1">
-            <p>Cyrille STROESSER (à 00:01 le 18/10/2020)</p>
-            <p>Note : 8/10</p>
-        </section>
-        <p>Je trouve ce jeu psarvtek bien mais il serait quand même beaucoup mieux si l'argent qu'on avait dedans était vrai, genre t'achètes un jeu 25 balles et dedans t'as des millions d'euros, ce serait du génie wallah, tout le monde l'acheterai du coup !!! mais bon les directeurs marketing sont encore trop cons pour avoir pensé à ça du coup je sais même plus quoi dire mais bon faut que ce commentaire soit long pour pouvoir tester l'affichage des retour à la ligne et tt bref je pense que c'est assez long là</p>
-        <section class="bottom_review">
-            <a href="index.php?action=game_page&id=1&id_review=1&show=true#review1">3 commentaires</a>
-            <form method="post">
-                <input type="submit" name="like" value="Pertinent">
-                <input type="submit" name="dislike" value="Pas pertinent">
-            </form>
-        </section>
+    <?php if(isset($_GET['addReview'])){ ?>
+        <form method="post" class="review" id="addReview">
+            <p class="small_title">Ajouter un avis :</p>
+            <textarea cols="150" rows="8" placeholder="Ecrivez votre avis ici" name="contentReview"></textarea>
+            <p>Note (Entre 1 et 5) :</p>
+            <input type="number" min="1" max="5" step="1" name="score"> <br> <br>
+            <input type="submit" value="Ajouter">
+        </form>
+    <?php } ?>
 
-        <!-- Display reviews's comments -->
-        
-        <?php if(isset($_GET['id_review'])){ if($_GET['id_review']==1 && $_GET['show']=='true'){ ?>
-        <section class="comments_box">
-            <section class="comment">
-                <p class="comment_top">Théo DURR (à 23:17 le 18/10/2020) :</p>
-                <p>Je suis ton plus grand fan Cyrille !!!!!</p>
-            </section>
-            <section class="comment">
-                <p class="comment_top">Esteban LELIBOUX (à 23:19 le 18/10/2020) :</p>
-                <p>Wouah mais ce site est tellement bien fait ! Comment fas-tu pour être si bon en html/css siril ?!?! </p>
-            </section>
-            <section class="comment">
-                <p class="comment_top">Cyrille STROESSER (à 23:21 le 18/10/2020) :</p>
-                <p>FIRST</p>
-            </section>
-            <section class="comment">
-                <p class="comment_top">Cyrille STROESSER (à 23:21 le 18/10/2020) :</p>
-                <p>FIRST</p>
-            </section>
-            <section class="comment">
-                <p class="comment_top">Cyrille STROESSER (à 23:21 le 18/10/2020) :</p>
-                <p>FIRST</p>
-            </section>
-            <section class="comment">
-                <p class="comment_top">Cyrille STROESSER (à 23:21 le 18/10/2020) :</p>
-                <p>FIRST</p>
-            </section>
+    <!--Integration reviews -->
 
-            <!-- Add comments -->
-
-            <?php if(isset($_SESSION)){?>
-                <?php if(!isset($_GET['modify'])){ ?>
-                <a href="index.php?action=game_page&id=1&id_review=1&show=true&modify=true#review1" class="add_comment">Ajouter un commentaire</a>
-            <?php }; }else{ ?>
-                <a href="index.php?action=login" class="add_comment">Pour ajouter un commentaire, connectez-vous</a>
-            <?php }; ?>
-            <?php if(isset($_GET['show']) && isset($_GET['modify']) ){ ?>
-                <form method="post" >
-                    <textarea cols="150" rows="8" placeholder="Ecrivez votre commenatire ici"></textarea>
-                    <input type="submit" value="Ajouter">
+    <?php foreach($r as $value){ ?>
+        <section class="review" id="review<?php echo $value->id(); ?>">
+            <section class="top_review" id="review1">
+                <p><?php echo ($value->user())->firstName() . " " . ($value->user())->lastName() . " (" . $value->creationDate() . ")" ?></p>
+                <p>Note : <?php echo $value->score(); ?>/10</p>
+            </section>
+            <p><?php echo $value->content(); ?></p>
+            <?php if($_GET['action']=='game_page'){ ?>
+            <section class="bottom_review">
+                <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&id_review=<?php echo $value->id(); ?>&show=true#review<?php echo $value->id(); ?>">Commentaires</a>
+                <form method="post">
+                    <input type="submit" name="like" value="Pertinent">
+                    <input type="submit" name="dislike" value="Pas pertinent">
                 </form>
+            </section>
             <?php }; ?>
 
+            <!-- Display reviews's comments -->
+            
+            <?php if(isset($_GET['id_review'])){ if($_GET['id_review']==$value->id() && $_GET['show']=='true'){ ?>
+            <section class="comments_box">
+                <?php if(!empty($c)){ foreach($c as $comment){ ?> 
+                    <section class="comment">
+                        <p class="comment_top"><?php echo $comment->user()->firstName() . " " . $comment->user()->lastName() . " (" .  $comment->creationDate() . ") :" ?></p>
+                        <p> <?php echo $comment->content();?> </p>
+                    </section>
+                <?php }; };?>
+
+                <!-- Add comments -->
+
+                <?php if(isset($_SESSION['user'])){ 
+                    if(!isset($_GET['addComment'])){ ?>
+                    <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&id_review=<?php echo $value->id(); ?>&show=true&addComment=true#review<?php echo $value->id(); ?>" class="btn1">Ajouter un commentaire</a>
+                <?php }; }else{ ?>
+                    <a href="index.php?action=login" class="btn1">Pour ajouter un commentaire, connectez-vous</a>
+                <?php }; ?>
+                <?php if(isset($_GET['show'])){ if(isset($_GET['addComment']) && $_GET['id_review']==$value->id()){ ?>
+                    <form method="post" cible="index.php?action=game_page&id=<?php echo $_GET['id'];?>&id_review=<?php echo $value->id();?>&show=true#review<?php echo $value->id();?>">
+                        <textarea cols="150" rows="8" placeholder="Ecrivez votre commenatire ici" name="contentComment"></textarea>
+                        <input type="submit" value="Ajouter">
+                    </form>
+                <?php };}; ?>
+
+            </section>
+            <?php };}; ?>
         </section>
-        <?php };}; ?>
-    </section>
-        
-    <!--Integration reviews with if(isset($_GET[id_review]) && isset($_GET[show]))-->
-
-    <section class="review">
-        <section class="top_review" id="review2">
-            <p>Cyrille STROESSER (à 00:01 le 18/10/2020)</p>
-            <p>Note : 8/10</p>
-        </section>
-        <p>Je trouve ce jeu psarvtek bien mais il serait quand même beaucoup mieux si l'argent qu'on avait dedans était vrai, genre t'achètes un jeu 25 balles et dedans t'as des millions d'euros, ce serait du génie wallah, tout le monde l'acheterai du coup !!! mais bon les directeurs marketing sont encore trop cons pour avoir pensé à ça du coup je sais même plus quoi dire mais bon faut que ce commentaire soit long pour pouvoir tester l'affichage des retour à la ligne et tt bref je pense que c'est assez long là</p>
-        <section class="bottom_review">
-            <a href="index.php?action=game_page&id=2&id_review=2&show=true#review2">0 commentaire</a>
-            <form method="post">
-                <input type="submit" name="like" value="Pertinent">
-                <input type="submit" name="dislike" value="Pas pertinent">
-            </form>
-        </section>
-
-        <!-- Display reviews's comments -->
-        
-        <?php if(isset($_GET['id_review'])){ if($_GET['id_review']==2 && $_GET['show']=='true'){ ?>
-        <section class="comments_box">
-
-            <!-- Add comments -->
-
-            <?php if(isset($_SESSION)){?>
-                <?php if(!isset($_GET['modify'])){ ?>
-                <a href="index.php?action=game_page&id=1&id_review=2&show=true&modify=true#review2" class="add_comment">Ajouter un commentaire</a>
-            <?php  }; }else{ ?>
-                <a href="index.php?action=login" class="add_comment">Pour ajouter un commentaire, connectez-vous</a>
-            <?php }; ?>
-            <?php if(isset($_GET['modify'])){ if($_GET['id_review']){ ?>
-                <form method="post" >
-                    <textarea cols="150" rows="8" placeholder="Ecrivez votre commenatire ici"></textarea>
-                    <input type="submit" value="Ajouter">
-                </form>
-            <?php }; }; ?>
-
-        </section>
-        <?php };}; ?>
-    </section>
+    <?php };?>
 </section>

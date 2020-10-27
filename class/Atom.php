@@ -19,4 +19,24 @@ abstract class Atom {
             }
         }
     }
+
+    /**
+     * Return object attributes in an array
+     *
+     * @return array
+     */
+    public function toArray(bool $returnNullValues = true): array{
+        $array = [];
+        foreach ((array) $this as $key => $value) {
+            $result = explode('_', $key);
+            if ($value == null) {
+                if ($returnNullValues) {
+                    $array[$result[1]] = $value;
+                }
+            } else {
+                $array[$result[1]] = $value;
+            }
+        }
+        return $array;
+    }
 }

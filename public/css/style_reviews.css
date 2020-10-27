@@ -16,11 +16,18 @@
     margin-left: 5px;
 }
 
+
 /* Review */
 
 .review{
     border-top: 3px solid grey;
+    padding-bottom: 0.5%;
+    padding-top: 0.5%;
     height: auto;
+}
+
+.review p{
+    margin-top: 0;
 }
 
 .top_review{
@@ -76,7 +83,7 @@
     font-weight: bold;
 }
 
-.add_comment{
+.btn1{
     color: black;
     text-decoration: none;
     border: black solid 1px;
