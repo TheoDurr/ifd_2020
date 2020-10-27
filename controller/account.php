@@ -4,11 +4,11 @@ if(isset($_SESSION['user'])){
     if(!empty($_POST)){ // If there is data
         if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['firstName'])){
             // one or more of the 'special characters' found in $_POST['firstName']
-            $errors['firstName'] = "Le prénom contient des caractères invalides";
+            $_SESSION['errors']['firstName'] = "Le prénom contient des caractères invalides";
         }
         if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['lastName'])){
             // one or more of the 'special characters' found in $_POST['lastName']
-            $errors['lastName'] = "Le nom contient des caractères invalides";
+            $_SESSION['errors']['lastName'] = "Le nom contient des caractères invalides";
         }
         if(empty($errors)){
             $_SESSION['user']->setFirstName($_POST['firstName']);
@@ -21,7 +21,7 @@ if(isset($_SESSION['user'])){
         }
     }
 }else{
-    $errors['connection'] = "Pour accéder à votre compte, vous devez d'abord vous connecter";
+    $_SESSION['errors']['connection'] = "Pour accéder à votre compte, vous devez d'abord vous connecter";
     header('location : index.php');
 }
 
