@@ -105,7 +105,7 @@ class CommentManager extends Manager{
      * @param Comment $c
      * @return array
      */
-    public function getUser(Comment $c): array{
+    public function getUser(Comment $c): User{
         $uManager = new UserManager($this->_db);
         $result = $uManager->get(new User(array('id' => $c->userId())));
         
