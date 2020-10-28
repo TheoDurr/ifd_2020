@@ -11,7 +11,7 @@ if(!isset($_SESSION['errors'])){
     $_SESSION['errors'] = array();
 }
 // DB Connection Initialization
-$db = new PDO('mysql:host=92.140.139.116;dbname=ifd', 'admin', 'ifd2020');
+$db = new PDO('mysql:host=90.126.235.250;dbname=ifd', 'admin', 'ifd2020');
 
 try {
     if(isset($_GET['action'])){
