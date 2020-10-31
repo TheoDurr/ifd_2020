@@ -49,13 +49,11 @@
 
 .result_game img{
     width: 10%;
-    /*padding-right: 0.9%;
-    padding-left: 0.9%;*/
 }
 
 .content_text{
     height: 100%;
-    width: 90%;
+    width: 85%;
 }
 
 #game_title{
@@ -70,7 +68,8 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    height: 80%;
+    height: 79%;
+    padding-top: 0.5%;
 }
 
 .result_game p{
@@ -81,8 +80,8 @@
 #games_info{
     display: flex;
     justify-content: space-between;
-    width: 80%;
-    height: 80  %;
+    width: 100%;
+    height: 80%;
 }
 
 .games_info_content{
@@ -91,6 +90,7 @@
 
 .description{
     width: 70%;
+    overflow: auto;
 }
 
 .category_name{
