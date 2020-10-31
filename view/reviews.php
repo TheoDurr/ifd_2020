@@ -16,7 +16,7 @@
                     <option value="date_asc">Date (plus vieux)</option>
                 </select>
             </form>
-            <p> <?php echo sizeof($r); ?> avis</p>
+            <p> <?php if(!empty($r)){echo sizeof($r); }else{ echo "0"; } ?> avis</p>
             <?php if(isset($_SESSION['user'])){ if($_GET['action']=='game_page' && !isset($_GET['addReview'])){ ?>
             <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&addReview=true#addReview" class="btn1">Ajouter un avis</a>
             <?php };}else{ ?>
@@ -38,7 +38,7 @@
     <?php } ?>
 
     <!--Integration reviews -->
-
+    <?php if(!empty($r)){ ?>
     <?php foreach($r as $value){ ?>
         <section class="review" id="review<?php echo $value->id(); ?>">
             <section class="top_review" id="review1">
@@ -85,5 +85,5 @@
             </section>
             <?php };}; ?>
         </section>
-    <?php };?>
+    <?php };};?>
 </section>
