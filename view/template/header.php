@@ -18,7 +18,7 @@
             </section>
         </section>
         
-        <a href="index.php" id="main_title">Jeu critique - réseau social de ciritques de jeux de plateau</a>
+        <a href="index.php" id="main_title">Jeu critique - réseau social de critiques de jeux de plateau</a>
         <section id="header_right">
             <?php if(isset($_SESSION['user'])){ ?>
             <section class="dropdown">

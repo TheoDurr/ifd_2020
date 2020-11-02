@@ -48,7 +48,7 @@ class CategoryManager extends Manager{
      * @return mixed
      */
     public function get(Category $c = NULL){
-        if($c){
+        if($c){ 
             $array = $c->toArray(false);
 
             $s = "SELECT * FROM category WHERE ";
