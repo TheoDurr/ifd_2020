@@ -173,7 +173,7 @@ class GameManager extends Manager
         // if everything is ok, we try to upload the file
         } else {
             if (move_uploaded_file($_FILES['image']["tmp_name"], $target_file)) {
-                $mesErrors=" Le fichier ". htmlspecialchars(basename($_FILES['image']["name"])). " a bien été téléchargé.";
+                $mesErrors=" Le fichier a bien été téléchargé.";
             } else {
                 $mesErrors= "Le téléchargement a échoué";
             }

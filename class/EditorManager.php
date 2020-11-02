@@ -21,7 +21,7 @@ class EditorManager extends Manager{
     public function add(Editor $e){
         $q = $this->_db->prepare('INSERT INTO editor (name) VALUES (:name)');
 
-        $q->bindValue(':content', $e->name(), PDO::PARAM_STR);
+        $q->bindValue(':name', $e->name(), PDO::PARAM_STR);
 
         $result = $q->execute();
 
