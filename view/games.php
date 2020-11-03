@@ -39,19 +39,19 @@
         <?php foreach($data['games'] as $game){ ?>
         <a href="index.php?action=game_page&id=<?= $game->id() ?>" class="result_game">
             <img src="data:image/jpeg;base64, <?= base64_encode($game->img())?>"/>
-            <section>
+            <section class="content_text">
                 <p id="game_title"><?= $game->name() ?></p>
                 <section id="games_info">
                     <section class="games_info_content">
-                        <p class="category_name">Catégorie :</p>
+                        <p class="small_title">Catégorie :</p>
                         <p><?= $game->category()->name() ?></p>
                     </section>
                     <section class="games_info_content">
-                        <p class="category_name">Note Moyenne :</p>
+                        <p class="small_title">Note Moyenne :</p>
                         <p><?= $game->avgScore() ?>/5</p>
                     </section> 
-                    <section>
-                        <p class="category_name">Description :</p>
+                    <section class="description">
+                        <p class="small_title">Description :</p>
                         <p><?= $game->description() ?></p>
                     </section>
                 </section>   
