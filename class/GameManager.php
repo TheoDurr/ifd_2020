@@ -2,13 +2,15 @@
 /**
  * Class used to manage games
  */
-class GameManager extends Manager{
+class GameManager extends Manager
+{
     /**
      * Db initialization
      *
      * @param PDO $db
      */
-    public function __construct(PDO $db){
+    public function __construct(PDO $db)
+    {
         parent::__construct($db);
     }
 
@@ -18,7 +20,8 @@ class GameManager extends Manager{
      * @param Game $game
      * @return mixed
      */
-    public function add(Game $game){
+    public function add(Game $game)
+    {
         $q = $this->_db->prepare('INSERT INTO game (name, editorId, description, img, categoryId, price, playersMin, playersMax, userId, complexity, concentration, ambiance)
         VALUES (:name, :editorId, :description, :img, :categoryId, :price, :playersMin, :playersMax, :userId, :complexity, :concentration, :ambiance)');
 
@@ -46,7 +49,8 @@ class GameManager extends Manager{
      * @param Game $game game to delete
      * @return mixed
      */
-    public function delete(Game $game){
+    public function delete(Game $game)
+    {
         $q =$this->_db->prepare('DELETE FROM game WHERE id = :id');
         $result = $q->execute(array('id' => $game->id()));
 
@@ -59,16 +63,17 @@ class GameManager extends Manager{
      * @param int $id
      * @return mixed
      */
-    public function get(Game $g = NULL){
-        if($g){
+    public function get(Game $g = null)
+    {
+        if ($g) {
             $array = $g->toArray(false);
 
             $s = "SELECT * FROM game WHERE ";
 
             $i = 0;
-            foreach($array as $key => $value){
+            foreach ($array as $key => $value) {
                 $s = $s . $key . " = :" . $key;
-                if($i != count($array) - 1){
+                if ($i != count($array) - 1) {
                     $s = $s . ", ";
                 }
                 $i++;
@@ -80,20 +85,21 @@ class GameManager extends Manager{
             $result = array();
             $q = $this->_db->query('SELECT * FROM game');
         }
-        while($data = $q->fetch(PDO::FETCH_ASSOC)){
+        while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
             $data['editor'] = $this->getEditor(new Editor(array('id' => $data['editorId'])));
             $data['category'] = $this->getCategory(new Category(array('id' => $data['categoryId'])));
             $data['avgScore'] = $this->getAvgScore(new Game(array('id' => $data['id'])));
             $result[] = new Game($data);
         }
-        if(empty($result)){
+        if (empty($result)) {
             return false;
         } else {
             return $result;
         }
     }
 
-    public function update(Game $game){
+    public function update(Game $game)
+    {
         $q = $this->_db->prepare('
         UPDATE game SET
                 name = :name, 
@@ -131,28 +137,74 @@ class GameManager extends Manager{
         return $result;
     }
 
-    private function getEditor(Editor $e){
+    public function UploadPicture(string &$mesErrors)
+    {
+        $target_repo = "C:/xampp/htdocs/ifd_2020/public/img/";
+        $target_file = $target_repo . basename($_FILES['image']["name"]);
+        $uploadOk = 1;
+        $typeImage = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $size=getimagesize($_FILES["image"]["tmp_name"]);
+
+        // Check if file already exists
+        if (file_exists($target_file)) {
+            $mesErrors= "Cette image existe dèjà";
+            $uploadOk = 0;
+        }
+
+        // Check file size
+        elseif ($_FILES['image']["size"] > 500000) {
+            $mesErrors= "Cette image est trop volumineuse.";
+            $uploadOk = 0;
+        } elseif ($size[0]!=$size[1]) {
+            $uploadOk = 0;
+            $mesErrors= "Cette image n'est pas carrée";
+        }
+
+        // Check format file
+        elseif ($typeImage != "jpg" && $typeImage != "png" && $typeImage != "jpeg"
+        && $typeImage != "gif") {
+            $mesErrors= "Seul le type jpg/png/jpeg/gif sont acceptés";
+            $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0
+        if ($uploadOk == 0) {
+            $mesErrors=$mesErrors . " / Le téléchargement a échoué";
+        // if everything is ok, we try to upload the file
+        } else {
+            if (move_uploaded_file($_FILES['image']["tmp_name"], $target_file)) {
+                $mesErrors=" Le fichier a bien été téléchargé.";
+            } else {
+                $mesErrors= "Le téléchargement a échoué";
+            }
+        }
+    }
+
+    private function getEditor(Editor $e)
+    {
         $eManager = new EditorManager($this->_db);
         $result = $eManager->get($e);
 
         return $result[0];
     }
 
-    private function getCategory(Category $c){
+    private function getCategory(Category $c)
+    {
         $cManager = new CategoryManager($this->_db);
         $result = $cManager->get($c);
 
         return $result[0];
     }
 
-    private function getAvgScore(Game $g){
+    private function getAvgScore(Game $g)
+    {
         $rManager = new ReviewManager($this->_db);
         $result = $rManager->get(new Review(array('gameId' => $g->id())));
 
-        if($result){
+        if ($result) {
             $i = 0;
             $score = 0;
-            foreach($result as $review){
+            foreach ($result as $review) {
                 $score += $review->score();
                 $i++;
             }

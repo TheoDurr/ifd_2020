@@ -21,7 +21,7 @@ class CategoryManager extends Manager{
     public function add(Category $c){
         $q = $this->_db->prepare('INSERT INTO editor (name) VALUES (:name)');
 
-        $q->bindValue(':content', $c->name(), PDO::PARAM_STR);
+        $q->bindValue(':name', $c->name(), PDO::PARAM_STR);
 
         $result = $q->execute();
 
