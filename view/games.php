@@ -24,7 +24,7 @@
             <input type="number" name="players_max" min="1" max="20" step="1">
             <input type="submit" value="Rechercher">
         </section>
-        <p id="indication">*Vous n'êtes pas obligé de renseigner tous les champs    </p>
+        <p id="indication">*Vous n'êtes pas obligé de renseigner tous les champs</p>
     </form>
 
     <section id="results" class="box1">

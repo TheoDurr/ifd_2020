@@ -36,6 +36,9 @@ try {
             case 'add_game':
                 require 'controller/add_game.php';
             break;
+            case 'control_panel':
+                require 'controller/control_panel.php';
+            break;
             default:
                 echo "error name action";
         }
