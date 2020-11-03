@@ -72,7 +72,11 @@ class GameManager extends Manager
 
             $i = 0;
             foreach ($array as $key => $value) {
-                $s = $s . $key . " = :" . $key;
+                if(strpos($value, "%" === false)){
+                    $s = $s . $key . " = :" . $key;
+                } else {
+                    $s = $s . $key . " LIKE :" . $key;
+                }
                 if ($i != count($array) - 1) {
                     $s = $s . ", ";
                 }
@@ -96,6 +100,41 @@ class GameManager extends Manager
         } else {
             return $result;
         }
+    }
+    /**
+     * Look for a specific game in the database with characteristics between certain intervals. 
+     * @param int $id
+     * @return mixed
+     */
+    public function getBetween(array $data)
+    {
+        if ($data) { // If there is data
+            //We prepare the request depending on the data received in parameter  
+            $q = $this->_db->prepare('SELECT * FROM game WHERE (price) BETWEEN (:priceMin) AND (:priceMax) 
+            AND (playersMin)>=(:playersMin) AND (playersMax)<=(:playersMax);');
+
+            $q->bindValue(':priceMin', $data['priceMin'], PDO::PARAM_INT);
+            $q->bindValue(':priceMax', $data['priceMax'], PDO::PARAM_INT);
+            $q->bindValue(':playersMin', $data['playersMin'], PDO::PARAM_INT);
+            $q->bindValue(':playersMax', $data['playersMax'], PDO::PARAM_INT);
+    
+            $r = $q->execute(); // we execute the request
+
+            while ($data2= $q->fetch(PDO::FETCH_ASSOC)) { 
+            //As long as data is retrieved from the database, it is memorized in the data2 array.
+                $data2['editor'] = $this->getEditor(new Editor(array('id' => $data2['editorId'])));
+                $data2['category'] = $this->getCategory(new Category(array('id' => $data2['categoryId'])));
+                $data2['avgScore'] = $this->getAvgScore(new Game(array('id' => $data2['id'])));
+                $result[] = new Game($data2);
+                //We create a new object of type game
+            }
+        }
+        if (empty($result)) { // If the array is empty we return false
+            return false;
+        } else { // if not we return the array
+            return $result;
+        }
+      
     }
 
     public function update(Game $game)

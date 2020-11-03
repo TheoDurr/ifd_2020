@@ -15,23 +15,23 @@
         <datalist id="ed">
             <?php 
             $EManager = new EditorManager($db);
-            $editors=$EManager->get();
-            foreach($editors as $e){?>
+            $editors=$EManager->get(); //We are going to look for all the referenced editors in the database.
+            foreach($editors as $e){ // They are listed in the search bar?>
             <option value="<?php echo $e->name(); ?>"><?php echo $e->name(); ?></option>
             <?php } ?>
         </datalist>
-
-        
-
         <p class="small_title">Description :</p>
         <textarea name="description" cols="150" rows="10" name="description"></textarea>
         <p class="small_title">Image (ratio 1:1) :</p>
         <input type="file" name="image">
         <p class="small_title">Catégorie :</p>
-        <select name="category" id="categoryId">
-            <option value="0">-Select-</option>
-            <option value="Aventure">Aventure</option>
-            <option value="Reflexion">Réflexion</option>
+        <select name="category" id="categroy">
+           <?php 
+            $CManager = new CategoryManager($db);
+            $category=$CManager->get(); //We are going to look for all the referenced category in the database.;
+            foreach($category as $c){// They are listed and the user can choose?>
+            <option value="<?php echo $c->name(); ?>"><?php echo $c->name(); ?></option>
+            <?php } ?>
         </select>
         <p class="small_title">Prix :</p>
         <input type="number" min="1" max="400" name="price">
