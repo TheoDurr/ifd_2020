@@ -50,8 +50,8 @@
             <section class="bottom_review">
                 <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&id_review=<?php echo $value->id(); ?>&show=true#review<?php echo $value->id(); ?>">Commentaires</a>
                 <form method="post">
-                    <input type="submit" name="like" value="Pertinent">
-                    <input type="submit" name="dislike" value="Pas pertinent">
+                    <input type="submit" name="reaction" placeholder="Pertinent">
+                    <input type="submit" name="reaction" value="Pas pertinent">
                 </form>
             </section>
             <?php }; ?>
