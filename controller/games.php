@@ -56,7 +56,7 @@ if (!empty($_POST)){ // If we received data from the form
     else { // If the user has typed something in the search bar 
 
         //The game is only searched on what is entered in the search bar.
-        $dataSearch=$gManager->get(new Game(array('name' =>$_POST['search'])));
+        $dataSearch=$gManager->get(new Game(array('name' =>"%" . $_POST['search'] . "%")));
         $data['games']=$dataSearch;
     }  
 }

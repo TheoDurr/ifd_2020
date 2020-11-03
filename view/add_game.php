@@ -28,7 +28,7 @@
         <select name="category" id="categroy">
            <?php 
             $CManager = new CategoryManager($db);
-            $category=$CManager->get() //We are going to look for all the referenced category in the database.;
+            $category=$CManager->get(); //We are going to look for all the referenced category in the database.;
             foreach($category as $c){// They are listed and the user can choose?>
             <option value="<?php echo $c->name(); ?>"><?php echo $c->name(); ?></option>
             <?php } ?>
