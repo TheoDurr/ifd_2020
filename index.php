@@ -12,6 +12,7 @@ if(!isset($_SESSION['errors'])){
 }
 // DB Connection Initialization
 $db = new PDO('mysql:host=90.126.235.250;dbname=ifd', 'admin', 'ifd2020');
+$db->query("SET FOREIGN_KEY_CHECKS=0");
 
 try {
     if(isset($_GET['action'])){
@@ -38,6 +39,9 @@ try {
             break;
             case 'control_panel':
                 require 'controller/control_panel.php';
+            break;
+            case 'delete_user':
+                require 'controller/delete_user.php';
             break;
             default:
                 echo "error name action";

@@ -1,0 +1,67 @@
+.content{
+    margin: 0px 5px 0px 5px;
+    width: 100%;
+}
+
+h1, h2, h3{
+    font-family: sans-serif;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+}
+
+.stats, .users, .games{
+    border: 7px solid #6B7BF4;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.stats h3{
+    text-transform: uppercase;
+}
+
+.stat_elt{
+    padding-bottom: 10px;
+    margin: 0px 10px;
+    text-align: center;
+}
+
+.stat_elt span{
+    font-size: 20pt;
+    font-family: sans-serif;
+}
+
+.users, .games{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 50%;
+}
+
+.users span{
+    padding: 5px;
+    width: 100%;
+}
+
+.users table{
+    padding: 0px 5px;
+}
+
+table .action{
+    width: 75px;
+}
+
+td a{
+    display: inline;
+    text-decoration: none;
+}
+
+.column{
+    display: flex;
+}
+
+tr, th{
+    text-align: left;
+}
