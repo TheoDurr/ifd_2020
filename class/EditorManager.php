@@ -54,9 +54,13 @@ class EditorManager extends Manager{
             $s = "SELECT * FROM editor WHERE ";
 
             $i = 0;
-            foreach($array as $key => $value){
-                $s = $s . $key . " = :" . $key;
-                if($i != count($array) - 1){
+            foreach ($array as $key => $value) {
+                if(strpos($value, "%" === false)){
+                    $s = $s . $key . " = :" . $key;
+                } else {
+                    $s = $s . $key . " LIKE :" . $key;
+                }
+                if ($i != count($array) - 1) {
                     $s = $s . ", ";
                 }
                 $i++;

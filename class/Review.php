@@ -28,10 +28,10 @@ class Review extends Atom {
     }
 
     public function setScore(int $score){
-        if($score > 0 && $score <= 5){
+        if($score > 0 && $score <= 10){
             $this->_score = $score;
         } else {
-            throw new Exception("Value exceed range (1-5)");
+            throw new Exception("Value exceed range (1-10)");
         }
     }
 
