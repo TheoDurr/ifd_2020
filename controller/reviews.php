@@ -27,8 +27,12 @@ if(isset($_POST['contentComment']) && isset($_SESSION['user'])){
 // Add a reaction
 
 if(isset($_POST['reaction'])){
+    $rManager = new ReactionManager($db);
     if($_POST['reaction']=="Pertinent"){
-        
+        $rManager->add(new Reaction(array(
+            "userId" => $_SESSION['user']->id(),
+            "reviewId" =>  $_POST['reviewId']
+        )));
     }elseif($_POST['reaction']=="Pas pertinent"){
 
     }
