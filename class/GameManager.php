@@ -249,8 +249,8 @@ class GameManager extends Manager
             }
 
             return $score/$i;
-        } else {
-            return 0;
+        } else { // If there is no reviews yet
+            return 100;
         }
     }
 }

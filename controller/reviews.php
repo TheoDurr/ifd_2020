@@ -24,6 +24,16 @@ if(isset($_POST['contentComment']) && isset($_SESSION['user'])){
     $cManager->add($c);
 }
 
+// Add a reaction
+
+if(isset($_POST['reaction'])){
+    if($_POST['reaction']=="Pertinent"){
+        
+    }elseif($_POST['reaction']=="Pas pertinent"){
+
+    }
+}
+
 // Game's review
 if($_GET['action']=='game_page' && isset($_GET['id'])){
     $rManager = new ReviewManager($db);

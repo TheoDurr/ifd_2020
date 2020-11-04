@@ -59,7 +59,7 @@
                     </section>
                     <section class="games_info_content">
                         <p class="small_title">Note Moyenne :</p>
-                        <p><?= $game->avgScore() ?>/5</p>
+                        <p><?php if($game->avgScore()>10){echo "- "; }else{echo $game->avgScore(); } ?>/10</p>
                     </section> 
                     <section class="description">
                         <p class="small_title">Description :</p>

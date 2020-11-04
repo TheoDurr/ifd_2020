@@ -19,6 +19,10 @@
             <p><?= $g->category()->name() ?></p>
         </section>
         <section class="info_content">
+            <p class="small_title">Note moyenne :</p>
+            <p><?php if($g->avgScore()>10){echo "- "; }else{echo $g->avgScore(); } ?>/10</p>
+        </section>
+        <section class="info_content">
             <p class="small_title">Prix :</p>
             <p><?= $g->price() ?> €</p>
         </section>
