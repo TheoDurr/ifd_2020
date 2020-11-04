@@ -31,8 +31,8 @@
         <form method="post" class="review" id="addReview">
             <p class="small_title">Ajouter un avis :</p>
             <textarea cols="150" rows="8" placeholder="Ecrivez votre avis ici" name="contentReview"></textarea>
-            <p>Note (Entre 1 et 5) :</p>
-            <input type="number" min="1" max="5" step="1" name="score"> <br> <br>
+            <p>Note (Entre 0 et 10) :</p>
+            <input type="number" min="0" max="10" step="1" name="score"> <br> <br>
             <input type="submit" value="Ajouter">
         </form>
     <?php } ?>
