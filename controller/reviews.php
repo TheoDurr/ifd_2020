@@ -26,15 +26,21 @@ if(isset($_POST['contentComment']) && isset($_SESSION['user'])){
 
 // Add a reaction
 
-if(isset($_POST['reaction'])){
-    $rManager = new ReactionManager($db);
-    if($_POST['reaction']=="Pertinent"){
-        $rManager->add(new Reaction(array(
+if(isset($_GET['reaction'])){
+    $rManager = new ReactionManager($db); 
+    $a = $rManager->get(new Reaction(array("userId" => $_SESSION['user']->id(), "reviewId" => $_GET['id_review'])));
+    if(!is_bool($a)){
+        $rManager->update(new Reaction(array(
             "userId" => $_SESSION['user']->id(),
-            "reviewId" =>  $_POST['reviewId']
+            "reviewId" => $_GET['id_review'],
+            "type" => $_GET['reaction']
         )));
-    }elseif($_POST['reaction']=="Pas pertinent"){
-
+    }else{
+    $rManager->add(new Reaction(array(
+        "userId" => $_SESSION['user']->id(),
+        "reviewId" => $_GET['id_review'],
+        "type" => $_GET['reaction']
+    )));
     }
 }
 

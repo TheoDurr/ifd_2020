@@ -53,17 +53,14 @@ class ReactionManager extends Manager{
 
             $i = 0;
             foreach ($array as $key => $value) {
-                if(strpos($value, "%" === false)){
-                    $s = $s . $key . " = :" . $key;
-                } else {
-                    $s = $s . $key . " LIKE :" . $key;
-                }
+                
+                $s = $s . $key . " = :" . $key;
+
                 if ($i != count($array) - 1) {
-                    $s = $s . ", ";
+                    $s = $s . " AND ";
                 }
                 $i++;
             }
-
             $q = $this->_db->prepare($s);
             $q->execute($array);
             while($data = $q->fetch(PDO::FETCH_ASSOC)){
