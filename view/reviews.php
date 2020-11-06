@@ -1,6 +1,5 @@
 <link rel="stylesheet" type="text/css" href="public/css/style_reviews.css">
-
-<section class="box1">
+<section class="box1" id="reviews">
     <section class="top_box_review">
         <?php if($_GET['action']=='account'){ ?>
             <p class="big_title">Mes derniers avis postés :</p>
@@ -48,17 +47,26 @@
             <p><?php echo $value->content(); ?></p>
             <?php if($_GET['action']=='game_page'){ ?>
             <section class="bottom_review">
-                <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&id_review=<?php echo $value->id(); ?>&show=true#review<?php echo $value->id(); ?>">Commentaires</a>
-                <form method="post">
-                    <input type="submit" name="reaction" placeholder="Pertinent">
-                    <input type="submit" name="reaction" value="Pas pertinent">
-                </form>
-            </section>
+                <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&reviewId=<?php echo $value->id(); ?>&show=true#review<?php echo $value->id(); ?>">Commentaires</a>
+                <?php if(isset($_SESSION['user'])){
+                    $rManager = new ReactionManager($db); 
+                    $a = $rManager->get(new Reaction(array("userId" => $_SESSION['user']->id(), "reviewId" => $value->id())));
+                    if(!is_bool($a)){ ?>
+                        <a class="btn1" <?php if($a[0]->type()==-1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>" <?php } ?>>Pertinent</a>
+                        <a class="btn1" <?php if($a[0]->type()==1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>" <?php } ?>>Pas pertinent</a>    
+                    <?php }else{ ?>
+                        <a class="btn1" href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>">Pertinent</a>
+                        <a class="btn1" href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>">Pas pertinent</a>
+                    <?php }
+                    }else{ ?>
+                        <a href="index.php?action=login" class="btn1">Connectez-vous pour réagir à cet avis</a>
+                    <?php } ?>
+            </section>  
             <?php }; ?>
 
             <!-- Display reviews's comments -->
             
-            <?php if(isset($_GET['id_review'])){ if($_GET['id_review']==$value->id() && $_GET['show']=='true'){ ?>
+            <?php if(isset($_GET['reviewId'])&& isset($_GET['show'])){ if($_GET['reviewId']==$value->id() && $_GET['show']=='true'){ ?>
             <section class="comments_box">
                 <?php if(!empty($c)){ foreach($c as $comment){ ?> 
                     <section class="comment">
@@ -71,12 +79,12 @@
 
                 <?php if(isset($_SESSION['user'])){ 
                     if(!isset($_GET['addComment'])){ ?>
-                    <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&id_review=<?php echo $value->id(); ?>&show=true&addComment=true#review<?php echo $value->id(); ?>" class="btn1">Ajouter un commentaire</a>
+                    <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&reviewId=<?php echo $value->id(); ?>&show=true&addComment=true#review<?php echo $value->id(); ?>" class="btn1">Ajouter un commentaire</a>
                 <?php }; }else{ ?>
                     <a href="index.php?action=login" class="btn1">Pour ajouter un commentaire, connectez-vous</a>
                 <?php }; ?>
-                <?php if(isset($_GET['show'])){ if(isset($_GET['addComment']) && $_GET['id_review']==$value->id()){ ?>
-                    <form method="post" cible="index.php?action=game_page&id=<?php echo $_GET['id'];?>&id_review=<?php echo $value->id();?>&show=true#review<?php echo $value->id();?>">
+                <?php if(isset($_GET['show'])){ if(isset($_GET['addComment']) && $_GET['reviewId']==$value->id()){ ?>
+                    <form method="post" cible="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&show=true#review<?php echo $value->id();?>">
                         <textarea cols="150" rows="8" placeholder="Ecrivez votre commenatire ici" name="contentComment"></textarea>
                         <input type="submit" value="Ajouter">
                     </form>

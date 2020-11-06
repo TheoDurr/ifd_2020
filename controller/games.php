@@ -9,7 +9,7 @@ if (!empty($_POST)){ // If we received data from the form
 
         // the user is not forced to fill in all the boxes, 
         // if he has not filled in a box, we assign it the maximum or minimum value
-        // so that he does not lose any game in the search. 
+        // so that does not lose any game in the search. 
         if( $_POST['priceMin']!='') { $Prmin=$_POST['priceMin']; } else{ $Prmin=0;} 
         if( $_POST['priceMax']!='') { $Prmax=$_POST['priceMax']; } else{ $Prmax=400;}
         if( $_POST['playersMin']!='') { $Plmin=$_POST['playersMin']; } else{ $Plmin=0;}
