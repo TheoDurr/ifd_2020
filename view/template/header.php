@@ -22,7 +22,7 @@
         <section id="header_right">
             <?php if(isset($_SESSION['user'])){ ?>
             <section class="dropdown">
-                <a href="index.php?action=account" class="btn" id="my_account">Mon compte</a>
+                <a href="index.php?action=account&userId=<?php echo $_SESSION['user']->id();?>" class="btn" id="my_account">Mon compte</a>
                 <a href="index.php?action=logout" class="btn" id="logout">Déconnexion</a>
             </section>
             

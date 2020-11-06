@@ -2,7 +2,7 @@
 <section class="box1" id="reviews">
     <section class="top_box_review">
         <?php if($_GET['action']=='account'){ ?>
-            <p class="big_title">Mes derniers avis postés :</p>
+            <p class="big_title">Derniers avis postés :</p>
         <?php }else{ ?>
             <p class="big_title">Avis :</p>
         <?php }; ?>
