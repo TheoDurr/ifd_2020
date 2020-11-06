@@ -10,7 +10,7 @@
 <nav id="menu_nav">
     <ul>
         <section id="header_left">
-            <img src="public/img/logo.jpg">
+            <a href="index.php" class="img"><img src="public/img/logo.jpg"></a>
             <a href="index.php" class="btn" id="btn-accueil">Accueil</a>
             <section class="dropdown">
                 <a href="index.php?action=games" class="btn" id="btn-jeux">Jeux</a>
