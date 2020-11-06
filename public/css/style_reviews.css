@@ -47,8 +47,10 @@
     display: flex;
 }
 
-.bottom_review a{
+.bottom_review a img{
     margin-left: 10px;
+    height: 1em;
+
 }
 
 .bottom_review p{

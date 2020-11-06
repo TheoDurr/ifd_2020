@@ -8,8 +8,8 @@
         <?php } ?>
         <section class="sort_section">
             <p>Trier par :</p>
-            <form action="post">
-                <select name="sort_by" id="sort_by">
+            <form method="post">
+                <select name="sortBy" id="sort_by" onchange="this.form.submit();">
                     <option value="reaction">Intérêt</option>
                     <option value="date_desc">Date (plus récent)</option>
                     <option value="date_asc">Date (plus vieux)</option>
@@ -54,16 +54,17 @@
                     $rManager = new ReactionManager($db); 
                     $a = $rManager->get(new Reaction(array("userId" => $_SESSION['user']->id(), "reviewId" => $value->id())));
                     if(!is_bool($a)){ ?>
-                        <a class="btn1" <?php if($a[0]->type()==-1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>" <?php } ?>>Pertinent</a>
-                        <a class="btn1" <?php if($a[0]->type()==1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>" <?php } ?>>Pas pertinent</a>    
+                        <a <?php if($a[0]->type()==-1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>" <?php } ?>><img src="public/img/up.png"></a>
+                        <p>Pertinence: <?php echo $value->totalReaction(); ?></p>
+                        <a <?php if($a[0]->type()==1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>" <?php } ?>><img src="public/img/down.png"></a>    
                     <?php }else{ ?>
-                        <a class="btn1" href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>">Pertinent</a>
-                        <a class="btn1" href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>">Pas pertinent</a>
+                        <a href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>"><img src="public/img/up.png"></a>
+                        <p>Pertinence: <?php echo $value->totalReaction(); ?></p>
+                        <a href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>"><img src="public/img/down.png"></a>
                     <?php }
                     }else{ ?>
                         <a href="index.php?action=login" class="btn1">Connectez-vous pour réagir à cet avis</a>
                     <?php } ?>
-                    <p>Pertinence: <?php echo $value->totalReaction(); ?></p>
             </section>
             <?php }; ?>
 

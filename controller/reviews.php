@@ -2,6 +2,12 @@
 
 //Add a review
 
+if(isset($_POST['sortBy'])){
+    
+}else{
+
+}
+
 if(isset($_POST['contentReview']) && isset($_SESSION['user'])){
     $r = new Review(array(
         'gameId' => $_GET['id'],
