@@ -26,7 +26,7 @@ if(isset($_POST['contentComment']) && isset($_SESSION['user'])){
 
 // Add a reaction
 
-if(isset($_GET['reaction'])){
+if(isset($_GET['reaction']) && isset($_SESSION['user'])){
     $rManager = new ReactionManager($db); 
     $a = $rManager->get(new Reaction(array("userId" => $_SESSION['user']->id(), "reviewId" => $_GET['reviewId'])));
     if(!is_bool($a)){
