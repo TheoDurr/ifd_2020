@@ -12,7 +12,6 @@ if(!isset($_SESSION['errors'])){
 }
 // DB Connection Initialization
 $db = new PDO('mysql:host=90.126.235.250;dbname=ifd', 'admin', 'ifd2020');
-$db->query("SET FOREIGN_KEY_CHECKS=0");
 
 try {
     if(isset($_GET['action'])){

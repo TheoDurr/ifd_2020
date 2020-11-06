@@ -40,6 +40,17 @@ class UserManager extends Manager {
      * @return mixed
      */
     public function delete(User $user){
+        // User's reviews deletion (this ensure no orphan review stays in the database)
+        $rM = new ReviewManager($this->_db);
+        $reviews = $rM->get(new Review(array('userId' => $user->id())));
+
+        if($reviews){
+            foreach($reviews as $r){
+                $rM->delete($r);
+            }
+        }
+
+        // User deletion
         $q =$this->_db->prepare('DELETE FROM user WHERE id = :id');
         $result = $q->execute(array('id' => $user->id()));
 

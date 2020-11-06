@@ -54,7 +54,7 @@
                     <?php }?>
                 </td>
                 <td>
-                    <?= $u->firstName() . " " . $u->lastName()?>
+                    <?= $u->firstName() . " " . $u->lastName()?> <?php if($_SESSION['user']->id() == $u->id()){echo "(Vous)";}?>
                 </td>
                 <td>
                     <?= $u->email()?>
@@ -78,8 +78,9 @@
                 <thead>
                     <th class="action">Actions</th>
                     <th>Nom</th>
+                    <th>Editeur</th>
+                    <th>Catégorie</th>
                     <th>Prix</th>
-                    <th>Date de création du compte</th>
                 </thead>
 
                 <?php
@@ -98,10 +99,13 @@
                         <?= $g->name()?>
                     </td>
                     <td>
-                        <?= $g->price()?>€
+                        <?= $g->editor()->name()?>
                     </td>
                     <td>
-                        <?= $g->userId() ?>
+                        <?= $g->category()->name() ?>
+                    </td>
+                    <td>
+                        <?= $g->price() ?>€
                     </td>
                 </tr>
                 <tr>

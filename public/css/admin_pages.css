@@ -18,6 +18,10 @@ footer{
     justify-content: space-evenly;
 }
 
+.stats{
+    margin-bottom: 10px;
+}
+
 .stats h3{
     text-transform: uppercase;
 }
@@ -38,6 +42,12 @@ footer{
     flex-direction: column;
     justify-content: flex-start;
     width: 50%;
+    max-height: 405px;
+    overflow: auto;
+}
+
+.users{
+    margin-right: 10px;
 }
 
 .users span{

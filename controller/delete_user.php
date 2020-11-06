@@ -10,30 +10,8 @@ if(!isset($_SESSION['user'])){
 }
 
 if(isset($_GET['id'])){
-    $u = new User(array(
-        'id' => (int) $_GET['id']
-    ));
-    // Deletes user's reviews
-    $rM = new ReviewManager($db);
-    $reviews = $rM->get(new Review(array(
-        'userId' => $u->id()
-    )));
-
-    foreach($reviews as $r){
-        $rM->delete($r);
-    }
-
-    $rM = new CommentManager($db);
-    $comments = $rM->get(new Comment(array(
-        'userId' => $u->id()
-    )));
-
-    foreach($comments as $c){
-        $rM->delete($c);
-    }
-
     $uM = new UserManager($db);
-    $uM->delete($u);
+    $uM->delete(new User(array('id' => (int) $_GET['id'])));
 
 } else {
     $_SESSION['errors']['invalidId'] = "Utilisateur introuvable";

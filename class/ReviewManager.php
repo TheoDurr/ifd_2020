@@ -39,6 +39,17 @@ class ReviewManager extends Manager{
      * @return mixed
      */
     public function delete(Review $r){
+        // Review's comment deletion (this ensure no orphan comment stays in the database)
+        $cM = new CommentManager($this->_db);
+        $comments = $cM->get(new Comment(array("reviewId" => $r->id())));
+
+        if($comments){
+            foreach($comments as $c){
+                $cM->delete($c);
+            }
+        }
+
+        // Review deletion
         $q = $this->_db->prepare('DELETE FROM review WHERE id = :id');
         $result = $q->execute(array('id' => $r->id()));
 
