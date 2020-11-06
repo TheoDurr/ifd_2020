@@ -74,6 +74,7 @@ class ReviewManager extends Manager{
             $q->execute($array);
             while($data = $q->fetch(PDO::FETCH_ASSOC)){
                 $data['user'] = $this->getUser(new Review(array('userId' => $data['userId'])));
+                $data['totalReaction'] = $this->getTotalReaction(new Review(array('id' => $data['id'])));
                 $result[] = new Review($data);
             }
 
@@ -88,6 +89,7 @@ class ReviewManager extends Manager{
 
             while($data = $q->fetch(PDO::FETCH_ASSOC)){
                 $data['user'] = $this->getUser(new Review(array('userId' => $data['userId'])));
+                $data['totalReaction'] = $this->getTotalReaction(new Review(array('reviewId' => $data['id'])));
                 $result[] = new Review($data);
             }
     
@@ -118,6 +120,20 @@ class ReviewManager extends Manager{
         $result = $uManager->get(new User(array('id' => $r->userId())));
 
         return $result[0];
+    }
+
+    public function getTotalReaction(Review $r){
+        $rManager = new ReactionManager($this->_db);
+        $total = $rManager->get(new Reaction(array('reviewId' => $r->id())));
+        $sum = 0;
+        if(!empty($total)){
+            foreach($total as $value){
+                $sum = $sum + $value->type();
+            }
+            return $sum;
+        }else{
+            return false;
+        }
     }
 }
 

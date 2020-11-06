@@ -63,6 +63,7 @@
                     }else{ ?>
                         <a href="index.php?action=login" class="btn1">Connectez-vous pour réagir à cet avis</a>
                     <?php } ?>
+                    <p>Pertinence: <?php echo $value->totalReaction(); ?></p>
             </section>
             <?php }; ?>
 
