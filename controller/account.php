@@ -8,8 +8,8 @@
     }
 
     $uManager = new UserManager($db);
-
-    if(!empty($_POST)){ // If the user want to modify his information (if there is data)
+    // If the user want to modify his information (if there is data)
+    if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['birthDate']) && isset($_POST['email'])){
         if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['firstName'])){
             // one or more of the 'special characters' found in $_POST['firstName']
             $_SESSION['errors']['firstName'] = "Le prénom contient des caractères invalides";

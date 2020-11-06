@@ -11,8 +11,8 @@
             <form method="post">
                 <select name="sortBy" id="sort_by" onchange="this.form.submit();">
                     <option value="reaction">Intérêt</option>
-                    <option value="date_desc">Date (plus récent)</option>
-                    <option value="date_asc">Date (plus vieux)</option>
+                    <option value="dateAsc" <?php if(isset($_POST['sortBy'])){if($_POST['sortBy']=='dateAsc'){ echo 'selected'; }} ?>>Date (plus récent)</option>
+                    <option value="dateDesc"<?php if(isset($_POST['sortBy'])){if($_POST['sortBy']=='dateDesc'){ echo 'selected'; }} ?>>Date (plus vieux)</option>
                 </select>
             </form>
             <p> <?php if(!empty($r)){echo sizeof($r); }else{ echo "0"; } ?> avis</p>
@@ -43,7 +43,7 @@
     <?php foreach($r as $value){ ?> 
         <section class="review" id="review<?php echo $value->id(); ?>">
             <section class="top_review" id="review1">
-                <p><a href="index.php?action=account&userId=<?php echo $value->user()->id(); ?>"><?php echo $value->user()->firstName() . " " . $value->user()->lastName() . " (" . $value->creationDate() . ")"; ?></a></p>
+                <p><a href="index.php?action=account&userId=<?php echo $value->user()->id(); ?>"><?php echo $value->user()->firstName() . " " . $value->user()->lastName(); ?></a> <?php echo " (" . $value->creationDate() . ")"; ?></p>
                 <p>Note : <?php echo $value->score(); ?>/10</p>
             </section>
             <p><?php echo $value->content(); ?></p>
@@ -63,7 +63,10 @@
                         <a href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>"><img src="public/img/down.png"></a>
                     <?php }
                     }else{ ?>
-                        <a href="index.php?action=login" class="btn1">Connectez-vous pour réagir à cet avis</a>
+                        <a href="index.php?action=login"><img src="public/img/up.png"></a>
+                        <p>Pertinence: <?php echo $value->totalReaction(); ?></p>
+                        <a href="index.php?action=login"><img src="public/img/down.png"></a>
+
                     <?php } ?>
             </section>
             <?php }; ?>

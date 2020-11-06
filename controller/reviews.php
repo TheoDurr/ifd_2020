@@ -2,12 +2,6 @@
 
 //Add a review
 
-if(isset($_POST['sortBy'])){
-    
-}else{
-
-}
-
 if(isset($_POST['contentReview']) && isset($_SESSION['user'])){
     $r = new Review(array(
         'gameId' => $_GET['id'],
@@ -69,6 +63,20 @@ if($_GET['action']=='account'){
         $r = $rManager->get(new Review(array('userId' => $_SESSION['user']->id())));
     }else{
         $r = false;
+    }
+}
+
+// Sort the reviews by reactions or date
+
+if(!is_bool($r) && count($r)>1){
+    if(isset($_POST['sortBy'])){
+        if($_POST['sortBy']=='reaction'){
+            usort($r,"cmpTotalReaction");
+        }elseif($_POST['sortBy']=='dateAsc'){
+            usort($r,"cmpCreationDate");
+        }
+    }else{
+        usort($r,"cmpTotalReaction");
     }
 }
 

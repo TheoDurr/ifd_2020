@@ -115,6 +115,20 @@ class ReviewManager extends Manager{
         return $result;
     }
 
+    
+    
+
+    /**
+     * Sort an array of review by its reviews's total Reaction
+     *
+     * @param Review $r
+     * @return array
+     */
+    public function sortByReaction(array $r){
+        
+        return usort($r,"cmpTotalReaction");
+    }
+
     public function getUser(Review $r){
         $uManager = new UserManager($this->_db);
         $result = $uManager->get(new User(array('id' => $r->userId())));
