@@ -50,6 +50,16 @@ class UserManager extends Manager {
             }
         }
 
+        // Review's reactions deletion
+        $reactionManager = new ReactionManager($this->_db);
+        $reactions = $reactionManager->get(new Reaction(array('userId' => $user->id())));
+
+        if($reactions){
+            foreach($reactions as $r){
+                $reactionManager->delete($r);
+            }
+        }
+
         // User deletion
         $q =$this->_db->prepare('DELETE FROM user WHERE id = :id');
         $result = $q->execute(array('id' => $user->id()));

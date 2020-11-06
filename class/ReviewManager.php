@@ -49,6 +49,17 @@ class ReviewManager extends Manager{
             }
         }
 
+        // Review's reactions deletion
+        $reactionManager = new ReactionManager($this->_db);
+        $reactions = $reactionManager->get(new Reaction(array('reviewId' => $r->id())));
+
+        if($reactions){
+            foreach($reactions as $r){
+                $reactionManager->delete($r);
+            }
+        }
+
+
         // Review deletion
         $q = $this->_db->prepare('DELETE FROM review WHERE id = :id');
         $result = $q->execute(array('id' => $r->id()));
