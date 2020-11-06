@@ -44,12 +44,14 @@
             foreach($data['users'] as $u){?>
             <tr>
                 <td>
+                    <?php if($_SESSION['user']->id() != $u->id()){ ?>
                     <a href="index.php?action=delete_user&id=<?=$u->id()?>">
                         <img src="public/img/garbage.png" alt="delete user" class="action_icon">
                     </a>
                     <a href="index.php?action=edit_user&id=<?=$u->id()?>">
                         <img src="public/img/edit.png" alt="edit user" class="action_icon">
                     </a>
+                    <?php }?>
                 </td>
                 <td>
                     <?= $u->firstName() . " " . $u->lastName()?>
