@@ -1,6 +1,6 @@
 <?php
 /**
- * Class used to manage reviews
+ * Class used to manage reactions
  */
 class ReactionManager extends Manager{
     /**
@@ -13,7 +13,7 @@ class ReactionManager extends Manager{
     }
 
     /**
-     * Adds a riveiw to the database
+     * Adds a reaction to the database
      * 
      * @param Review $r
      * @return mixed
