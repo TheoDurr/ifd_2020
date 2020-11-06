@@ -36,8 +36,11 @@
     align-items: center;
 }
 
-.top_review p{
+.top_review p, .top_review a{
     font-weight: bold;
+    text-decoration: none;
+    color: black;
+    margin-top: 0;
 }
 
 .bottom_review{

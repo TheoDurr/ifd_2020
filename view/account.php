@@ -39,10 +39,9 @@
                 <p class="small_title">Date de création du compte</p>
                 <p> <?php echo $userInfo->creationDate();?></p>
             </section>
-            <?php if($_SESSION['user']->id()==$_GET['userId']){ ?>
+            <?php if(isset($_SESSION['user'])){if($_SESSION['user']->id()==$_GET['userId']){ ?>
             <a href="index.php?action=account&modify=true">Modifier</a>
-       
-    <?php };}; ?>
+    <?php }}} ?>
     </section>
 
     <?php require 'controller/reviews.php'; ?>

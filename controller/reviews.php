@@ -55,9 +55,15 @@ if($_GET['action']=='game_page' && isset($_GET['id'])){
 }
 
 // User's review
-if($_GET['action']=='account' && isset($_SESSION['user'])){
+if($_GET['action']=='account'){
     $rManager = new ReviewManager($db);
-    $r = $rManager->get(new Review(array("userId" => $_SESSION['user']->id())));
+    if(isset($_GET['userId'])){
+        $r = $rManager->get(new Review(array('userId' => $_GET['userId'])));
+    }elseif(isset($_SESSION['user'])){
+        $r = $rManager->get(new Review(array('userId' => $_SESSION['user']->id())));
+    }else{
+        $r = false;
+    }
 }
 
 require dirname(__FILE__) . '../../view/reviews.php';
