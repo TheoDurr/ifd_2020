@@ -141,6 +141,17 @@ class ReviewManager extends Manager{
 
         return $result[0];
     }
+
+    /**
+     * Return number of entries in database
+     *
+     * @return void
+     */
+    public function count(){
+        $result = $this->_db->query("SELECT COUNT(*) FROM review");
+
+        return (int) $result->fetch()[0];
+    }
 }
 
     

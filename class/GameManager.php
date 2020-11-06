@@ -264,4 +264,15 @@ class GameManager extends Manager
             return 100;
         }
     }
+
+    /**
+     * Return number of entries in database
+     *
+     * @return void
+     */
+    public function count(){
+        $result = $this->_db->query("SELECT COUNT(*) FROM game");
+
+        return (int) $result->fetch()[0];
+    }
 }

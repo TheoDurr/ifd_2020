@@ -75,3 +75,7 @@ td a{
 tr, th{
     text-align: left;
 }
+
+.inline a, .inline h2{
+    display: inline;
+}

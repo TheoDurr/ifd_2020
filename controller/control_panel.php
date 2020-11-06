@@ -15,5 +15,8 @@ $data['users'] = $uM->get();
 $gM = new GameManager($db);
 $data['games'] = $gM->get();
 
+// Stat model
+require dirname(__FILE__) . '../../model/stats.php';
 
+// View
 require dirname(__FILE__) . '../../view/control_panel.php';
