@@ -18,7 +18,7 @@ if(isset($_POST['contentComment']) && isset($_SESSION['user'])){
     $c = new Comment(array(
         'userId' => $_SESSION['user']->id(),
         'content' => $_POST['contentComment'],
-        'reviewId' => $_GET['reviewId']
+        'reviewId' => $_GET['id_review']
     ));
     $cManager = new CommentManager($db);
     $cManager->add($c);
@@ -26,21 +26,11 @@ if(isset($_POST['contentComment']) && isset($_SESSION['user'])){
 
 // Add a reaction
 
-if(isset($_GET['reaction'])){
-    $rManager = new ReactionManager($db); 
-    $a = $rManager->get(new Reaction(array("userId" => $_SESSION['user']->id(), "reviewId" => $_GET['reviewId'])));
-    if(!is_bool($a)){
-        $rManager->update(new Reaction(array(
-            "userId" => $_SESSION['user']->id(),
-            "reviewId" => $_GET['reviewId'],
-            "type" => $_GET['reaction']
-        )));
-    }else{
-    $rManager->add(new Reaction(array(
-        "userId" => $_SESSION['user']->id(),
-        "reviewId" => $_GET['reviewId'],
-        "type" => $_GET['reaction']
-    )));
+if(isset($_POST['reaction'])){
+    if($_POST['reaction']=="Pertinent"){
+        
+    }elseif($_POST['reaction']=="Pas pertinent"){
+
     }
 }
 
@@ -48,9 +38,9 @@ if(isset($_GET['reaction'])){
 if($_GET['action']=='game_page' && isset($_GET['id'])){
     $rManager = new ReviewManager($db);
     $r = $rManager->get(new Review(array("gameId" => $_GET['id'])));
-    if(isset($_GET['reviewId']) && isset($_GET['show'])){
+    if(isset($_GET['id_review']) && isset($_GET['show'])){
         $cManager = new CommentManager($db);
-        $c = $cManager->get(new Comment(array('reviewId' => $_GET['reviewId'])));
+        $c = $cManager->get(new Comment(array('reviewId' => $_GET['id_review'])));
     }
 }
 
