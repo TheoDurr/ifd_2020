@@ -2,10 +2,10 @@
 <section class="box1" id="reviews">
     <section class="top_box_review">
         <?php if($_GET['action']=='account'){ ?>
-            <p class="big_title">Mes derniers avis postés :</p>
+            <p class="big_title">Derniers avis postés :</p>
         <?php }else{ ?>
             <p class="big_title">Avis :</p>
-        <?php }; ?>
+        <?php } ?>
         <section class="sort_section">
             <p>Trier par :</p>
             <form action="post">
@@ -16,17 +16,19 @@
                 </select>
             </form>
             <p> <?php if(!empty($r)){echo sizeof($r); }else{ echo "0"; } ?> avis</p>
-            <?php if(isset($_SESSION['user'])){ if($_GET['action']=='game_page' && !isset($_GET['addReview'])){ ?>
-            <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&addReview=true#addReview" class="btn1">Ajouter un avis</a>
-            <?php };}else{ ?>
-            <a href="index.php?action=login" class="btn1">Connectez-vous pour ajouter un avis</a>
-            <?php }; ?>
+            <?php if($_GET['action']=='game_page'){
+                if(isset($_SESSION['user'])){ if($_GET['action']=='game_page' && !isset($_GET['addReview'])){ ?>
+                <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&addReview=true#addReview" class="btn1">Ajouter un avis</a>
+                <?php }}else{ ?>
+                <a href="index.php?action=login" class="btn1">Connectez-vous pour ajouter un avis</a>
+                <?php } ?>
+            <?php } ?>
         </section>
     </section>
 
     <!-- Add review -->
 
-    <?php if(isset($_GET['addReview'])){ ?>
+    <?php if(isset($_GET['addReview']) && $_GET['action']=='game_page'){ ?>
         <form method="post" class="review" id="addReview">
             <p class="small_title">Ajouter un avis :</p>
             <textarea cols="150" rows="8" placeholder="Ecrivez votre avis ici" name="contentReview"></textarea>
@@ -37,11 +39,11 @@
     <?php } ?>
 
     <!--Integration reviews -->
-    <?php if(!empty($r)){ ?>
-    <?php foreach($r as $value){ ?>
+    <?php if(!empty($r)){  //?>
+    <?php foreach($r as $value){ ?> 
         <section class="review" id="review<?php echo $value->id(); ?>">
             <section class="top_review" id="review1">
-                <p><?php echo ($value->user())->firstName() . " " . ($value->user())->lastName() . " (" . $value->creationDate() . ")" ?></p>
+                <p><a href="index.php?action=account&userId=<?php echo $value->user()->id(); ?>"><?php echo $value->user()->firstName() . " " . $value->user()->lastName() . " (" . $value->creationDate() . ")"; ?></a></p>
                 <p>Note : <?php echo $value->score(); ?>/10</p>
             </section>
             <p><?php echo $value->content(); ?></p>
@@ -61,7 +63,7 @@
                     }else{ ?>
                         <a href="index.php?action=login" class="btn1">Connectez-vous pour réagir à cet avis</a>
                     <?php } ?>
-            </section>  
+            </section>
             <?php }; ?>
 
             <!-- Display reviews's comments -->
