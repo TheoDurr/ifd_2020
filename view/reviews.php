@@ -48,15 +48,19 @@
             <?php if($_GET['action']=='game_page'){ ?>
             <section class="bottom_review">
                 <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&reviewId=<?php echo $value->id(); ?>&show=true#review<?php echo $value->id(); ?>">Commentaires</a>
-                <?php $rManager = new ReactionManager($db); 
-                $a = $rManager->get(new Reaction(array("userId" => $_SESSION['user']->id(), "reviewId" => $value->id())));
-                if(!is_bool($a)){ ?>
-                    <a class="btn1" <?php if($a[0]->type()==-1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>" <?php } ?>>Pertinent</a>
-                    <a class="btn1" <?php if($a[0]->type()==1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>" <?php } ?>>Pas pertinent</a>    
-                <?php }else{ ?>
-                    <a class="btn1" href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>">Pertinent</a>
-                    <a class="btn1" href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>">Pas pertinent</a>
-                <?php } ?>
+                <?php if(isset($_SESSION['user'])){
+                    $rManager = new ReactionManager($db); 
+                    $a = $rManager->get(new Reaction(array("userId" => $_SESSION['user']->id(), "reviewId" => $value->id())));
+                    if(!is_bool($a)){ ?>
+                        <a class="btn1" <?php if($a[0]->type()==-1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>" <?php } ?>>Pertinent</a>
+                        <a class="btn1" <?php if($a[0]->type()==1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>" <?php } ?>>Pas pertinent</a>    
+                    <?php }else{ ?>
+                        <a class="btn1" href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>">Pertinent</a>
+                        <a class="btn1" href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>">Pas pertinent</a>
+                    <?php }
+                    }else{ ?>
+                        <a href="index.php?action=login" class="btn1">Connectez-vous pour réagir à cet avis</a>
+                    <?php } ?>
             </section>  
             <?php }; ?>
 
