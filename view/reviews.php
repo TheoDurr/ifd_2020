@@ -58,9 +58,9 @@
                         <a class="btn1" href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>">Pertinent</a>
                         <a class="btn1" href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>">Pas pertinent</a>
                     <?php }
-                }else{ ?>
-                    <a href="index.php?action=login" class="btn1">Connectez pour ajouter un avis</a>
-                <?php } ?>
+                    }else{ ?>
+                        <a href="index.php?action=login" class="btn1">Connectez-vous pour réagir à cet avis</a>
+                    <?php } ?>
             </section>  
             <?php }; ?>
 
