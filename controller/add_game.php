@@ -1,7 +1,7 @@
 <?php
 if(!isset($_SESSION['user'])){
     // User not logged
-    header("Location: index.php?action=login");
+    header('Location: index.php?action=login&target=add_game');
 }
 
 if (!empty($_POST)){ // We check if something has been transmitted

@@ -2,8 +2,7 @@
 
 <link rel="stylesheet" type="text/css" href="public/css/style_add_game.css">
 <section class="contents_page">
-    <?php if(isset($_SESSION['user'])) { ?>
-        <section id="add_game_box" class="box1">
+    <section id="add_game_box" class="box1">
 
         <p class="big_title">Ajouter un jeu :</p>
         <form method="post" enctype="multipart/form-data">
@@ -47,16 +46,9 @@
             <input type="submit" value="Ajouter">
         </form>
 
-        </section>
+    </section>
 
-    
 
-    <?php } else {?>
-        <section id="add_game_box" class="box1">
-        <?php header('Location: index.php?action=login'); 
-        exit();?>
-        </section>
-    <?php } ?>
 </section>
 
 <?php $data['content'] = ob_get_clean(); 

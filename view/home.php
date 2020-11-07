@@ -24,13 +24,13 @@
 
         <div class="compteur">
             <div class="left">
-                Commentaires postés : <div class="nombre">n</div>
+                Commentaires postés : <div class="nombre"> <?= $stats['comments']?></div>
             </div>
             <div class="middle">
-                Critiques postées : <div class="nombre">n</div>
+                Critiques postées : <div class="nombre"><?=$stats['reviews']?></div>
             </div>
             <div class="right">
-                 Jeu référencés : <div class="nombre">n</div>
+                 Jeu référencés : <div class="nombre"><?=$stats['games']?></div>
             </div>
         </div>
 
