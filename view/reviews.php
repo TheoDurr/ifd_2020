@@ -49,7 +49,6 @@
                     <?php if(isset($_SESSION['user'])){
                         if($value->user()->id() == $_SESSION['user']->id()){ ?>                    
                     <span class="actions">
-                        <a href="index.php?action=edit_review&id=<?=$value->id()?>"><img src="public/img/edit.png" alt="edit"></a>
                         <a href="index.php?action=delete_review&id=<?=$value->id()?>"><img src="public/img/garbage.png" alt="garbage"></a>
                     </span>
                         <?php }

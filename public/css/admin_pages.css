@@ -66,6 +66,11 @@ table .action{
 td a{
     display: inline;
     text-decoration: none;
+    color:black;
+}
+
+td a:hover {
+    text-decoration: underline;
 }
 
 .column{

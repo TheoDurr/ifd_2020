@@ -48,8 +48,12 @@ try {
             case 'delete_review':
                 require 'controller/delete_review.php';
             break;
+            case 'edit_user':
+                require 'controller/edit_user.php';
+            break;
             default:
-                echo "error name action";
+                $_SESSION['errors']['auth'] = "Page introuvable";
+                header('Location: index.php');
         }
     } else {
         // Home page
