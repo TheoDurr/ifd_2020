@@ -44,7 +44,17 @@
         <section class="review" id="review<?php echo $value->id(); ?>">
             <section class="top_review" id="review1">
                 <p><a href="index.php?action=account&userId=<?php echo $value->user()->id(); ?>"><?php echo $value->user()->firstName() . " " . $value->user()->lastName(); ?></a> <?php echo " (" . $value->creationDate() . ")"; ?></p>
-                <p>Note : <?php echo $value->score(); ?>/10</p>
+                <p>
+                    Note : <?php echo $value->score(); ?>/10
+                    <?php if(isset($_SESSION['user'])){
+                        if($value->user()->id() == $_SESSION['user']->id()){ ?>                    
+                    <span class="actions">
+                        <a href="index.php?action=edit_review&id=<?=$value->id()?>"><img src="public/img/edit.png" alt="edit"></a>
+                        <a href="index.php?action=delete_review&id=<?=$value->id()?>"><img src="public/img/garbage.png" alt="garbage"></a>
+                    </span>
+                        <?php }
+                    }?>
+                </p>
             </section>
             <p><?php echo $value->content(); ?></p>
             <?php if($_GET['action']=='game_page'){ ?>
