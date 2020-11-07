@@ -48,9 +48,6 @@ try {
             case 'delete_review':
                 require 'controller/delete_review.php';
             break;
-            case 'edit_user':
-                require 'controller/edit_user.php';
-            break;
             default:
                 $_SESSION['errors']['auth'] = "Page introuvable";
                 header('Location: index.php');
