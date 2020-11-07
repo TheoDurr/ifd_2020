@@ -26,22 +26,22 @@
             <input type="submit" value="Valider">
         </form>
     <?php }else{ ?>
-        <p id="name_user"><?php echo $_SESSION['user']->firstName() . " " . $_SESSION['user']->lastName(); ?></p>
+        <p id="name_user"><?php echo $userInfo->firstName() . " " . $userInfo->lastName(); ?></p>
             <section>
                 <p class="small_title">Date de naissance :</p>
-                <p><?php echo $_SESSION['user']->birthDate(); ?></p>
+                <p><?php echo $userInfo->birthDate(); ?></p>
             </section>
             <section>
                 <p class="small_title">Email :</p>
-                <p><?php echo $_SESSION['user']->email(); ?></p>
+                <p><?php echo $userInfo->email(); ?></p>
             </section>
             <section>
                 <p class="small_title">Date de création du compte</p>
-                <p> <?php echo $_SESSION['user']->creationDate();?></p>
+                <p> <?php echo $userInfo->creationDate();?></p>
             </section>
+            <?php if(isset($_SESSION['user'])){if($_SESSION['user']->id()==$_GET['userId']){ ?>
             <a href="index.php?action=account&modify=true">Modifier</a>
-       
-    <?php }; ?>
+    <?php }}} ?>
     </section>
 
     <?php require 'controller/reviews.php'; ?>
