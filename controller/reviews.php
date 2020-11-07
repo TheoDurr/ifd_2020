@@ -55,9 +55,29 @@ if($_GET['action']=='game_page' && isset($_GET['id'])){
 }
 
 // User's review
-if($_GET['action']=='account' && isset($_SESSION['user'])){
+if($_GET['action']=='account'){
     $rManager = new ReviewManager($db);
-    $r = $rManager->get(new Review(array("userId" => $_SESSION['user']->id())));
+    if(isset($_GET['userId'])){
+        $r = $rManager->get(new Review(array('userId' => $_GET['userId'])));
+    }elseif(isset($_SESSION['user'])){
+        $r = $rManager->get(new Review(array('userId' => $_SESSION['user']->id())));
+    }else{
+        $r = false;
+    }
+}
+
+// Sort the reviews by reactions or date
+
+if(!is_bool($r) && count($r)>1){
+    if(isset($_POST['sortBy'])){
+        if($_POST['sortBy']=='reaction'){
+            usort($r,"cmpTotalReaction");
+        }elseif($_POST['sortBy']=='dateAsc'){
+            usort($r,"cmpCreationDate");
+        }
+    }else{
+        usort($r,"cmpTotalReaction");
+    }
 }
 
 require dirname(__FILE__) . '../../view/reviews.php';

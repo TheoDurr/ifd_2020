@@ -36,16 +36,25 @@
     align-items: center;
 }
 
-.top_review p{
+.top_review p, .top_review a{
     font-weight: bold;
+    text-decoration: none;
+    color: black;
+    margin-top: 0;
 }
 
 .bottom_review{
     display: flex;
 }
 
-.bottom_review a{
+.bottom_review a img{
     margin-left: 10px;
+    height: 1em;
+
+}
+
+.bottom_review p{
+    margin-left: 10px; 
 }
 
 .bottom_review input{
