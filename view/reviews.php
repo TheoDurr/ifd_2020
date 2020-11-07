@@ -2,31 +2,33 @@
 <section class="box1" id="reviews">
     <section class="top_box_review">
         <?php if($_GET['action']=='account'){ ?>
-            <p class="big_title">Mes derniers avis postés :</p>
+            <p class="big_title">Derniers avis postés :</p>
         <?php }else{ ?>
             <p class="big_title">Avis :</p>
-        <?php }; ?>
+        <?php } ?>
         <section class="sort_section">
             <p>Trier par :</p>
-            <form action="post">
-                <select name="sort_by" id="sort_by">
+            <form method="post">
+                <select name="sortBy" id="sort_by" onchange="this.form.submit();">
                     <option value="reaction">Intérêt</option>
-                    <option value="date_desc">Date (plus récent)</option>
-                    <option value="date_asc">Date (plus vieux)</option>
+                    <option value="dateAsc" <?php if(isset($_POST['sortBy'])){if($_POST['sortBy']=='dateAsc'){ echo 'selected'; }} ?>>Date (plus récent)</option>
+                    <option value="dateDesc"<?php if(isset($_POST['sortBy'])){if($_POST['sortBy']=='dateDesc'){ echo 'selected'; }} ?>>Date (plus vieux)</option>
                 </select>
             </form>
             <p> <?php if(!empty($r)){echo sizeof($r); }else{ echo "0"; } ?> avis</p>
-            <?php if(isset($_SESSION['user'])){ if($_GET['action']=='game_page' && !isset($_GET['addReview'])){ ?>
-            <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&addReview=true#addReview" class="btn1">Ajouter un avis</a>
-            <?php };}else{ ?>
-            <a href="index.php?action=login" class="btn1">Connectez-vous pour ajouter un avis</a>
-            <?php }; ?>
+            <?php if($_GET['action']=='game_page'){
+                if(isset($_SESSION['user'])){ if($_GET['action']=='game_page' && !isset($_GET['addReview'])){ ?>
+                <a href="index.php?action=game_page&id=<?php echo $_GET['id']; ?>&addReview=true#addReview" class="btn1">Ajouter un avis</a>
+                <?php }}else{ ?>
+                <a href="index.php?action=login" class="btn1">Connectez-vous pour ajouter un avis</a>
+                <?php } ?>
+            <?php } ?>
         </section>
     </section>
 
     <!-- Add review -->
 
-    <?php if(isset($_GET['addReview'])){ ?>
+    <?php if(isset($_GET['addReview']) && $_GET['action']=='game_page'){ ?>
         <form method="post" class="review" id="addReview">
             <p class="small_title">Ajouter un avis :</p>
             <textarea cols="150" rows="8" placeholder="Ecrivez votre avis ici" name="contentReview"></textarea>
@@ -37,11 +39,11 @@
     <?php } ?>
 
     <!--Integration reviews -->
-    <?php if(!empty($r)){ ?>
-    <?php foreach($r as $value){ ?>
+    <?php if(!empty($r)){  //?>
+    <?php foreach($r as $value){ ?> 
         <section class="review" id="review<?php echo $value->id(); ?>">
             <section class="top_review" id="review1">
-                <p><?php echo ($value->user())->firstName() . " " . ($value->user())->lastName() . " (" . $value->creationDate() . ")" ?></p>
+                <p><a href="index.php?action=account&userId=<?php echo $value->user()->id(); ?>"><?php echo $value->user()->firstName() . " " . $value->user()->lastName(); ?></a> <?php echo " (" . $value->creationDate() . ")"; ?></p>
                 <p>Note : <?php echo $value->score(); ?>/10</p>
             </section>
             <p><?php echo $value->content(); ?></p>
@@ -52,16 +54,21 @@
                     $rManager = new ReactionManager($db); 
                     $a = $rManager->get(new Reaction(array("userId" => $_SESSION['user']->id(), "reviewId" => $value->id())));
                     if(!is_bool($a)){ ?>
-                        <a class="btn1" <?php if($a[0]->type()==-1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>" <?php } ?>>Pertinent</a>
-                        <a class="btn1" <?php if($a[0]->type()==1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>" <?php } ?>>Pas pertinent</a>    
+                        <a <?php if($a[0]->type()==-1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>" <?php } ?>><img src="public/img/up.png"></a>
+                        <p>Pertinence: <?php echo $value->totalReaction(); ?></p>
+                        <a <?php if($a[0]->type()==1){?>href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>" <?php } ?>><img src="public/img/down.png"></a>    
                     <?php }else{ ?>
-                        <a class="btn1" href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>">Pertinent</a>
-                        <a class="btn1" href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>">Pas pertinent</a>
+                        <a href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=1#review<?php echo $value->id();?>"><img src="public/img/up.png"></a>
+                        <p>Pertinence: <?php echo $value->totalReaction(); ?></p>
+                        <a href="index.php?action=game_page&id=<?php echo $_GET['id'];?>&reviewId=<?php echo $value->id();?>&reaction=-1#review<?php echo $value->id();?>"><img src="public/img/down.png"></a>
                     <?php }
                     }else{ ?>
-                        <a href="index.php?action=login" class="btn1">Connectez-vous pour réagir à cet avis</a>
+                        <a href="index.php?action=login"><img src="public/img/up.png"></a>
+                        <p>Pertinence: <?php echo $value->totalReaction(); ?></p>
+                        <a href="index.php?action=login"><img src="public/img/down.png"></a>
+
                     <?php } ?>
-            </section>  
+            </section>
             <?php }; ?>
 
             <!-- Display reviews's comments -->
