@@ -64,4 +64,6 @@ else // If the user has sent nothing
 {
     $data['games']=$gManager->get();  // We search all games in the database
 }
+
+$tabName = "Jeux";
 require dirname(__FILE__) . '../../view/games.php';

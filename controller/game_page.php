@@ -26,4 +26,6 @@ if(isset($_GET['id'])){
     }
 }
 
+$tabName = $data['game']->name();
+
 require dirname(__FILE__) . '../../view/game_page.php';

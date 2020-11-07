@@ -9,20 +9,26 @@
         <form method="post" id="modify_info">
             <section>
                 <p class="small_title">Prénom :</p>
-                <input type="text" max="255" name="firstName" value="<?php echo $_SESSION['user']->firstName(); ?>">
+                <input type="text" max="255" name="firstName" value="<?php echo $userInfo->firstName(); ?>">
             </section>
             <Section>
                 <p class="small_title">Nom :</p>
-                <input type="text" max="255" name="lastName" value="<?php echo $_SESSION['user']->lastName(); ?>">
+                <input type="text" max="255" name="lastName" value="<?php echo $userInfo->lastName(); ?>">
             </Section>
             <section>
                 <p class="small_title">Date de naissance :</p>
-                <input type="date" name="birthDate" value="<?php echo $_SESSION['user']->birthDate(); ?>">
+                <input type="date" name="birthDate" value="<?php echo $userInfo->birthDate(); ?>">
             </section>
             <section>
                 <p class="small_title">Email :</p>
-                <input type="email" name="email" value="<?php echo $_SESSION['user']->email(); ?>">
+                <input type="email" name="email" value="<?php echo $userInfo->email(); ?>">
             </section>
+            <?php if($_SESSION['user']->admin()){ ?>
+            <section>
+                <p class="small_title">Administrateur</p>
+                <input type="checkbox" name="admin" <?= $userInfo->admin() ? "checked" : "" ?> >
+            </section>
+            <?php }?>
             <input type="submit" value="Valider">
         </form>
     <?php }}else{ ?>
@@ -39,9 +45,10 @@
             <p class="small_title">Date de création du compte</p>
             <p> <?php echo $userInfo->creationDate();?></p>
         </section>
-        <?php if(isset($_SESSION['user'])){if($_SESSION['user']->id()==$_GET['userId']){ // The user can modify his information if he's on his own page account?>
-            <a href="index.php?action=account&modify=true">Modifier</a>
-        <?php }elseif(isset($_SESSION['user'])){ // Else, if he is connected he can follow/unfollow the user
+       <?php if(isset($_SESSION['user'])){
+            if($_SESSION['user']->id()==$_GET['userId'] || $_SESSION['user']->admin()){ ?>
+        <a href="index.php?action=account&userId=<?=$_GET['userId']?>&modify=true">Modifier</a>
+         <?php }elseif(isset($_SESSION['user'])){ // Else, if he is connected he can follow/unfollow the user
             $fManager = new FollowManager($db);
             $f = new Follow(array(
                 'followingId' => $_SESSION['user']->id(),

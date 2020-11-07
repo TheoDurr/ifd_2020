@@ -54,8 +54,8 @@ class ReviewManager extends Manager{
         $reactions = $reactionManager->get(new Reaction(array('reviewId' => $r->id())));
 
         if($reactions){
-            foreach($reactions as $r){
-                $reactionManager->delete($r);
+            foreach($reactions as $reac){
+                $reactionManager->delete($reac);
             }
         }
 
@@ -168,7 +168,13 @@ class ReviewManager extends Manager{
 
         return (int) $result->fetch()[0];
     }
-  
+
+    /**
+     * return number of reaction of a review
+     *
+     * @param Review $r
+     * @return mixed
+     */
     public function getTotalReaction(Review $r){
         $rManager = new ReactionManager($this->_db);
         $total = $rManager->get(new Reaction(array('reviewId' => $r->id())));

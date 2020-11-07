@@ -29,7 +29,7 @@
     <!-- Add review -->
 
     <?php if(isset($_GET['addReview']) && $_GET['action']=='game_page'){ ?>
-        <form method="post" class="review" id="addReview">
+        <form method="post" class="review" id="addReview" action=<?=$_SERVER['REQUEST_URI']?>>
             <p class="small_title">Ajouter un avis :</p>
             <textarea cols="150" rows="8" placeholder="Ecrivez votre avis ici" name="contentReview"></textarea>
             <p>Note (Entre 0 et 10) :</p>
@@ -49,6 +49,14 @@
                     echo '<p class="small_title">(' . $gamesNames[$i] . ')</p>';
                 } ?>
                 <p>Note : <?php echo $r[$i]->score(); ?>/10</p>
+                <?php if(isset($_SESSION['user'])){
+                    if($value->user()->id() == $_SESSION['user']->id()){ ?>                    
+                      <span class="actions">
+                          <a href="index.php?action=delete_review&id=<?=$value->id()?>"><img src="public/img/garbage.png" alt="garbage"></a>
+                      </span>
+                    <?php }
+                }?>
+
             </section>
             <p><?php echo $r[$i]->content(); ?></p>
             <?php if($_GET['action']=='game_page'){ ?>

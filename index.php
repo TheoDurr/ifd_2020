@@ -45,8 +45,12 @@ try {
             case 'delete_game':
                 require 'controller/delete_game.php';
             break;
+            case 'delete_review':
+                require 'controller/delete_review.php';
+            break;
             default:
-                echo "error name action";
+                $_SESSION['errors']['auth'] = "Page introuvable";
+                header('Location: index.php');
         }
     } else {
         // Home page

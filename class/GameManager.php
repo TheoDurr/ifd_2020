@@ -195,14 +195,8 @@ class GameManager extends Manager
         $typeImage = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         $size=getimagesize($_FILES["image"]["tmp_name"]);
 
-        // Check if file already exists
-        if (file_exists($target_file)) {
-            $mesErrors= "Cette image existe dèjà";
-            $uploadOk = 0;
-        }
-
         // Check file size
-        elseif ($_FILES['image']["size"] > 500000) {
+        if ($_FILES['image']["size"] > 500000) {
             $mesErrors= "Cette image est trop volumineuse.";
             $uploadOk = 0;
         } elseif ($size[0]!=$size[1]) {
