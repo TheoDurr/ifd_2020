@@ -98,4 +98,15 @@ class EditorManager extends Manager{
 
         return $result;
     }
+
+    /**
+     * Return number of entries in database
+     *
+     * @return void
+     */
+    public function count(){
+        $result = $this->_db->query("SELECT COUNT(*) FROM editor");
+
+        return (int) $result->fetch()[0];
+    }
 }

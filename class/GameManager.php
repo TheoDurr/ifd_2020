@@ -51,6 +51,17 @@ class GameManager extends Manager
      */
     public function delete(Game $game)
     {
+        // Game's reviews deletion (this ensure no orphan review stays in the database)
+        $rM = new ReviewManager($this->_db);
+        $reviews = $rM->get(new Review(array('gameId' => $game->id())));
+
+        if($reviews){
+            foreach($reviews as $r){
+                $rM->delete($r);
+            }
+        }
+
+        // Game deletion
         $q =$this->_db->prepare('DELETE FROM game WHERE id = :id');
         $result = $q->execute(array('id' => $game->id()));
 
@@ -246,5 +257,16 @@ class GameManager extends Manager
         } else { // If there is no reviews yet
             return 100;
         }
+    }
+
+    /**
+     * Return number of entries in database
+     *
+     * @return void
+     */
+    public function count(){
+        $result = $this->_db->query("SELECT COUNT(*) FROM game");
+
+        return (int) $result->fetch()[0];
     }
 }

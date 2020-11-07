@@ -39,6 +39,28 @@ class ReviewManager extends Manager{
      * @return mixed
      */
     public function delete(Review $r){
+        // Review's comment deletion (this ensure no orphan comment stays in the database)
+        $cM = new CommentManager($this->_db);
+        $comments = $cM->get(new Comment(array("reviewId" => $r->id())));
+
+        if($comments){
+            foreach($comments as $c){
+                $cM->delete($c);
+            }
+        }
+
+        // Review's reactions deletion
+        $reactionManager = new ReactionManager($this->_db);
+        $reactions = $reactionManager->get(new Reaction(array('reviewId' => $r->id())));
+
+        if($reactions){
+            foreach($reactions as $r){
+                $reactionManager->delete($r);
+            }
+        }
+
+
+        // Review deletion
         $q = $this->_db->prepare('DELETE FROM review WHERE id = :id');
         $result = $q->execute(array('id' => $r->id()));
 
@@ -136,6 +158,17 @@ class ReviewManager extends Manager{
         return $result[0];
     }
 
+    /**
+     * Return number of entries in database
+     *
+     * @return void
+     */
+    public function count(){
+        $result = $this->_db->query("SELECT COUNT(*) FROM review");
+
+        return (int) $result->fetch()[0];
+    }
+  
     public function getTotalReaction(Review $r){
         $rManager = new ReactionManager($this->_db);
         $total = $rManager->get(new Reaction(array('reviewId' => $r->id())));

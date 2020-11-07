@@ -36,6 +36,15 @@ try {
             case 'add_game':
                 require 'controller/add_game.php';
             break;
+            case 'control_panel':
+                require 'controller/control_panel.php';
+            break;
+            case 'delete_user':
+                require 'controller/delete_user.php';
+            break;
+            case 'delete_game':
+                require 'controller/delete_game.php';
+            break;
             default:
                 echo "error name action";
         }

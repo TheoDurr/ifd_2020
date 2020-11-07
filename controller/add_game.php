@@ -1,4 +1,9 @@
 <?php
+if(!isset($_SESSION['user'])){
+    // User not logged
+    header("Location: index.php?action=login");
+}
+
 if (!empty($_POST)){ // We check if something has been transmitted
     $GManager = new GameManager($db); 
     $error=0; // checks the errors

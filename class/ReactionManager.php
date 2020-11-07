@@ -1,6 +1,6 @@
 <?php
 /**
- * Class used to manage reviews
+ * Class used to manage reactions
  */
 class ReactionManager extends Manager{
     /**
@@ -13,7 +13,7 @@ class ReactionManager extends Manager{
     }
 
     /**
-     * Adds a riveiw to the database
+     * Adds a reaction to the database
      * 
      * @param Review $r
      * @return mixed
@@ -100,5 +100,16 @@ class ReactionManager extends Manager{
         $result = $q->execute();
         
         return $result;
+    }
+
+    /**
+     * Return number of entries in database
+     *
+     * @return void
+     */
+    public function count(){
+        $result = $this->_db->query("SELECT COUNT(*) FROM reaction");
+
+        return (int) $result->fetch()[0];
     }
 }
