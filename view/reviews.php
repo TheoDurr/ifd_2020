@@ -40,23 +40,19 @@
 
     <!--Integration reviews -->
     <?php if(!empty($r)){ 
-        $c = count($r); ?>
-    <?php for($i=0;$i<$c;$i++){ ?>
+        $n = count($r); ?>
+    <?php for($i=0;$i<$n;$i++){ ?>
         <section class="review" id="review<?php echo $r[$i]->id(); ?>">
             <section class="top_review" id="review1">
                 <p><a href="index.php?action=account&userId=<?php echo $r[$i]->user()->id(); ?>"><?php echo $r[$i]->user()->firstName() . " " . $r[$i]->user()->lastName(); ?></a> <?php echo " (" . $r[$i]->creationDate() . ")"; ?></p>
-                <?php if($_GET['action']=='account'){
-                    echo '<p class="small_title">(' . $gamesNames[$i] . ')</p>';
-                } ?>
-                <p>Note : <?php echo $r[$i]->score(); ?>/10</p>
-                <?php if(isset($_SESSION['user'])){
-                    if($value->user()->id() == $_SESSION['user']->id()){ ?>                    
-                      <span class="actions">
-                          <a href="index.php?action=delete_review&id=<?=$value->id()?>"><img src="public/img/garbage.png" alt="garbage"></a>
-                      </span>
-                    <?php }
-                }?>
-
+                <span class="actions">
+                    <p>Note : <?php echo $r[$i]->score(); ?>/10</p>
+                    <?php if(isset($_SESSION['user'])){
+                        if($r[$i]->user()->id() == $_SESSION['user']->id()){ ?>                    
+                            <a href="index.php?action=delete_review&id=<?=$r[$i]->id()?>"><img src="public/img/garbage.png" alt="garbage"></a>
+                        <?php }
+                    }?>
+                </span>
             </section>
             <p><?php echo $r[$i]->content(); ?></p>
             <?php if($_GET['action']=='game_page'){ ?>

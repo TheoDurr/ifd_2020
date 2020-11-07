@@ -79,17 +79,17 @@
     </section>
 
     
-    <?php if(isset($rfollowed)){ ?>
-    <section id="follows_last_reviews" class="box1">
-        <p class="big_title">Derniers avis postés des personnes suivis :</p>
-        <?php foreach($rfollowed as $followed){ 
-            if(!empty($followed)){ ?>
-                <p class="small_title" id=""><?php echo $followed[0]->user()->firstName() . " " . $followed[0]->user()->lastName(); ?></p>
-                <?php $r=$followed;
-                require 'controller/reviews.php'; ?>
-            <?php }  
-        } ?>
-    </section>
+    <?php if(isset($rfollowed)){?>
+        <section id="follows_last_reviews" class="box1">
+            <p class="big_title">Derniers avis postés des personnes suivis :</p>
+            <?php foreach($rfollowed as $followed){ 
+                if(!empty($followed)){ ?>
+                    <p class="small_title" id=""><?php echo $followed[0]->user()->firstName() . " " . $followed[0]->user()->lastName(); ?></p>
+                    <?php $r=$followed;
+                    require 'controller/reviews.php'; ?>
+                <?php }  
+            } ?>
+        </section>
     <?php } ?>
     
 </section>

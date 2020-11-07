@@ -3,14 +3,14 @@
 //Add a review
 
 if(isset($_POST['contentReview']) && isset($_SESSION['user'])){
-    $r = new Review(array(
+    $newR = new Review(array(
         'gameId' => $_GET['id'],
         'score' => $_POST['score'],
         'content' => $_POST['contentReview'],
         'userId' => $_SESSION['user']->id()
     ));
     $rManager = new ReviewManager($db);
-    $rManager->add($r);
+    $rManager->add($newR);
 }
 
 // Add a Comment 
@@ -46,16 +46,19 @@ if(isset($_GET['reaction']) && isset($_SESSION['user'])){
 
 // Sort the reviews by reactions or date
 
-if(!is_bool($r) && count($r)>1){
-    if(isset($_POST['sortBy'])){
-        if($_POST['sortBy']=='reaction'){
+if(!is_bool($r)){
+    if(count($r)>1){
+        if(isset($_POST['sortBy'])){
+            if($_POST['sortBy']=='reaction'){
+                usort($r,"cmpTotalReaction");
+            }elseif($_POST['sortBy']=='dateAsc'){
+                usort($r,"cmpCreationDate");
+            }
+        }else{
             usort($r,"cmpTotalReaction");
-        }elseif($_POST['sortBy']=='dateAsc'){
-            usort($r,"cmpCreationDate");
         }
-    }else{
-        usort($r,"cmpTotalReaction");
     }
+
 }
 
 require dirname(__FILE__) . '../../view/reviews.php';

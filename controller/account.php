@@ -101,12 +101,6 @@
     // Get the user's reviews
     if(isset($_GET['userId'])){
         $r = $rManager->get(new Review(array('userId' => $_GET['userId'])));
-        if(!is_bool($r)){
-            $gamesNames = array();
-            foreach($r as $value){ // Get each corresponding game's name
-                $gamesNames[] = $gManager->get(new Game(array('id' => $value->gameId())))[0]->name();
-            }
-        }
     }
 
     // Get the followed users' reviews 
