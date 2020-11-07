@@ -5,11 +5,36 @@
 <section class="contents_page">
     
     <section id="presentation" class="box1">
-        <p>Présentation du site :</p>
-        <p>Bienvenue sur Jeu Critique, le forum n°1 de critiques de jeux de plateux dans la monde !</p>
-        <p>Vous êtes actuellement n perosnnes à être connecté sur le forum. <br> Ce forum ressens n critiques portant sur n.</p>
-        <p>Créez vous un compte au plus vite, pour pouvoir à votre tour poster des critiques et ajouter des nouveaux jeux <br><a href="index.php?action=register">Se créer un compte</a></p>
-        <p></p>
+        <img id= "PrincipalPicture" src="public/img/imagePrésentation.jpg">
+        
+        <section id="title">Bienvenue sur Jeu Critique</section>
+        <div class="SmallTitle">Le forum n°1 de critiques de jeux de société dans le monde !</div><br>
+        <div class ="explication">
+            <div class="explicationPicture">
+                <img id= "BlocPicture" src="public/img/MiddlePage.jpg"> 
+            </div>
+            <div class="explicationText">
+                <div class="SmallTitle">Jeu Critique, pour quoi faire ?</div><br>
+                Connectez vous ou créez vous un compte au plus en cliquant sur le lien suivant :
+                <a href="index.php?action=register">Se créer un compte</a><br><br>
+                <div class="evidence">Ensuite ajoutez, recherchez, commentez et notez </div> des millions de jeux
+            </div>
+
+        </div>
+
+        <div class="compteur">
+            <div class="left">
+                Commentaires postés : <div class="nombre"> <?= $stats['comments']?></div>
+            </div>
+            <div class="middle">
+                Critiques postées : <div class="nombre"><?=$stats['reviews']?></div>
+            </div>
+            <div class="right">
+                 Jeu référencés : <div class="nombre"><?=$stats['games']?></div>
+            </div>
+        </div>
+
+        
     </section>
 
     <aside>
