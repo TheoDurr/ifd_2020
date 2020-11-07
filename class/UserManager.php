@@ -40,6 +40,27 @@ class UserManager extends Manager {
      * @return mixed
      */
     public function delete(User $user){
+        // User's reviews deletion (this ensure no orphan review stays in the database)
+        $rM = new ReviewManager($this->_db);
+        $reviews = $rM->get(new Review(array('userId' => $user->id())));
+
+        if($reviews){
+            foreach($reviews as $r){
+                $rM->delete($r);
+            }
+        }
+
+        // Review's reactions deletion
+        $reactionManager = new ReactionManager($this->_db);
+        $reactions = $reactionManager->get(new Reaction(array('userId' => $user->id())));
+
+        if($reactions){
+            foreach($reactions as $r){
+                $reactionManager->delete($r);
+            }
+        }
+
+        // User deletion
         $q =$this->_db->prepare('DELETE FROM user WHERE id = :id');
         $result = $q->execute(array('id' => $user->id()));
 
@@ -107,5 +128,16 @@ class UserManager extends Manager {
         $result = $q->execute();
 
         return $result;
+    }
+
+    /**
+     * Return number of entries in database
+     *
+     * @return void
+     */
+    public function count(){
+        $result = $this->_db->query("SELECT COUNT(*) FROM user");
+
+        return (int) $result->fetch()[0];
     }
 }
