@@ -54,8 +54,8 @@ class ReviewManager extends Manager{
         $reactions = $reactionManager->get(new Reaction(array('reviewId' => $r->id())));
 
         if($reactions){
-            foreach($reactions as $r){
-                $reactionManager->delete($r);
+            foreach($reactions as $reac){
+                $reactionManager->delete($reac);
             }
         }
 
