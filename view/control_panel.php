@@ -55,7 +55,7 @@
                     <?php }?>
                 </td>
                 <td>
-                    <?= $u->firstName() . " " . $u->lastName()?> <?php if($_SESSION['user']->id() == $u->id()){echo "(Vous)";}?>
+                    <?= $u->firstName() . " " . $u->lastName()?> <?php if($_SESSION['user']->id() == $u->id()){echo "(Vous)";} if($u->admin()){echo "(Admin)";}?>
                 </td>
                 <td>
                     <?= $u->email()?>
