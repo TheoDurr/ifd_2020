@@ -195,7 +195,7 @@ class GameManager extends Manager
         $typeImage = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         $size=getimagesize($_FILES["image"]["tmp_name"]);
 
-        // Check file size
+        // We check the file size
         if ($_FILES['image']["size"] > 500000) {
             $mesErrors= "Cette image est trop volumineuse.";
             $uploadOk = 0;
@@ -204,18 +204,19 @@ class GameManager extends Manager
             $mesErrors= "Cette image n'est pas carrée";
         }
 
-        // Check format file
-        elseif ($typeImage != "jpg" && $typeImage != "png" && $typeImage != "jpeg"
-        && $typeImage != "gif") {
+        // We check the format file
+        elseif ($typeImage != "jpg" && $typeImage != "png" && $typeImage != "jpeg" && $typeImage != "gif") {
             $mesErrors= "Seul le type jpg/png/jpeg/gif sont acceptés";
             $uploadOk = 0;
         }
 
-        // Check if $uploadOk is set to 0
+        // We check if $uploadOk is set to 0 (thus there isn't error)
         if ($uploadOk == 0) {
+            // if it's not ok, error messages are written
             $mesErrors=$mesErrors . " / Le téléchargement a échoué";
-        // if everything is ok, we try to upload the file
-        } else {
+        
+        } 
+        else { // if everything is ok, we try to upload the file
             if (move_uploaded_file($_FILES['image']["tmp_name"], $target_file)) {
                 $mesErrors=" Le fichier a bien été téléchargé.";
             } else {
