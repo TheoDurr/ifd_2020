@@ -34,4 +34,6 @@ if(!empty($_POST)){
         }
     }    
 }
+
+$tabName = "S'inscrire";
 require dirname(__FILE__) . '../../view/register.php';

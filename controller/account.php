@@ -1,5 +1,5 @@
 <?php
-
+    
     // If no user is specify, redirection to his own page
     if(!isset($_GET['userId']) && isset($_SESSION['user'])){
         $_GET['userId'] = $_SESSION['user']->id();
@@ -30,6 +30,7 @@
             // one or more of the 'special characters' found in $_POST['lastName']
             $_SESSION['errors']['lastName'] = "Le nom contient des caractères invalides";
         }
+
         if(empty($_SESSION['errors'])){
             $userInfo->setFirstName($_POST['firstName']);
             $userInfo->setLastName($_POST['lastName']);
@@ -45,4 +46,5 @@
         }
     }
 
+    $tabName = $userInfo->firstName() . " " . $userInfo->lastName();
     require dirname(__FILE__) . '../../view/account.php';

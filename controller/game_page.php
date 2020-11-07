@@ -15,4 +15,5 @@ if(isset($_GET['id']) && (int) $_GET['id']){
     header('Location: index.php?action=games');
 }
 
+$tabName = $data['game']->name();
 require dirname(__FILE__) . '../../view/game_page.php';
