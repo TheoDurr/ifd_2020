@@ -49,7 +49,7 @@
                     <a href="index.php?action=delete_user&id=<?=$u->id()?>">
                         <img src="public/img/garbage.png" alt="delete user" class="action_icon">
                     </a>
-                    <a href="index.php?action=edit_user&id=<?=$u->id()?>">
+                    <a href="index.php?action=account&userId=<?= $u->id() ?>&modify=true">
                         <img src="public/img/edit.png" alt="edit user" class="action_icon">
                     </a>
                     <?php }?>
@@ -91,9 +91,6 @@
                     <td>
                         <a href="index.php?action=delete_game&id=<?=$g->id()?>">
                             <img src="public/img/garbage.png" alt="delete game" class="action_icon">
-                        </a>
-                        <a href="index.php?action=edit_game&id=<?=$g->id()?>">
-                            <img src="public/img/edit.png" alt="edit game" class="action_icon">
                         </a>
                     </td>
                     <td>
