@@ -19,4 +19,5 @@ if(!empty($_POST)){
     }
 }
 
+$tabName = "Se connecter";
 require dirname(__FILE__) . '../../view/login.php';

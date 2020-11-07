@@ -125,4 +125,6 @@ if (!empty($_POST)){ // We check if something has been transmitted
     
     }
 }
+
+$tabName = "Ajouter un jeu";
 require dirname(__FILE__) . '../../view/add_game.php';

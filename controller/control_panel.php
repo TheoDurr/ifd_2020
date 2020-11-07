@@ -19,4 +19,5 @@ $data['games'] = $gM->get();
 require dirname(__FILE__) . '../../model/stats.php';
 
 // View
+$tabName = "Administration";
 require dirname(__FILE__) . '../../view/control_panel.php';

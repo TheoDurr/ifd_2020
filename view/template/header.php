@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Jeu critique - Connexion</title>
+        <title><?php if(isset($tabName)){echo $tabName;} else {echo "Jeu critique";} ?></title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="public/css/style.css">
     </head>
