@@ -53,7 +53,8 @@
 
     <?php } else {?>
         <section id="add_game_box" class="box1">
-        <p class="big_title">Veuillez vous connecter pour ajouter un jeu</p>
+        <?php header('Location: index.php?action=login'); 
+        exit();?>
         </section>
     <?php } ?>
 </section>

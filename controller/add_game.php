@@ -95,6 +95,7 @@ if (!empty($_POST)){ // We check if something has been transmitted
         $picture="0";
         if($picturePresent==1){ // if user adds a picture
             $picture=file_get_contents("/xampp/htdocs/ifd_2020/public/img/" . $_FILES['image']['name']); // we will have his picture
+            unlink("/xampp/htdocs/ifd_2020/public/img/". $_FILES['image']["name"]);
         }
         else { //if not
             $picture=file_get_contents("/xampp/htdocs/ifd_2020/public/img/NoPicture.png"); // a default image is added 
