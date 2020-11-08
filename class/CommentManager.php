@@ -38,7 +38,7 @@ class CommentManager extends Manager{
      * @return mixed
      */
     public function delete(Comment $c){
-        $q = $this->_db->prepare('DELETE FROM review WHERE id = :id');
+        $q = $this->_db->prepare('DELETE FROM comment WHERE id = :id');
         $result = $q->execute(array('id' => $c->id()));
 
         return $result;
