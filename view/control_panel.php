@@ -2,7 +2,6 @@
 
 <link rel="stylesheet" type="text/css" href="public/css/admin_pages.css">
 
-
 <section class="contents_page">
     
 <div class="content">

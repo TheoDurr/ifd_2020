@@ -1,4 +1,5 @@
 <?php
+
 if(!isset($_SESSION['user'])){
     // User not logged
     header('Location: index.php?action=login&target=add_game');
@@ -31,7 +32,7 @@ if (!empty($_POST)){ // We check if something has been transmitted
         $error=1;
     }
     else if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['editor'])){
-         // If the editor doesn't respect the synthax
+        // If the editor doesn't respect the synthax
         $_SESSION['errors']['editor'] = "L'éditeur contient des caractères spéciaux invalides";
         $error=1;
     }
@@ -92,7 +93,7 @@ if (!empty($_POST)){ // We check if something has been transmitted
         // we look for and get if and editor is already in the db
         $editorId=0;
         if ($editorFind){ // if it is
-           $editorId=$editorFind[0]; // we get the id
+        $editorId=$editorFind[0]; // we get the id
         }
         else // if it isn't
         {
@@ -139,7 +140,7 @@ if (!empty($_POST)){ // We check if something has been transmitted
             'ambiance' => $_POST['ambiance']
         ));
         $rManager = new GameManager($db);
-        $rManager->add($g); // we add g at the db
+        $rManager->add($g); // we add game at the db
     
     }
 }

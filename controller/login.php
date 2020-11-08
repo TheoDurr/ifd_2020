@@ -1,6 +1,7 @@
 <?php
 
-if(!empty($_POST)){
+// If the user tried to log (if there is data)
+if(!empty($_POST)){ 
     $uManager = new UserManager($db);
     $result = $uManager->get(new User(array('email' => $_POST['email'])));
     if(!$result){

@@ -56,7 +56,7 @@
                     ));
                     if(is_bool($fManager->get($f))){ // If he doesn't already follow the user, he can follow?> 
                         <a href="index.php?action=account&userId=<?php echo $_GET['userId']; ?>&follow=follow">Suivre</a>
-        <?php }else{ // If he already follows the user, he can unfollow?>
+        <?php }else{ // If he already follows the user, he can unfollow ?>
                 <a href="index.php?action=account&userId=<?php echo $_GET['userId']; ?>&follow=unfollow">Ne plus suivre</a>
         <?php }
         }}} ?>

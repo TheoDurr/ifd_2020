@@ -1,7 +1,6 @@
 <?php
 
-if(!isset($_SESSION['user'])){
-    // Not logged
+if(!isset($_SESSION['user'])){ // Not logged
     $_SESSION['errors']['auth'] = "Vous devez vous connecter";
     header('Location: index.php?action=login');
 }
@@ -9,7 +8,6 @@ if(!isset($_SESSION['user'])){
 if(isset($_GET['id'])){
     $rM = new ReviewManager($db);
     $reviewToDelete = new Review(array('id' => (int) $_GET['id']));
-
     // Checking authorization
     if(!$result = $rM->get($reviewToDelete)){
         $_SESSION['errors']['invalidId'] = "Avis introuvable";

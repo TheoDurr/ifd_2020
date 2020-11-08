@@ -1,6 +1,7 @@
 <?php
+
+// User already logged
 if(isset($_SESSION['user'])){
-    // User already logged
     header("Location: index.php?action=account");
 }
 

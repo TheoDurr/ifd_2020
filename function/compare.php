@@ -17,7 +17,7 @@ function cmpTotalReaction($a, $b){
  * Compare the totalReaction's review
  *
  * @param Review $a, Review $b
- * @return (-1;1))
+ * @return (-1;1)
  */
 function cmpCreationDate($a, $b){
     if($a->creationDate() < $b->creationDate( )){

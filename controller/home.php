@@ -1,6 +1,5 @@
 <?php
 
-
 require dirname(__FILE__) . '../../model/stats.php';
 
 $tabName = "Accueil";
