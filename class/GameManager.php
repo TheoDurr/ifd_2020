@@ -22,8 +22,8 @@ class GameManager extends Manager
      */
     public function add(Game $game)
     {
-        $q = $this->_db->prepare('INSERT INTO game (name, editorId, description, img, categoryId, price, playersMin, playersMax, userId, complexity, concentration, ambiance)
-        VALUES (:name, :editorId, :description, :img, :categoryId, :price, :playersMin, :playersMax, :userId, :complexity, :concentration, :ambiance)');
+        $q = $this->_db->prepare('INSERT INTO game (name, editorId, description, img, categoryId, price, playersMin, playersMax, complexity, concentration, ambiance)
+        VALUES (:name, :editorId, :description, :img, :categoryId, :price, :playersMin, :playersMax, :complexity, :concentration, :ambiance)');
 
         $q->bindValue(':name', ucwords($game->name()), PDO::PARAM_STR);
         $q->bindValue(':editorId', $game->editor()->id(), PDO::PARAM_INT);
@@ -33,7 +33,6 @@ class GameManager extends Manager
         $q->bindValue(':price', (string) $game->price(), PDO::PARAM_STR);
         $q->bindValue(':playersMin', $game->playersMin(), PDO::PARAM_INT);
         $q->bindValue(':playersMax', $game->playersMax(), PDO::PARAM_INT);
-        $q->bindValue(':userId', $game->userId(), PDO::PARAM_INT);
         $q->bindValue(':complexity', $game->complexity(), PDO::PARAM_INT);
         $q->bindValue(':concentration', $game->concentration(), PDO::PARAM_INT);
         $q->bindValue(':ambiance', $game->ambiance(), PDO::PARAM_INT);
@@ -167,7 +166,6 @@ class GameManager extends Manager
                 price = :price,
                 playersMin = :playersMin,
                 playersMax = :playersMax,
-                userId = :userId,
                 complexity = :complexity,
                 concentration = :concentration,
                 ambiance = :ambiance
@@ -182,7 +180,6 @@ class GameManager extends Manager
         $q->bindValue(':price', (string) $game->price(), PDO::PARAM_STR);
         $q->bindValue(':playersMin', $game->playersMin(), PDO::PARAM_INT);
         $q->bindValue(':playersMax', $game->playersMax(), PDO::PARAM_INT);
-        $q->bindValue(':userId', $game->userId(), PDO::PARAM_INT);
         $q->bindValue(':complexity', $game->complexity(), PDO::PARAM_INT);
         $q->bindValue(':concentration', $game->concentration(), PDO::PARAM_INT);
         $q->bindValue(':ambiance', $game->ambiance(), PDO::PARAM_INT);

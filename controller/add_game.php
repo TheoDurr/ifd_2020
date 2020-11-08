@@ -134,7 +134,6 @@ if (!empty($_POST)){ // We check if something has been transmitted
             'price'=> strval($_POST['price']),
             'playersMin' => $_POST['playersMin'],
             'playersMax' => $_POST['playersMax'],
-            'userId' => $_SESSION['user']->id(),
             'complexity' => $_POST['complexity'],
             'concentration' => $_POST['concentration'],
             'ambiance' => $_POST['ambiance']
