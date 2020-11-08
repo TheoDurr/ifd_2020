@@ -108,6 +108,7 @@
         }
     }
 
+
     $tabName = $userInfo->firstName() . " " . $userInfo->lastName();
 
     require dirname(__FILE__) . '../../view/account.php';
