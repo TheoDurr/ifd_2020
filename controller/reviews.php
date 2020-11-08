@@ -45,7 +45,7 @@ if(isset($_GET['reaction']) && isset($_SESSION['user'])){
 }
 
 // Get the user's reviews (on account.php)
-if(isset($_GET['userId'])){
+if(isset($_GET['userId']) && !isset($r)){
     $r = $rManager->get(new Review(array('userId' => $_GET['userId'])));
 }
 
