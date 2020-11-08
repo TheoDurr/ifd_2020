@@ -29,7 +29,7 @@
     <!-- Add review -->
 
     <?php if(isset($_GET['addReview']) && $_GET['action']=='game_page'){ ?>
-        <form method="post" class="review" id="addReview" action=<?=$_SERVER['REQUEST_URI']?>>
+        <form method="post" action="index.php?action=game_page&id=<?=$_GET['id']?>#reviews" class="review" id="addReview">
             <p class="small_title">Ajouter un avis :</p>
             <textarea cols="150" rows="8" placeholder="Ecrivez votre avis ici" name="contentReview"></textarea>
             <p>Note (Entre 0 et 10) :</p>
@@ -49,7 +49,7 @@
                     <p>Note : <?php echo $r[$i]->score(); ?>/10</p>
                     <?php if(isset($_SESSION['user'])){
                         if($r[$i]->user()->id() == $_SESSION['user']->id()){ ?>                    
-                            <a href="index.php?action=delete_review&id=<?=$r[$i]->id()?>"><img src="public/img/garbage.png" alt="garbage"></a>
+                            <a href="index.php?action=delete_review&id=<?=$r[$i]->id()?><?php if(isset($_GET['id'])){echo"&gameId=".$_GET['id'];} elseif(isset($_GET['userId'])){echo"&userId=".$_GET['userId'];} ?>"><img src="public/img/garbage.png" alt="garbage"></a>
                         <?php }
                     }?>
                 </span>

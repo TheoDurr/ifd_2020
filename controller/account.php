@@ -48,7 +48,7 @@
               }
               $uManager->update($userInfo);
               header('location: index.php?action=account&userId='. $_GET['userId']);
-          }
+        }
     }
 
     // Look for the user in the db
@@ -98,11 +98,6 @@
         }
     }
 
-    // Get the user's reviews
-    if(isset($_GET['userId'])){
-        $r = $rManager->get(new Review(array('userId' => $_GET['userId'])));
-    }
-
     // Get the followed users' reviews 
     if(isset($_GET['userId']) && isset($followedUsers[0])){
         if(!is_bool($followedUsers[0])){
@@ -112,6 +107,7 @@
             }
         }
     }
+
 
     $tabName = $userInfo->firstName() . " " . $userInfo->lastName();
 

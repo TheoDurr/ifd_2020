@@ -44,6 +44,21 @@ if(isset($_GET['reaction']) && isset($_SESSION['user'])){
     }
 }
 
+// Get the user's reviews (on account.php)
+if(isset($_GET['userId']) && !isset($r)){
+    $r = $rManager->get(new Review(array('userId' => $_GET['userId'])));
+}
+
+// Get the game's reviews (on game_page.php)
+if(isset($_GET['id'])){
+    $rManager = new ReviewManager($db);
+    $r = $rManager->get(new Review(array("gameId" => $_GET['id'])));
+    if(isset($_GET['reviewId']) && isset($_GET['show'])){
+        $cManager = new CommentManager($db);
+        $c = $cManager->get(new Comment(array('reviewId' => $_GET['reviewId'])));
+    }
+}
+
 // Sort the reviews by reactions or date
 
 if(!is_bool($r)){
