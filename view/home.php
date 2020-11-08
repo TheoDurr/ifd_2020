@@ -15,7 +15,7 @@
             </div>
             <div id="explicationText">
                 <div class="small_title">Jeu Critique, pour quoi faire ?</div><br>
-                Connectez vous ou créez vous un compte au plus en cliquant sur le lien suivant :
+                Connectez-vous ou créez-vous un compte au plus vite en cliquant sur le lien suivant :
                 <a href="index.php?action=register">Se créer un compte</a><br><br>
                 Ensuite <div class="evidence"> ajoutez, recherchez, commentez et notez </div> des millions de jeux
             </div>
@@ -36,16 +36,6 @@
 
         
     </section>
-
-    <aside>
-        <section id="last_reviews" class="box1">
-            <p>Derniere critiques postées par les utilisateurs</p>
-        </section>
-
-        <section id="last_games" class="box1">
-            <p>Derniers jeux ajoutés</p>
-        </section>
-    </aside>
 </section>  
 
 <?php $data['content'] = ob_get_clean(); 

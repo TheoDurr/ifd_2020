@@ -5,7 +5,7 @@
 }
 
 #presentation{
-    width: 70%;
+    width: 100%;
 }
 
 #last_reviews{
@@ -16,14 +16,6 @@
     height: 50%;
 }
 
-aside{
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0%;
-    width: 30%;
-    height: 100%;
-}
 #title{
     font-size: 2.5em;
     text-align: center ;  
