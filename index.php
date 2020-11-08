@@ -4,6 +4,7 @@
  */
 // Autoloader initialization
 require_once 'function/autoload.php';
+require_once 'function/compare.php';
 spl_autoload_register('autoloader');
 session_start();
 

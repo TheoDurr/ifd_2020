@@ -29,7 +29,7 @@
     <!-- Add review -->
 
     <?php if(isset($_GET['addReview']) && $_GET['action']=='game_page'){ ?>
-        <form method="post" class="review" id="addReview">
+        <form method="post" action="index.php?action=game_page&id=<?=$_GET['id']?>#reviews" class="review" id="addReview">
             <p class="small_title">Ajouter un avis :</p>
             <textarea cols="150" rows="8" placeholder="Ecrivez votre avis ici" name="contentReview"></textarea>
             <p>Note (Entre 0 et 10) :</p>
