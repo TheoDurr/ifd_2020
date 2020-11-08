@@ -1,4 +1,5 @@
 <?php
+
 if(!isset($_SESSION['user'])){
     // Not logged
     $_SESSION['errors']['auth'] = "Vous devez vous connecter";

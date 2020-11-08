@@ -112,6 +112,7 @@ class GameManager extends Manager
             return $result;
         }
     }
+
     /**
      * Look for a specific game in the database with characteristics between certain intervals. 
      * @param int $id
@@ -148,6 +149,12 @@ class GameManager extends Manager
       
     }
 
+    /**
+     * Update the game with new data
+     *
+     * @param Game $r
+     * @return mixed
+     */
     public function update(Game $game)
     {
         $q = $this->_db->prepare('
@@ -187,6 +194,12 @@ class GameManager extends Manager
         return $result;
     }
 
+    /**
+     * Upload a picture 
+     *
+     * @param string &($mesErrors)
+     * @return void
+     */
     public function UploadPicture(string &$mesErrors)
     {
         $target_repo = "C:/xampp/htdocs/ifd_2020/public/img/";
@@ -224,6 +237,12 @@ class GameManager extends Manager
         }
     }
 
+    /**
+     * Get the editor by its Id
+     *
+     * @param Editor $e
+     * @return mixed
+     */
     private function getEditor(Editor $e)
     {
         $eManager = new EditorManager($this->_db);
@@ -232,6 +251,12 @@ class GameManager extends Manager
         return $result[0];
     }
 
+    /**
+     * Get the category by its Id
+     *
+     * @param Categroy $c
+     * @return mixed
+     */
     private function getCategory(Category $c)
     {
         $cManager = new CategoryManager($this->_db);
@@ -239,7 +264,12 @@ class GameManager extends Manager
 
         return $result[0];
     }
-
+    /**
+     * Get the average score of the game
+     *
+     * @param Game $g
+     * @return int
+     */
     private function getAvgScore(Game $g)
     {
         $rManager = new ReviewManager($this->_db);
@@ -262,7 +292,7 @@ class GameManager extends Manager
     /**
      * Return number of entries in database
      *
-     * @return void
+     * @return int
      */
     public function count(){
         $result = $this->_db->query("SELECT COUNT(*) FROM game");

@@ -13,7 +13,7 @@
                 $gManager = new GameManager($db);
                 $game=$gManager->get(); //We are going to look for all the referenced games in the database.
                 foreach($game as $g){ // They are listed in the search bar ?> 
-                <option value="<?php echo $g->name(); ?>"><?php echo $g->name(); ?></option>
+                <option value="<?= $g->name(); ?>"><?= $g->name(); ?></option>
                 <?php } ?>
             </datalist>
             <p class="small_title">Catégorie :</p>
@@ -22,7 +22,7 @@
                 $CManager = new CategoryManager($db);
                 $category=$CManager->get(); //We are going to look for all the referenced category in the database.
                 foreach($category as $c){// They are listed and the user can choose?>
-                <option value="<?php echo $c->name(); ?>"><?php echo $c->name(); ?></option>
+                <option value="<?= $c->name(); ?>"><?= $c->name(); ?></option>
                 <?php } ?>
             </select>
             <p class="small_title">Prix min:</p>

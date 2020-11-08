@@ -3,7 +3,6 @@
 $gManager = new GameManager($db);
 $cManager = new CategoryManager($db);
 
-
 if (!empty($_POST)){ // If we received data from the form 
     if($_POST['search']==''){ // if the user has not typed anything in the search bar
 

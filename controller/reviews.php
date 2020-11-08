@@ -1,7 +1,6 @@
 <?php
 
 //Add a review
-
 if(isset($_POST['contentReview']) && isset($_SESSION['user'])){
     $newR = new Review(array(
         'gameId' => $_GET['id'],
@@ -25,7 +24,6 @@ if(isset($_POST['contentComment']) && isset($_SESSION['user'])){
 }
 
 // Add a reaction
-
 if(isset($_GET['reaction']) && isset($_SESSION['user'])){
     $rManager = new ReactionManager($db); 
     $a = $rManager->get(new Reaction(array("userId" => $_SESSION['user']->id(), "reviewId" => $_GET['reviewId'])));
@@ -60,7 +58,6 @@ if(isset($_GET['id'])){
 }
 
 // Sort the reviews by reactions or date
-
 if(!is_bool($r)){
     if(count($r)>1){
         if(isset($_POST['sortBy'])){
@@ -73,7 +70,6 @@ if(!is_bool($r)){
             usort($r,"cmpTotalReaction");
         }
     }
-
 }
 
 require dirname(__FILE__) . '../../view/reviews.php';
