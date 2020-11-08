@@ -48,7 +48,7 @@
               }
               $uManager->update($userInfo);
               header('location: index.php?action=account&userId='. $_GET['userId']);
-          }
+        }
     }
 
     // Look for the user in the db
