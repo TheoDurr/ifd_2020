@@ -5,7 +5,7 @@
 <section class="contents_page">
 
     <section id="my_info" class="box1">
-    <?php if(isset($_GET['modify']) && isset($_SESSION['user'])){ if($_SESSION['user']->id()==$_GET['userId']){ ?>
+    <?php if(isset($_GET['modify']) && isset($_SESSION['user'])){ if($_SESSION['user']->id()==$_GET['userId'] || $_SESSION['user']->admin()){ ?>
         <form method="post" id="modify_info">
             <section>
                 <p class="small_title">Prénom :</p>
@@ -47,16 +47,16 @@
         </section>
        <?php if(isset($_SESSION['user'])){
             if($_SESSION['user']->id()==$_GET['userId'] || $_SESSION['user']->admin()){ ?>
-        <a href="index.php?action=account&userId=<?=$_GET['userId']?>&modify=true">Modifier</a>
-         <?php }elseif(isset($_SESSION['user'])){ // Else, if he is connected he can follow/unfollow the user
-            $fManager = new FollowManager($db);
-            $f = new Follow(array(
-                'followingId' => $_SESSION['user']->id(),
-                'followedId' => $_GET['userId']
-            ));
-            if(is_bool($fManager->get($f))){ // If he doesn't already follow the user, he can follow?> 
-                <a href="index.php?action=account&userId=<?php echo $_GET['userId']; ?>&follow=follow">Suivre</a>
-        <?php }else{ // If he already follows the user, he can unfollow?>
+                <a href="index.php?action=account&userId=<?=$_GET['userId']?>&modify=true">Modifier</a>
+            <?php }elseif(isset($_SESSION['user'])){ // Else, if he is connected he can follow/unfollow the user
+                    $fManager = new FollowManager($db);
+                    $f = new Follow(array(
+                        'followingId' => $_SESSION['user']->id(),
+                        'followedId' => $_GET['userId']
+                    ));
+                    if(is_bool($fManager->get($f))){ // If he doesn't already follow the user, he can follow?> 
+                        <a href="index.php?action=account&userId=<?php echo $_GET['userId']; ?>&follow=follow">Suivre</a>
+        <?php }else{ // If he already follows the user, he can unfollow ?>
                 <a href="index.php?action=account&userId=<?php echo $_GET['userId']; ?>&follow=unfollow">Ne plus suivre</a>
         <?php }
         }}} ?>
